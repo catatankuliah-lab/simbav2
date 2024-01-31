@@ -1,0 +1,90 @@
+.menu:hover {
+  background-color: rgb(230, 79, 36);
+  color: white;
+}
+.nav-item.active {
+  background-color: rgb(230, 79, 36);
+  border-radius: 5px;
+}
+
+.nav-item.active a {
+  color: #ffffff !important; /* Ganti dengan warna teks yang sesuai */
+}
+
+/* Hapus gaya default DataTables */
+.dataTables_wrapper {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+}
+
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+  margin-top: 0;
+}
+
+.dataTables_wrapper .dataTables_length label {
+  font-weight: normal;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #eee;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  text-align: right;
+  padding-top: 0.25em;
+  display: flex;
+  justify-content: center;
+}
+.dataTables_length {
+  display: none;
+}
+.dataTables_filter {
+  display: none;
+}
+.dataTables_info {
+  display: none;
+}
+.dataTables_wrapper .dataTables_paginate {
+  margin-top: 10px;
+  float: left;
+  text-align: right;
+  padding-top: 0.25em;
+}
+/* .dataTables_paginate.paging_simple_numbers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+/* .pagination-container {
+  display: flex;
+  align-items: center;
+} */
+
+.paginate_button {
+  padding: 0.5em 1em;
+  margin: 0 0.25em;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.paginate_button.current {
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 0 0.25em;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f2f2f2; /* Warna latar belakang ketika nomor halaman aktif */
+  color: #333; /* Warna teks ketika nomor halaman aktif */
+}
