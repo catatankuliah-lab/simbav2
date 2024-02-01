@@ -8,7 +8,7 @@ $("#prosesLogin").click(function () {
   };
 
   $.ajax({
-    url: "http://localhost:8080/api/v1/auth/proseslogin",
+    url: "http://localhost:8080/api/auth/proseslogin",
     type: "POST",
     dataType: "json",
     contentType: "application/json",
