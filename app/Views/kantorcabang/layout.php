@@ -111,7 +111,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item <?= $menu3 ?>">
-                            <a class="sidebar-link" onclick="laporan()" aria-expanded="false"><i data-feather="file" class="feather-icon"></i><span class="hide-menu">Laporan
+                            <a class="sidebar-link" onclick="laporan()" aria-expanded="false"><i data-feather="file" class="feather-icon"></i><span class="hide-menu">Laporan Doc
                                 </span>
                             </a>
                         </li>

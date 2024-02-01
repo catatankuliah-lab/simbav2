@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\API;
+namespace App\Controllers\API\Akun;
 
 use App\Models\AkunModel;
 use CodeIgniter\RESTful\ResourceController;
@@ -129,7 +129,7 @@ class AkunController extends ResourceController
         if ($data) {
             session()->set('id_akun', $data->id_akun);
             session()->set('id_gudang', $data->id_gudang);
-            session()->set('id_kantor', $data->id_kantor);
+            session()->set('id_kantor', $data->id_kantor_cabang);
             session()->set('id_hak_akses', $data->id_hak_akses);
             session()->set('nama_lengkap', $data->nama_lengkap);
             return $this->respond($data);

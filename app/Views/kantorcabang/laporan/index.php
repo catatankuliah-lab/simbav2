@@ -4,34 +4,33 @@
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="card-body">
-            <h4 class="card-title mb-3">Loading Order (LO)</h4>
-            <h6 class="card-subtitle mb-3">
-                Klik <a style="font-weight: bolder;" href="<?= base_url('gudang/spmbast/create') ?>">disini</a> untuk mengelola Loading Order (LO)
-            </h6>
+            <h4 class="card-title mb-3">Laporan Document</h4>
             <div class="row mt-4">
                 <div class="col-12 h6">Pilih Berdasarkan</div>
-                <div class="col-md-3 my-3">
-                    <select onchange="generatereport()" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi">
-                        <option data-id_alokasi='0' value="0">Pilih Alokasi</option>
+                <div class="col-md-6 my-3">
+                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="datatanggal">
+                        <option value="0">Pilih Tanggal</option>
                     </select>
                 </div>
-                <div class="col-md-3 my-3">
-                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihgudang" name="pilihgudang" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Gudang">
-                        <option data-nama_gudang="0" value="0">Pilih Gudang</option>
+                <div class="col-md-6 my-3">
+                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihwo" name="pilihwo" style="height: 50px !important; font-size: 14px;" placeholder="pilihwo">
+                        <option value="0">Pilih Work Order (WO)</option>
                     </select>
                 </div>
-                <div class="col-md-3 my-3">
-                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkabupatenkota" name="pilihkabupatenkota" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kabupaten Kota" onchange="showKecamatan()">
-                        <option data-nama_kabupaten='0' value="0">Pilih Nama Kabupaten/Kota</option>
+                <div class="col-md-4 my-3">
+                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkabupaten" name="pilihkabupaten" style="height: 50px !important; font-size: 14px;" placeholder="pilihkabupaten">
+                        <option value="0">Pilih Kabupaten</option>
                     </select>
                 </div>
-                <div class="col-md-3 my-3">
-                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkecamatan" name="pilihkecamatan" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kecamatan">
+                <div class="col-md-4 my-3">
+                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkecamatan" name="pilihkecamatan" style="height: 50px !important; font-size: 14px;" placeholder="pilihkecamatan">
                         <option value="0">Pilih Kecamatan</option>
                     </select>
                 </div>
-                <div class="col-md-12 my-3">
-                    <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterSPM" name="filterSPM">Tampilkan</button>
+                <div class="col-md-4 my-3">
+                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihdesa" name="pilihdesa" style="height: 50px !important; font-size: 14px;" placeholder="pilihdesa">
+                        <option value="0">Pilih Desa</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
