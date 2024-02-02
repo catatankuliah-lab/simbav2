@@ -88,7 +88,7 @@
                                 <img src="<?= base_url('assetss/images/users/profile-pic.jpg') ?>" alt="user" class="rounded-circle" width="40">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="mt-2 dropdown-item" href="<?= base_url('auth/login') ?>"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                                <a class="mt-2 dropdown-item" href="<?= base_url('/') ?>"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
                                     Logout</a>
                             </div>
                         </li>

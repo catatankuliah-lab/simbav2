@@ -39,8 +39,8 @@ class AkunModel extends Model
     public function getAll()
     {
         $query = $this->db->table('akun')
-            ->select('akun.*, kantor.*, gudang.*, hak_akses.*')
-            ->join('kantor', 'kantor.id_kantor = akun.id_kantor', 'left')
+            ->select('akun.*, kantor_cabang.*, gudang.*, hak_akses.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor = akun.id_kantor', 'left')
             ->join('hak_akses', 'hak_akses.id_hak_akses = akun.id_hak_akses', 'left')
             ->join('gudang', 'gudang.id_gudang = akun.id_gudang', 'left')
             ->get();
@@ -50,8 +50,8 @@ class AkunModel extends Model
     public function getAkunByIdAkun($idAkun)
     {
         $query = $this->db->table('akun')
-            ->select('akun.*, kantor.*, hak_akses.*')
-            ->join('kantor', 'kantor.id_kantor = akun.id_kantor', 'left')
+            ->select('akun.*, kantor_cabang.*, hak_akses.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor = akun.id_kantor', 'left')
             ->join('hak_akses', 'hak_akses.id_hak_akses = akun.id_hak_akses', 'left')
             ->join('gudang', 'gudang.id_gudang = akun.id_gudang', 'left')
             ->where('akun.id_akun', $idAkun)
@@ -62,8 +62,8 @@ class AkunModel extends Model
     public function getAkunByKantor($idKantor)
     {
         $query = $this->db->table('akun')
-            ->select('akun.*, kantor.*, hak_akses.*')
-            ->join('kantor', 'kantor.id_kantor = akun.id_kantor', 'left')
+            ->select('akun.*, kantor_cabang.*, hak_akses.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor = akun.id_kantor', 'left')
             ->join('hak_akses', 'hak_akses.id_hak_akses = akun.id_hak_akses', 'left')
             ->join('gudang', 'gudang.id_gudang = akun.id_gudang', 'left')
             ->where('akun.id_kantor', $idKantor)
@@ -74,8 +74,8 @@ class AkunModel extends Model
     public function getAkunByKantor2($idKantor)
     {
         $query = $this->db->table('akun')
-            ->select('akun.*, kantor.*, hak_akses.*')
-            ->join('kantor', 'kantor.id_kantor = akun.id_kantor', 'left')
+            ->select('akun.*, kantor_cabang.*, hak_akses.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor = akun.id_kantor', 'left')
             ->join('hak_akses', 'hak_akses.id_hak_akses = akun.id_hak_akses', 'left')
             ->join('gudang', 'gudang.id_gudang = akun.id_gudang', 'left')
             ->where('akun.id_kantor', $idKantor)
@@ -87,8 +87,8 @@ class AkunModel extends Model
     public function getAkunByHakAkses($idHakAkses)
     {
         $query = $this->db->table('akun')
-            ->select('akun.*, kantor.*, hak_akses.*, gudang.*')
-            ->join('kantor', 'kantor.id_kantor = akun.id_kantor', 'left')
+            ->select('akun.*, kantor_cabang.*, hak_akses.*, gudang.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor = akun.id_kantor', 'left')
             ->join('hak_akses', 'hak_akses.id_hak_akses = akun.id_hak_akses', 'left')
             ->join('gudang', 'gudang.id_gudang = akun.id_gudang', 'left')
             ->where('akun.id_hak_akses', $idHakAkses)
@@ -99,8 +99,8 @@ class AkunModel extends Model
     public function getAkunByHakAksesAndKantor($idHakAkses, $idKantor)
     {
         $query = $this->db->table('akun')
-            ->select('akun.*, kantor.*, gudang.*')
-            ->join('kantor', 'kantor.id_kantor = akun.id_kantor', 'left')
+            ->select('akun.*, kantor_cabang.*, gudang.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor = akun.id_kantor', 'left')
             ->join('hak_akses', 'hak_akses.id_hak_akses = akun.id_hak_akses', 'left')
             ->join('gudang', 'gudang.id_gudang = akun.id_gudang', 'left')
             ->where('akun.id_hak_akses', $idHakAkses)

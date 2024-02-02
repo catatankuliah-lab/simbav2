@@ -20,7 +20,7 @@ class AkunController extends ResourceController
             'id_akun' => session()->get('id_akun'),
             'id_gudang' => session()->get('id_gudang'),
             'nama_lengkap' => session()->get('nama_lengkap'),
-            'id_kantor' => session()->get('id_kantor')
+            'id_kantor_cabang' => session()->get('id_kantor_cabang')
         ];
         return $this->response->setJSON($userData);
     }
@@ -88,7 +88,6 @@ class AkunController extends ResourceController
     public function update($id = null)
     {
         $data = $this->request->getJSON();
-
         $existingData = $this->model->find($id);
 
         if (!$existingData) {
@@ -129,7 +128,7 @@ class AkunController extends ResourceController
         if ($data) {
             session()->set('id_akun', $data->id_akun);
             session()->set('id_gudang', $data->id_gudang);
-            session()->set('id_kantor', $data->id_kantor_cabang);
+            session()->set('id_kantor_cabang', $data->id_kantor_cabang);
             session()->set('id_hak_akses', $data->id_hak_akses);
             session()->set('nama_lengkap', $data->nama_lengkap);
             return $this->respond($data);

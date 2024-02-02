@@ -23,9 +23,18 @@ class LOJanuariController extends ResourceController
             'id_akun' => session()->get('id_akun'),
             'id_gudang' => session()->get('id_gudang'),
             'nama_lengkap' => session()->get('nama_lengkap'),
-            'id_kantor_cabang' => session()->get('id_kantor')
+            'id_kantor_cabang' => session()->get('id_kantor_cabang')
         ];
         return $this->response->setJSON($userData);
     }
+
+    public function getbyidkantor($idkantor)
+    {
+        $dataspm = $this->model->getAllLOByCabang($idkantor, session()->get('id_kantor'));
+        if ($dataspm) {
+            return $this->respond($dataspm);
+        } else {
+            return $this->failNotFound('Record LO Kantor Cabang aktif tidak ditemukan.');
+        }
+    }
 }
-?>

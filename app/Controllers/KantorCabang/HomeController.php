@@ -30,7 +30,8 @@ class HomeController extends Controller
         return view('kantorcabang/lo/index', $data);
     }
 
-    public function index_laporan() {
+    public function index_laporan()
+    {
         $data = [
             'menu1' => '',
             'menu2' => '',
