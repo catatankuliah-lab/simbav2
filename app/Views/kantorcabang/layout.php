@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <!-- <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assetss/images/favicon.png') ?>"> -->
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/images/favicon.ico') ?>">
     <title>SIMBA - 88</title>
     <!-- Custom CSS -->
     <link href="<?= base_url('assetss/extra-libs/c3/c3.min.css') ?>" rel="stylesheet">
@@ -53,97 +53,51 @@
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md">
                 <div class="navbar-header" data-logobg="skin6">
-                    <!-- This is for the sidebar toggle which is visible on mobile only -->
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
                     <div class="navbar-brand">
-                        <!-- Logo icon -->
                         <b class="logo-icon" style="display: none;">
                             <img src="<?= base_url('assets/img/logo88.png') ?>" alt="homepage" class="dark-logo" width="30px" height="40px" style="margin-left: 10px;" />
                             <img src="<?= base_url('assets/img/logo.png') ?>" alt="homepage" class="light-logo" />
                         </b>
                         <span class="logo-text">
-                            <!-- dark Logo text -->
                             <img src="<?= base_url('assets/img/logo.png') ?>" alt="homepage" class="dark-logo" width="200px" />
-                            <!-- Light Logo text -->
-                            <!-- <img src="<?= base_url('assets/img/logo.png') ?>" class="light-logo" alt="homepage" /> -->
                         </span>
                     </div>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- Toggle which is visible on mobile only -->
-                    <!-- ============================================================== -->
                     <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
                         <li class="nav-item d-none d-md-block">
                             <span class="text-dark"></span>
                         </li>
                     </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav float-right">
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="ml-2"><span>Hello, </span><span class="text-dark"><?= session()->get('nama_lengkap') ?></span> <i data-feather="chevron-down" class="svg-icon"></i></span>
                                 <img src="<?= base_url('assetss/images/users/profile-pic.jpg') ?>" alt="user" class="rounded-circle" width="40">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="mt-2 dropdown-item" href="<?= base_url('auth/login') ?>"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                                <a class="mt-2 dropdown-item" href="<?= base_url('/') ?>"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
                                     Logout</a>
                             </div>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-small-cap mt-3"><span class="hide-menu">Dashboard</span></li>
@@ -151,48 +105,21 @@
                             <a class="sidebar-link" onclick="dashboard()" aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li class="nav-small-cap mt-2"><span class="hide-menu">Menu</span></li>
-                        <li class="sidebar-item <?= $menu2 ?> d-none">
-                            <a class="sidebar-link" onclick="dtt()" aria-expanded="false"><i data-feather="file" class="feather-icon"></i><span class="hide-menu">DTT
-                                </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item <?= $menu3 ?> d-none">
-                            <a class="sidebar-link" onclick="sptjm()" aria-expanded="false"><i data-feather="file" class="feather-icon"></i><span class="hide-menu">SPTJM
-                                </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item <?= $menu4 ?> d-none">
-                            <a class="sidebar-link" onclick="undangan()" aria-expanded="false"><i data-feather="file" class="feather-icon"></i><span class="hide-menu">Undangan
-                                </span>
-                            </a>
-                        </li>
                         <li class="sidebar-item <?= $menu2 ?>">
                             <a class="sidebar-link" onclick="spmbast()" aria-expanded="false"><i data-feather="file" class="feather-icon"></i><span class="hide-menu">Loading Order (LO)
                                 </span>
                             </a>
                         </li>
+                        <li class="sidebar-item <?= $menu3 ?>">
+                            <a class="sidebar-link" onclick="laporan()" aria-expanded="false"><i data-feather="file" class="feather-icon"></i><span class="hide-menu">Laporan Doc
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
         <div class="page-wrapper">
-            <!-- <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-12 align-self-center">
-                        <h5 class="page-title text-dark font-weight-medium mb-1">Selamat Datang di Delapan Delapan Logistic</h5>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <?= $this->renderSection('content') ?>
         </div>
     </div>
@@ -209,23 +136,14 @@
     <script src="<?= base_url('assetss/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') ?>"></script>
     <script>
         function dashboard() {
-            window.location.href = "<?= base_url('kantorcabang/') ?>"
+            window.location.href = "<?= base_url('itkantorcabang/') ?>"
         }
-
-        function dtt() {
-            window.location.href = "<?= base_url('kantorcabang/dtt') ?>"
-        }
-
-        function sptjm() {
-            window.location.href = "<?= base_url('kantorcabang/sptjm') ?>"
-        }
-
-        function undangan() {
-            window.location.href = "<?= base_url('kantorcabang/undangan') ?>"
-        }
-
         function spmbast() {
-            window.location.href = "<?= base_url('kantorcabang/spmbast') ?>"
+            window.location.href = "<?= base_url('itkantorcabang/lo') ?>"
+        }
+
+        function laporan() {
+            window.location.href = "<?= base_url('itkantorcabang/laporan') ?>"
         }
     </script>
 </body>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assetss/images/favicon.png') ?>">
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/images/favicon.ico') ?>">
     <title>SIMBA - 88</title>
     <!-- Custom CSS -->
     <script src="<?= base_url('assetss/libs/jquery/dist/jquery.min.js') ?>"></script>
