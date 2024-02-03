@@ -22,6 +22,13 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->delete('lo/(:num)', 'LO\LOJanuariController::delete/$1');
     $routes->get('lo/sessionya', 'LO\LOJanuariController::getSession');
     $routes->get('lo/getbyidkantor/(:num)', 'LO\LOJanuariController::getbyidkantor/$1');
+    $routes->get('lo/namagudangkantor/(:any)', 'LO\LOJanuariController::getGudangByIdKantor/$1');
+    $routes->get('lo/namakabupatenkantor/(:any)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
+    $routes->get('lo/kabupatenkecamatankantor/(:any)/(:any)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');
+    // Detail LO
+    $routes->get('lo/detail/(:any)', 'LO\LOJanuariController::showDetailLo/$1');
+
+
 
     // Alokasi
     $routes->get('alokasi', 'Alokasi\AlokasiController::index');
@@ -37,5 +44,4 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
 
     // Wilayah Kerja
     $routes->get('wilayahkerja/(:num)', 'WilayahKerja\WilayahKerjaController::getWilayahKerjaByIdKantor/$1');
-
 });

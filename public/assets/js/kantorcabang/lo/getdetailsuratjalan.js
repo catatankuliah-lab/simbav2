@@ -1,20 +1,27 @@
 $.ajax({
-  url: "http://localhost:8080/api/v1/spmbast/suratjalan/" + $('#idspmbast').val(),
+  url: "http://localhost:8080/api/v1/lo/suratjalan/" + $("#idspmbast").val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
     console.log(data);
-    $('#tanggalpembuatan').val(data.tanggal_pembuatan);
-    $('#nopoldriver').val(data.nopol_mobil + ' / ' + data.nama_driver + ' (' + data.nomor_driver + ')');
-    $('#kabupaten').val(data.nama_kabupaten_kota);
-    $('#kecamatan').val(data.nama_kecamatan);
-    $('#desakelurahan').val(data.nama_desa_kelurahan);
-    $('#totalpenyerahan').val(data.jumlah_penyaluran + ' Kg');
-    if (data.file_surat_jalan != null) {
-      $('#formsj').addClass('d-none');
+    $("#tanggalpembuatan").val(data[0].tanggal_muat);
+    $("#nopoldriver").val(
+      data[0].nomor_mobil +
+        " / " +
+        data[0].nama_driver +
+        " (" +
+        data[0].nomor_driver +
+        ")"
+    );
+    $("#kabupaten").val(data[0].nama_kabupaten_kota);
+    $("#kecamatan").val(data[0].nama_kecamatan);
+    $("#desakelurahan").val(data[0].nama_desa_kelurahan);
+    $("#totalpenyerahan").val(data[0].total + " Kg");
+    if (data[0].file_surat_jalan != null) {
+      $("#formsj").addClass("d-none");
     }
     if (data.file_penyerahan != null) {
-      $('#formdriver').addClass('d-none');
+      $("#formdriver").addClass("d-none");
     }
   },
   error: function (error) {
@@ -22,25 +29,25 @@ $.ajax({
   },
 });
 
-$("#filebuktisj").on('change', function () {
+$("#filebuktisj").on("change", function () {
   $.ajax({
-    url: 'http://localhost:8080/api/v1/spmbast/suratjalan/' + $('#idspmbast').val(),
+    url: "http://localhost:8080/api/v1/lo/suratjalan/" + $("#idspmbast").val(),
     type: "GET",
     dataType: "json",
     success: function (data) {
-      var formData = new FormData($('#uploadForm')[0]);
+      var formData = new FormData($("#uploadForm")[0]);
       var additionalData = {
-        'nomor_spm': $('#nomorlo').val(),
-        'id_spmbast': $('#idspmbast').val(),
-        'nama_alokasi': data.nama_alokasi,
-        'nama_provinsi': data.nama_provinsi,
-        'nama_kantor': data.nama_kantor,
-        'nama_gudang': data.nama_gudang,
+        nomor_spm: $("#nomorlo").val(),
+        id_spmbast: $("#idspmbast").val(),
+        nama_alokasi: data[0].nama_alokasi,
+        nama_provinsi: data[0].nama_provinsi,
+        nama_kantor: data[0].nama_kantor,
+        nama_gudang: data[0].nama_gudang,
       };
-      formData.append('additionalData', JSON.stringify(additionalData));
+      formData.append("additionalData", JSON.stringify(additionalData));
       $.ajax({
-        url: 'http://localhost:8080/api/v1/spmbast/uploadsj',
-        type: 'POST',
+        url: "http://localhost:8080/api/v1/lo/uploadsj",
+        type: "POST",
         data: formData,
         processData: false,
         contentType: false,
@@ -54,7 +61,7 @@ $("#filebuktisj").on('change', function () {
               timer: 3000,
               showConfirmButton: false,
             });
-            $('#formsj').addClass('d-none');
+            $("#formsj").addClass("d-none");
           } else {
             Swal.fire({
               icon: "error",
@@ -73,34 +80,34 @@ $("#filebuktisj").on('change', function () {
             timer: 3000,
             showConfirmButton: false,
           });
-        }
+        },
       });
     },
     error: function (error) {
       console.log("ERROR : ", error);
-    }
+    },
   });
 });
 
-$("#filebuktidriver").on('change', function () {
+$("#filebuktidriver").on("change", function () {
   $.ajax({
-    url: 'http://localhost:8080/api/v1/spmbast/suratjalan/' + $('#idspmbast').val(),
+    url: "http://localhost:8080/api/v1/lo/suratjalan/" + $("#idspmbast").val(),
     type: "GET",
     dataType: "json",
     success: function (data) {
-      var formData = new FormData($('#uploadForm2')[0]);
+      var formData = new FormData($("#uploadForm2")[0]);
       var additionalData = {
-        'nomor_spm': $('#nomorlo').val(),
-        'id_spmbast': $('#idspmbast').val(),
-        'nama_alokasi': data.nama_alokasi,
-        'nama_provinsi': data.nama_provinsi,
-        'nama_kantor': data.nama_kantor,
-        'nama_gudang': data.nama_gudang,
+        nomor_spm: $("#nomorlo").val(),
+        id_spmbast: $("#idspmbast").val(),
+        nama_alokasi: data[0].nama_alokasi,
+        nama_provinsi: data[0].nama_provinsi,
+        nama_kantor: data[0].nama_kantor,
+        nama_gudang: data[0].nama_gudang,
       };
-      formData.append('additionalData', JSON.stringify(additionalData));
+      formData.append("additionalData", JSON.stringify(additionalData));
       $.ajax({
-        url: 'http://localhost:8080/api/v1/spmbast/uploadsjdriver',
-        type: 'POST',
+        url: "http://localhost:8080/api/v1/lo/uploadsjdriver",
+        type: "POST",
         data: formData,
         processData: false,
         contentType: false,
@@ -114,7 +121,7 @@ $("#filebuktidriver").on('change', function () {
               timer: 3000,
               showConfirmButton: false,
             });
-            $('#formdriver').addClass('d-none');
+            $("#formdriver").addClass("d-none");
           } else {
             Swal.fire({
               icon: "error",
@@ -133,11 +140,11 @@ $("#filebuktidriver").on('change', function () {
             timer: 3000,
             showConfirmButton: false,
           });
-        }
+        },
       });
     },
     error: function (error) {
       console.log("ERROR : ", error);
-    }
+    },
   });
 });

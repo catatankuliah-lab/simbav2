@@ -127,7 +127,6 @@ function getDataAllLo(idkantor) {
     method: "GET",
     dataType: "json",
     success: function (data) {
-      console.log(data);
       var datanya = [];
       $.each(data, function (index, lo) {
         datanya.push({
@@ -210,184 +209,183 @@ $.ajax({
 });
 
 // // FILTERRING
-// $("#filterSPM").on("click", function () {
-//   var alokasi = $("#alokasi option:selected").data("id_alokasi");
-//   var gudang = $("#pilihgudang option:selected").data("nama_gudang");
-//   var namakabupaten = $("#pilihkabupatenkota option:selected").data(
-//     "nama_kabupaten"
-//   );
-//   var namakecamatan = $("#pilihkecamatan").val();
+$("#filterSPM").on("click", function () {
+  var alokasi = $("#alokasi option:selected").data("id_alokasi");
+  var gudang = $("#pilihgudang option:selected").data("nama_gudang");
+  var namakabupaten = $("#pilihkabupatenkota option:selected").data(
+    "nama_kabupaten"
+  );
+  var namakecamatan = $("#pilihkecamatan").val();
 
-//   console.log({
-//     alokasi,
-//     gudang,
-//     namakabupaten,
-//     namakecamatan,
-//   });
+  console.log({
+    alokasi,
+    gudang,
+    namakabupaten,
+    namakecamatan,
+  });
 
-//   // IF GUDANG SAJA
-//   // IF KAB/KOTA SAJA
-//   // IF GUDANG, KAB/KOTA, KEC
-//   // IF KAB/KOTA, KEC
-//   // ELSE TIDAK MEMILIH SEMUANYA -> TAMPILKAN SEMUA DATA
+  // IF GUDANG SAJA
+  // IF KAB/KOTA SAJA
+  // IF GUDANG, KAB/KOTA, KEC
+  // IF KAB/KOTA, KEC
+  // ELSE TIDAK MEMILIH SEMUANYA -> TAMPILKAN SEMUA DATA
 
-//   if (gudang != 0 && namakabupaten == 0 && namakecamatan == 0) {
-//     $.ajax({
-//       url: "http://localhost:8080/api/v1/lo/namagudangkantor/" + gudang,
-//       type: "GET",
-//       dataType: "json",
-//       contentType: "application/json",
-//       success: function (data) {
-//         console.log(data);
-//         datalo.empty();
-//         $.each(data, function (index, spm) {
-//           var listspm =
-//             "<tr>" +
-//             "<td>" +
-//             spm.tanggal_muat +
-//             "</td>" +
-//             "<td>" +
-//             spm.nama_gudang +
-//             "</td>" +
-//             "<td>" +
-//             spm.nomor_lo +
-//             "</td>" +
-//             "<td>" +
-//             spm.nomor_mobil +
-//             " / " +
-//             spm.nama_driver +
-//             " (" +
-//             spm.nomor_driver +
-//             ")" +
-//             "</td>" +
-//             "<td>" +
-//             spm.total +
-//             "</td>" +
-//             "<td>" +
-//             spm.status_dokumen_muat +
-//             "</td>" +
-//             "<td class='text-center'>" +
-//             "<a href='http://localhost:8080/gudang/spmbast/detail/" +
-//             spm.nomor_lo +
-//             "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-//             "<i class='fas fa-search-plus'></i>" +
-//             "</a>" +
-//             "</td>" +
-//             "</tr >";
-//           datalo.append(listspm);
-//         });
-//       },
-//       error: function (error) {
-//         datalo.empty();
-//       },
-//     });
-//   } else if (gudang == 0 && namakabupaten != 0 && namakecamatan == 0) {
-//     $.ajax({
-//       url:
-//         "http://localhost:8080/api/v1/lo/namakabupatenkantor/" + namakabupaten,
-//       type: "GET",
-//       dataType: "json",
-//       contentType: "application/json",
-//       success: function (data) {
-//         console.log(data);
-//         datalo.empty();
-//         $.each(data, function (index, spm) {
-//           var listspm =
-//             "<tr>" +
-//             "<td>" +
-//             spm.tanggal_muat +
-//             "</td>" +
-//             "<td>" +
-//             spm.nama_gudang +
-//             "</td>" +
-//             "<td>" +
-//             spm.nomor_lo +
-//             "</td>" +
-//             "<td>" +
-//             spm.nomor_mobil +
-//             " / " +
-//             spm.nama_driver +
-//             " (" +
-//             spm.nomor_driver +
-//             ")" +
-//             "</td>" +
-//             "<td>" +
-//             spm.total +
-//             "</td>" +
-//             "<td>" +
-//             spm.status_dokumen_muat +
-//             "</td>" +
-//             "<td class='text-center'>" +
-//             "<a href='http://localhost:8080/gudang/spmbast/detail/" +
-//             spm.nomor_lo +
-//             "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-//             "<i class='fas fa-search-plus'></i>" +
-//             "</a>" +
-//             "</td>" +
-//             "</tr >";
-//           datalo.append(listspm);
-//         });
-//       },
-//       error: function (error) {
-//         datalo.empty();
-//       },
-//     });
-//   } else if (gudang == 0 && namakabupaten != 0 && namakecamatan != 0) {
-//     $.ajax({
-//       url:
-//         "http://localhost:8080/api/v1/lo/kabupatenkecamatankantor/" +
-//         namakabupaten +
-//         "/" +
-//         namakecamatan,
-//       type: "GET",
-//       dataType: "json",
-//       contentType: "application/json",
-//       success: function (data) {
-//         console.log(data);
-//         datalo.empty();
-//         $.each(data, function (index, spm) {
-//           var listspm =
-//             "<tr>" +
-//             "<td>" +
-//             spm.tanggal_muat +
-//             "</td>" +
-//             "<td>" +
-//             spm.nama_gudang +
-//             "</td>" +
-//             "<td>" +
-//             spm.nomor_lo +
-//             "</td>" +
-//             "<td>" +
-//             spm.nomor_mobil +
-//             " / " +
-//             spm.nama_driver +
-//             " (" +
-//             spm.nomor_driver +
-//             ")" +
-//             "</td>" +
-//             "<td>" +
-//             spm.total +
-//             "</td>" +
-//             "<td>" +
-//             spm.status_dokumen_muat +
-//             "</td>" +
-//             "<td class='text-center'>" +
-//             "<a href='http://localhost:8080/gudang/spmbast/detail/" +
-//             spm.nomor_lo +
-//             "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-//             "<i class='fas fa-search-plus'></i>" +
-//             "</a>" +
-//             "</td>" +
-//             "</tr >";
-//           datalo.append(listspm);
-//         });
-//       },
-//       error: function (error) {
-//         datalo.empty();
-//       },
-//     });
-//   }
-// });
+  if (gudang != 0 && namakabupaten == 0 && namakecamatan == 0) {
+    $.ajax({
+      url: "http://localhost:8080/api/lo/namagudangkantor/" + gudang,
+      type: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      success: function (data) {
+        console.log(data);
+        datalo.empty();
+        $.each(data, function (index, spm) {
+          var listspm =
+            "<tr>" +
+            "<td>" +
+            spm.tanggal_muat +
+            "</td>" +
+            "<td>" +
+            spm.nama_gudang +
+            "</td>" +
+            "<td>" +
+            spm.nomor_lo +
+            "</td>" +
+            "<td>" +
+            spm.nomor_mobil +
+            " / " +
+            spm.nama_driver +
+            " (" +
+            spm.nomor_driver +
+            ")" +
+            "</td>" +
+            "<td>" +
+            spm.total +
+            "</td>" +
+            "<td>" +
+            spm.status_dokumen_muat +
+            "</td>" +
+            "<td class='text-center'>" +
+            "<a href='http://localhost:8080/gudang/spmbast/detail/" +
+            spm.nomor_lo +
+            "' type='button' class='text-primary' style='border-radius: 5px;'>" +
+            "<i class='fas fa-search-plus'></i>" +
+            "</a>" +
+            "</td>" +
+            "</tr >";
+          datalo.append(listspm);
+        });
+      },
+      error: function (error) {
+        datalo.empty();
+      },
+    });
+  } else if (gudang == 0 && namakabupaten != 0 && namakecamatan == 0) {
+    $.ajax({
+      url: "http://localhost:8080/api/lo/namakabupatenkantor/" + namakabupaten,
+      type: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      success: function (data) {
+        console.log(data);
+        datalo.empty();
+        $.each(data, function (index, spm) {
+          var listspm =
+            "<tr>" +
+            "<td>" +
+            spm.tanggal_muat +
+            "</td>" +
+            "<td>" +
+            spm.nama_gudang +
+            "</td>" +
+            "<td>" +
+            spm.nomor_lo +
+            "</td>" +
+            "<td>" +
+            spm.nomor_mobil +
+            " / " +
+            spm.nama_driver +
+            " (" +
+            spm.nomor_driver +
+            ")" +
+            "</td>" +
+            "<td>" +
+            spm.total +
+            "</td>" +
+            "<td>" +
+            spm.status_dokumen_muat +
+            "</td>" +
+            "<td class='text-center'>" +
+            "<a href='http://localhost:8080/gudang/spmbast/detail/" +
+            spm.nomor_lo +
+            "' type='button' class='text-primary' style='border-radius: 5px;'>" +
+            "<i class='fas fa-search-plus'></i>" +
+            "</a>" +
+            "</td>" +
+            "</tr >";
+          datalo.append(listspm);
+        });
+      },
+      error: function (error) {
+        datalo.empty();
+      },
+    });
+  } else if (gudang == 0 && namakabupaten != 0 && namakecamatan != 0) {
+    $.ajax({
+      url:
+        "http://localhost:8080/api/v1/lo/kabupatenkecamatankantor/" +
+        namakabupaten +
+        "/" +
+        namakecamatan,
+      type: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      success: function (data) {
+        console.log(data);
+        datalo.empty();
+        $.each(data, function (index, spm) {
+          var listspm =
+            "<tr>" +
+            "<td>" +
+            spm.tanggal_muat +
+            "</td>" +
+            "<td>" +
+            spm.nama_gudang +
+            "</td>" +
+            "<td>" +
+            spm.nomor_lo +
+            "</td>" +
+            "<td>" +
+            spm.nomor_mobil +
+            " / " +
+            spm.nama_driver +
+            " (" +
+            spm.nomor_driver +
+            ")" +
+            "</td>" +
+            "<td>" +
+            spm.total +
+            "</td>" +
+            "<td>" +
+            spm.status_dokumen_muat +
+            "</td>" +
+            "<td class='text-center'>" +
+            "<a href='http://localhost:8080/gudang/spmbast/detail/" +
+            spm.nomor_lo +
+            "' type='button' class='text-primary' style='border-radius: 5px;'>" +
+            "<i class='fas fa-search-plus'></i>" +
+            "</a>" +
+            "</td>" +
+            "</tr >";
+          datalo.append(listspm);
+        });
+      },
+      error: function (error) {
+        datalo.empty();
+      },
+    });
+  }
+});
 
 // function generatereport() {
 //   $("#tomboldownload").empty();

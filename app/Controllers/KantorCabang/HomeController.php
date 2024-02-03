@@ -2,10 +2,19 @@
 
 namespace App\Controllers\KantorCabang;
 
+use App\Models\LOJanuariModel;
 use CodeIgniter\Controller;
 
 class HomeController extends Controller
 {
+
+    protected $muatJanuari;
+
+    public function __construct()
+    {
+        $this->muatJanuari = new LOJanuariModel();
+    }
+
     public function index()
     {
         $data = [
@@ -39,5 +48,20 @@ class HomeController extends Controller
             'menu4' => '',
         ];
         return view('kantorcabang/laporan/index', $data);
+    }
+
+    public function detail_lo($nomorlo)
+    {
+
+        $datalo = $this->muatJanuari->getDokumenMuatByNomorLo($nomorlo, session()->get('id_kantor'));
+        $data = [
+            'menu1' => '',
+            'menu2' => 'selected',
+            'menu3' => '',
+            'menu4' => '',
+            'nomorlo' => $datalo[0]->nomor_lo,
+        ];
+
+        return view('kantorcabang/lo/detail', $data);
     }
 }
