@@ -105,4 +105,54 @@ class LOJanuariModel extends Model
             ->get();
         return $query->getResult();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function dashboard($idakun)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*')
+            ->where('januari_lo.id_akun', $idakun)
+            ->get();
+        return $query->getResult();
+    }
 }

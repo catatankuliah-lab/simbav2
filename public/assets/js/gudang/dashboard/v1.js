@@ -1,21 +1,42 @@
 $.ajax({
-    url: "http://localhost:8080/api/v1/lo/sessionya",
+    url: "http://localhost:8080/api/alokasi",
     method: "GET",
     dataType: "json",
     success: function (data) {
-        dashboardSemua(data.id_akun);
-    },
-    error: function (error) {
-        console.error("Gagal mengambil data sesi:", error);
-    },
+        const alokasi = $('#alokasi');
+        $.each(data, function (index, datanya) {
+            const listalokasi = "<option value='" + datanya.id_alokasi + "'>" + datanya.nama_alokasi + "</option>";
+            alokasi.append(listalokasi);
+        });
+    }
 });
 
-function dashboardSemua(idakun) {
+$("#alokasi").on("change", function () {
+    const alokasidipilih = $('#alokasi').val();
+    if (alokasidipilih == "1") {
+        prosestampilkandashboard(alokasidipilih);
+    }
+});
+
+function prosestampilkandashboard(idalokasi) {
+    Swal.fire({
+        title: 'Dashboard',
+        text: 'Memuat Data, Mohon Tunggu.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        },
+    });
     $.ajax({
-        url: "http://localhost:8080/api/v1/lo/dashboard/" + idakun,
+        url: "http://localhost:8080/api/lo/" + idalokasi + "/dashboard",
         method: "GET",
         dataType: "json",
         success: function (data) {
+            setTimeout(function () {
+                Swal.close();
+            }, 200);
             var total = 0;
             var lengkap = 0;
             var tidak = 0;
@@ -29,10 +50,13 @@ function dashboardSemua(idakun) {
             });
             $('#card1').text(total);
             $('#card2').text(lengkap);
-            $('#card3').text(total - lengkap);
+            $('#card3').text(tidak);
         },
         error: function (error) {
-            console.error("ERROR: ", error);
+            $('#card1').text(0);
+            $('#card2').text(0);
+            $('#card3').text(0);
+            console.error("error tampilkan dashboard: ", error);
         },
     });
 }

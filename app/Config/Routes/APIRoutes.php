@@ -25,10 +25,9 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('lo/namagudangkantor/(:any)', 'LO\LOJanuariController::getGudangByIdKantor/$1');
     $routes->get('lo/namakabupatenkantor/(:any)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
     $routes->get('lo/kabupatenkecamatankantor/(:any)/(:any)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');
+
     // Detail LO
     $routes->get('lo/detail/(:any)', 'LO\LOJanuariController::showDetailLo/$1');
-
-
 
     // Alokasi
     $routes->get('alokasi', 'Alokasi\AlokasiController::index');
@@ -44,4 +43,25 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
 
     // Wilayah Kerja
     $routes->get('wilayahkerja/(:num)', 'WilayahKerja\WilayahKerjaController::getWilayahKerjaByIdKantor/$1');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // LO NANA
+    $routes->get('lo/1/dashboard', 'LO\LOJanuariController::dashboard');
+    // $routes->get('lo/2/dasshboard/februari', 'LO\LOJanuariController::index');
+    // $routes->get('lo/dasshboard/maret', 'LO\LOJanuariController::index');
+    // $routes->get('lo/dasshboard/april', 'LO\LOJanuariController::index');
+    // $routes->get('lo/dasshboard/mei', 'LO\LOJanuariController::index');
+    // $routes->get('lo/dasshboard/juni', 'LO\LOJanuariController::index');
 });

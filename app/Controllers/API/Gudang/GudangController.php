@@ -16,8 +16,6 @@ class GudangController extends ResourceController
 
     public function index()
     {
-        $data = $this->model->findAll();
-        return $this->respondCreated($data);
     }
 
     public function show($id = null)

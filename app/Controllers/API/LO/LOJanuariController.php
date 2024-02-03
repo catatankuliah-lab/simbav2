@@ -78,4 +78,57 @@ class LOJanuariController extends ResourceController
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function dashboard()
+    {
+        $data = $this->model->dashboard(session()->get('id_akun'));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Record LO aktif tidak ditemukan.');
+        }
+    }
 }
