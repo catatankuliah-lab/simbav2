@@ -25,10 +25,8 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('lo/namagudangkantor/(:any)', 'LO\LOJanuariController::getGudangByIdKantor/$1');
     $routes->get('lo/namakabupatenkantor/(:any)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
     $routes->get('lo/kabupatenkecamatankantor/(:any)/(:any)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');
-    // Detail LO
     $routes->get('lo/detail/(:any)', 'LO\LOJanuariController::showDetailLo/$1');
-
-
+    $routes->get('lo/detail/suratjalan/(:any)', 'LO\LOJanuariController::showDetailSuratJalan/$1');
 
     // Alokasi
     $routes->get('alokasi', 'Alokasi\AlokasiController::index');
@@ -44,4 +42,11 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
 
     // Wilayah Kerja
     $routes->get('wilayahkerja/(:num)', 'WilayahKerja\WilayahKerjaController::getWilayahKerjaByIdKantor/$1');
+
+    // WO Januari
+    $routes->get('wo/getwobyidkantor/(:any)', 'WOJanuari\WOJanuariController::getWoByIdKantor/$1');
+
+    // PBP Januari
+    $routes->get('pbp/getkecamatanbykabupaten/(:any)', 'PBPJanuari\PBPJanuariController::showByKabupatenKota/$1');
+    $routes->get('pbp/getdesabykecamatan/(:any)', 'PBPJanuari\PBPJanuariController::showByDesa/$1');
 });

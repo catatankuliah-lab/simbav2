@@ -105,4 +105,14 @@ class LOJanuariModel extends Model
             ->get();
         return $query->getResult();
     }
+
+    public function getDetailSuratJalan($id_lo)
+    {
+        $query = $this->db->table('januari_lo')
+        ->select('januari_lo.*, januari_sj.*')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->where('januari_lo.id_lo', $id_lo)
+            ->get();
+        return $query->getResult();
+    }
 }

@@ -64,4 +64,20 @@ class HomeController extends Controller
 
         return view('kantorcabang/lo/detail', $data);
     }
+
+    public function detail_suratjalan($id_dokumen_muat)
+    {
+
+        $datalo = $this->muatJanuari->getDetailSuratJalan($id_dokumen_muat, session()->get('id_kantor'));
+        $data = [
+            'menu1' => '',
+            'menu2' => 'selected',
+            'menu3' => '',
+            'menu4' => '',
+            'nomorlo' => $datalo[0]->nomor_lo,
+            'idspmbast' => $datalo[0]->id_dokumen_muat,
+        ];
+
+        return view('kantorcabang/spmbast/detailsuratjalan', $data);
+    }
 }

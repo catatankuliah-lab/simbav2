@@ -8,18 +8,18 @@ class WilayahKerjaModel extends Model
 {
     protected $table = 'wilayah_kerja';
     protected $primaryKey = 'id_wilayah_kerja';
-    protected $allowedFields = ['kode_kabupaten_kota', 'id_kantor_cabang'];
+    protected $allowedFields = ['nama_kabupaten_kota', 'id_kantor_cabang'];
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     protected $protectFields    = true;
 
     protected $validationRules = [
-        'kode_kabupaten_kota' => 'required|is_unique[wilayah_kerja.kode_kabupaten_kota]',
+        'nama_kabupaten_kota' => 'required|is_unique[wilayah_kerja.nama_kabupaten_kota]',
         'id_kantor_cabang' => 'required'
     ];
 
     protected $validationMessages = [
-        'kode_kabupaten_kota' => [
+        'nama_kabupaten_kota' => [
             'required' => 'Kabupaten/Kota kantor harus diisi.',
             'is_unique' => 'Wilayah Kerja sudah ada.',
         ],
@@ -33,7 +33,7 @@ class WilayahKerjaModel extends Model
         $query = $this->db->table('wilayah_kerja')
             ->select('wilayah_kerja.*, kantor_cabang.*, kabupaten_kota.*')
             ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = wilayah_kerja.id_kantor_cabang', 'left')
-            ->join('kabupaten_kota', 'kabupaten_kota.kode_kabupaten_kota = wilayah_kerja.kode_kabupaten_kota', 'left')
+            ->join('kabupaten_kota', 'kabupaten_kota.nama_kabupaten_kota = wilayah_kerja.nama_kabupaten_kota', 'left')
             ->where('wilayah_kerja.id_kantor_cabang', $idkantor)
             ->get();
         return $query->getResult();
@@ -62,9 +62,8 @@ class WilayahKerjaModel extends Model
     public function WilayahKerjaByIdKantorIdWilayah($idkantor, $idwilayah)
     {
         $query = $this->db->table('wilayah_kerja')
-            ->select('wilayah_kerja.*, kantor_cabang.*, kabupaten_kota.*')
+            ->select('wilayah_kerja.*, kantor_cabang.*')
             ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = wilayah_kerja.id_kantor_cabang', 'left')
-            ->join('kabupaten_kota', 'kabupaten_kota.kode_kabupaten_kota = wilayah_kerja.kode_kabupaten_kota', 'left')
             ->where('wilayah_kerja.id_kantor_cabang', $idkantor)
             ->where('wilayah_kerja.id_wilayah_kerja', $idwilayah)
             ->get();
