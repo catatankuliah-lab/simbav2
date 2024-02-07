@@ -78,49 +78,15 @@ class LOJanuariController extends ResourceController
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    function showDetailSuratJalan($id_lo)
+    {
+        $data = $this->model->getDetailSuratJalan($id_lo);
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+        }
+    }
 
     public function dashboard()
     {

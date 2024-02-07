@@ -38,32 +38,10 @@
                     <label for="totalpenyerahan" class="h6">Total Penyerahan</label>
                     <input readonly value="" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan Nama Driver Disini" id="totalpenyerahan" name="totalpenyerahan">
                 </div>
-                <!-- <div class="col-md-4 mb-3" id="formsj">
-                    <form id="uploadForm" class="" enctype="multipart/form-data">
-                        <label for="filebuktisj" class="h6">Upload Bukti File Surat Jalan</label>
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input custom-shadow border-0 bg-white text-secondary px-4" style="height: 50px !important; font-size: 14px;" id="filebuktisj" name="filebuktisj">
-                                <label class="custom-file-label custom-shadow border-0 bg-white text-secondary px-4" style="height: 50px !important; font-size: 14px; border-radius: 25px; padding-top: 5px;" for="filebuktisj"></label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-4 mb-3" id="formdriver">
-                    <form id="uploadForm2" class="" enctype="multipart/form-data">
-                        <label for="filebuktidriver" class="h6">Upload Foto Penyerahan dari Driver</label>
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input custom-shadow border-0 bg-white text-secondary px-4" style="height: 50px !important; font-size: 14px;" id="filebuktidriver" name="filebuktidriver">
-                                <label class="custom-file-label custom-shadow border-0 bg-white text-secondary px-4" style="height: 50px !important; font-size: 14px; border-radius: 25px; padding-top: 5px;" for="filebuktidriver"></label>
-                            </div>
-                        </div>
-                    </form>
-                </div> -->
                 <input type="text" name="iddtt" id="iddtt" hidden>
             </div>
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets\js\kantorcabang\spmbast\getdetailsuratjalan.js') ?>"></script>
+<script src="<?= base_url('assets\js\kantorcabang\lo\getdetailsuratjalan.js') ?>"></script>
 <?php $this->endSection() ?>

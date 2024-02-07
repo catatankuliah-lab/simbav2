@@ -1,5 +1,5 @@
 $.ajax({
-  url: "http://localhost:8080/api/v1/lo/suratjalan/" + $("#idspmbast").val(),
+  url: "http://localhost:8080/api/lo/suratjalan/" + $("#nomor_lo").val(),
   type: "GET",
   dataType: "json",
   success: function (data) {

@@ -53,7 +53,7 @@ $.ajax({
         "</td>" +
         "<td class='text-center'>" +
         "<a href='http://localhost:8080/kantorcabang/lo/suratjalan/" +
-        spm.id_dokumen_muat +
+        spm.id_lo +
         "' type='button' class='text-primary' style='border-radius: 5px;'>" +
         "<i class='fas fa-search-plus'></i>" +
         "</a>" +
