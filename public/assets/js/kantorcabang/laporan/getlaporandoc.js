@@ -1,25 +1,34 @@
 var idkantor = "";
 const datawo = $("#datawo");
 
-$(function () {
-  $('input[name="datatanggal"]').daterangepicker(
-    {
-      opens: "left",
-    },
-    function (start, end, label) {
-      console.log(
-        "A new date selection was made: " +
-          start.format("YYYY-MM-DD") +
-          " to " +
-          end.format("YYYY-MM-DD")
-      );
-    }
-  );
+$.ajax({
+  url: "http://localhost:8080/api/alokasi",
+  method: "GET",
+  dataType: "json",
+  success: function (data) {
+    const alokasi = $("#alokasi");
+    $.each(data, function (index, datanya) {
+      const listalokasi =
+        "<option value='" +
+        datanya.id_alokasi +
+        "'>" +
+        datanya.nama_alokasi +
+        "</option>";
+      alokasi.append(listalokasi);
+    });
+  },
 });
 
-$(document).ready(function () {
+$("#alokasi").on("change", function () {
+  const alokasidipilih = $("#alokasi").val();
+  if (alokasidipilih == "1") {
+    dataJanuari(alokasidipilih);
+  }
+});
+
+function dataJanuari(alokasidipilih) {
   $.ajax({
-    url: "http://localhost:8080/api/lo/sessionya",
+    url: "http://localhost:8080/api/lo/" + alokasidipilih + "/sessionya",
     method: "GET",
     dataType: "json",
     success: function (data) {
@@ -37,7 +46,7 @@ $(document).ready(function () {
       console.error("Gagal mengambil data sesi:", error);
     },
   });
-});
+}
 
 function getWoByIdKantor(idkantor) {
   $.ajax({
@@ -158,13 +167,11 @@ function showDesa() {
 }
 
 function getDataAllWO(idkantor) {
-  console.log(idkantor);
   $.ajax({
     url: "http://localhost:8080/api/wo/getalldatawo/" + idkantor,
     method: "GET",
     dataType: "json",
     success: function (data) {
-      console.log(data);
       var datanya = [];
       $.each(data, function (index, lo) {
         datanya.push({
@@ -220,8 +227,39 @@ function getDataAllWO(idkantor) {
   });
 }
 
-function generatereport() {
-  window.location.href =
-    "http://localhost:8080/kantorcabang/lo/generatelaporanwo/" +
-    $("#datatanggal").val();
+function cariKabupaten() {
+  var keyword = $("#pilihkabupaten").val();
+  $("#tablewo").DataTable().columns(2).search(keyword).draw();
 }
+
+function cariKecamatan() {
+  var keyword = $("#pilihkecamatan").val();
+  $("#tablewo").DataTable().columns(3).search(keyword).draw();
+}
+
+function cariDesa() {
+  var keyword = $("#pilihdesa").val();
+  $("#tablewo").DataTable().columns(4).search(keyword).draw();
+}
+
+// function generatereport() {
+//   window.location.href =
+//     "http://localhost:8080/kantorcabang/lo/generatelaporanwo/" +
+//     $("#datatanggal").val();
+// }
+
+// $(function () {
+//   $('input[name="datatanggal"]').daterangepicker(
+//     {
+//       opens: "left",
+//     },
+//     function (start, end, label) {
+//       console.log(
+//         "A new date selection was made: " +
+//           start.format("YYYY-MM-DD") +
+//           " to " +
+//           end.format("YYYY-MM-DD")
+//       );
+//     }
+//   );
+// });

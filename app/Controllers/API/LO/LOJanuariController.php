@@ -28,7 +28,8 @@ class LOJanuariController extends ResourceController
         return $this->response->setJSON($userData);
     }
 
-    public function getbyidkantor($idkantor)
+    // Mengambil data Loading Order dari Kantor Cabang (Panji)
+    public function getbyidkantor($idkantor) 
     {
         $dataspm = $this->model->getAllLOByCabang($idkantor);
         if ($dataspm) {
@@ -38,6 +39,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
+     // Mengambil data Gudang dari Kantor Cabang (Panji)
     public function getGudangByIdKantor($namaGudang)
     {
         $data = $this->model->LOGudangByIdKantor($namaGudang, session()->get('id_kantor'));
@@ -48,6 +50,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
+      // Mengambil data Kabupaten dari Kantor Cabang (Panji)
     public function getKabupatenByIdKantor($namaKabupaten)
     {
         $data = $this->model->LOKabupatenByIdKantor($namaKabupaten, session()->get('id_kantor'));
@@ -58,19 +61,10 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    public function getKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan)
+      // Mengambil LO dari Nomor LO  (Panji)
+    function showDetailLo($nomorlo) 
     {
-        $data = $this->model->LOKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan, session()->get('id_kantor'));
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
-        }
-    }
-
-    function showDetailLo($nomorlo)
-    {
-        $data = $this->model->getDokumenMuatByNomorLo($nomorlo);
+        $data = $this->model->getLOByNomorLo($nomorlo);
         if ($data) {
             return $this->respond($data);
         } else {
@@ -78,6 +72,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
+     // Mengambil data Surat Jalan dari Id_lo (Panji)
     function showDetailSuratJalan($id_lo)
     {
         $data = $this->model->getDetailSuratJalan($id_lo);
