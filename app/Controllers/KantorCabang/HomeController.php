@@ -69,13 +69,14 @@ class HomeController extends Controller
 
         return view('kantorcabang/lo/detail', $data);
     }
+
     public function detail_wo($nomorwo)
     {
-        $datawo = $this->woJanuari->getDetailWo($nomorwo);
+        $datawo = $this->woJanuari->showDetailWO($nomorwo);
         $data = [
             'menu1' => '',
-            'menu2' => 'selected',
-            'menu3' => '',
+            'menu2' => '',
+            'menu3' => 'selected',
             'menu4' => '',
             'nomorwo' => $datawo[0]->nomor_wo,
         ];
