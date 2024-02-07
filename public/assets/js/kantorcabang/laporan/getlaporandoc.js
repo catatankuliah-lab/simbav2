@@ -1,4 +1,21 @@
 var idkantor = "";
+const datawo = $("#datawo");
+
+$(function () {
+  $('input[name="datatanggal"]').daterangepicker(
+    {
+      opens: "left",
+    },
+    function (start, end, label) {
+      console.log(
+        "A new date selection was made: " +
+          start.format("YYYY-MM-DD") +
+          " to " +
+          end.format("YYYY-MM-DD")
+      );
+    }
+  );
+});
 
 $(document).ready(function () {
   $.ajax({
@@ -11,6 +28,7 @@ $(document).ready(function () {
       idakun = data.id_akun;
       idkantor = data.id_kantor_cabang;
 
+      getDataAllWO(idkantor);
       getWoByIdKantor(idkantor);
       getWilayahKerja(idkantor);
     },
@@ -137,4 +155,77 @@ function showDesa() {
       console.error("Error:", error);
     },
   });
+}
+
+function getDataAllWO(idkantor) {
+  console.log(idkantor);
+  $.ajax({
+    url: "http://localhost:8080/api/wo/getalldatawo/" + idkantor,
+    method: "GET",
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+      var datanya = [];
+      $.each(data, function (index, lo) {
+        datanya.push({
+          tanggal_wo: lo.tanggal_wo,
+          nomor_wo: lo.nomor_wo,
+          pengirim:
+            lo.nomor_mobil +
+            " / " +
+            lo.nama_driver +
+            "(" +
+            lo.nomor_driver +
+            ")",
+          muatan: lo.jumlah_penyaluran_januari,
+          status: lo.status_dokumen_muat,
+          link: "http://localhost:8080/kantorcabang/lo/detail/" + lo.nomor_wo,
+        });
+      });
+      $("#tablewo").DataTable({
+        paging: true,
+        info: false,
+        language: {
+          paginate: {
+            next: ">",
+            previous: "<",
+          },
+        },
+        data: datanya,
+        columns: [
+          { data: "tanggal_wo" },
+          { data: "nomor_wo" },
+          { data: "pengirim" },
+          { data: "muatan" },
+          { data: "status" },
+          {
+            data: "link",
+            render: function (data, type, row, meta) {
+              return (
+                "<a href=" +
+                data +
+                " type='button' class='text-primary' style='border-radius: 5px;'>" +
+                "<i class='fas fa-search-plus'></i></a>"
+              );
+            },
+            className: "text-center",
+          },
+        ],
+      });
+    },
+
+    error: function (error) {
+      console.error("Gagal mengambil data sesi:", error);
+    },
+  });
+}
+
+function generatereport() {
+  $("#tomboldownload").empty();
+  var tanggalWO = $("#datatanggal option:selected").data("tanggal_wo");
+  var tomboldownload =
+    "<a href='http://localhost:8080/kantorcabang/lo/generatelaporanwo/" +
+    tanggal_wo +
+    "' style='font-weight: bolder;' class='text-primary' id='downloadspm'>Download</a> File Rekap Working Order";
+  $("#tomboldownload").append(tomboldownload);
 }

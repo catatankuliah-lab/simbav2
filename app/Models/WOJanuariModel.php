@@ -38,4 +38,25 @@ class WOJanuariModel extends Model
             ->get();
         return $query->getResult();
     }
+
+    public function getWOyNomorWO($nomorwo)
+    {
+        $query = $this->db->table('januari_wo')
+            ->select('januari_wo.*, januari_sj.*')
+            ->join('januari_sj', 'januari_sj.nomor_wo = januari_wo.nomor_wo')
+            ->where('januari_wo.nomor_wo', $nomorwo)
+            ->get();
+        return $query->getResult();
+    }
+
+    public function getAllByIdKantor($idkantor)
+    {
+        $query = $this->db->table('januari_wo')
+            ->select('januari_wo.*, januari_lo.*, januari_sj.*')
+            ->join('januari_lo', 'januari_lo.id_kantor = januari_wo.id_kantor_cabang')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->where('januari_wo.id_kantor_cabang', $idkantor)
+            ->get();
+        return $query->getResult();
+    }
 }

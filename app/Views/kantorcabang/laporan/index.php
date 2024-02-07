@@ -8,8 +8,14 @@
             <div class="row mt-4">
                 <div class="col-12 h6">Pilih Berdasarkan</div>
                 <div class="col-md-4 my-3">
-                    <input type="date" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="datatanggal">
+                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi">
+                        <option data-id_alokasi='0' value="0">Pilih Alokasi</option>
+                    </select>
                 </div>
+                <div class="col-md-4 my-3">
+                    <input type="text" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Range Tanggal" onchange="generatereport()">
+                </div>
+
                 <div class="col-md-4 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihwo" name="pilihwo" style="height: 50px !important; font-size: 14px;" placeholder="pilihwo">
                         <option data-nomor_wo="0" value="0">Pilih Work Order (WO)</option>
@@ -30,8 +36,28 @@
                         <option value="0">Pilih Desa</option>
                     </select>
                 </div>
-                <div class="col-md-4 my-3">
-                    <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterSPM" name="filterSPM">Download Dokumen</button>
+                <div class="col-md-12 my-3">
+                    <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterWO" name="filterWO">Filter Document</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive h6 mt-3">
+                        <table class="display" id="tablewo">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">No Working Order (WO)</th>
+                                    <th scope="col">Kabupaten</th>
+                                    <th scope="col">Kecamatan</th>
+                                    <th scope="col">Desa</th>
+                                    <th scope="col" class="text-center">Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody id="datawo">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="row mt-3">

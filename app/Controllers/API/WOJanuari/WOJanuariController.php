@@ -33,4 +33,13 @@ class WOJanuariController extends ResourceController
             return $this->failNotFound('Data WO Kantor tidak ditemukan.');
         }
     }
+
+    public function getalldatawo($idkantor) {
+        $data = $this->modelWOJanuari->getAllByIdKantor($idkantor, session()->get("id_akun"));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data WO Kantor tidak ditemukan.');
+        }
+    }
 }

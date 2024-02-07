@@ -45,6 +45,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
 
     // WO Januari
     $routes->get('wo/getwobyidkantor/(:any)', 'WOJanuari\WOJanuariController::getWoByIdKantor/$1');
+    $routes->get('wo/getalldatawo/(:any)', 'WOJanuari\WOJanuariController::getalldatawo/$1');
 
     // PBP Januari
     $routes->get('pbp/getkecamatanbykabupaten/(:any)', 'PBPJanuari\PBPJanuariController::showByKabupatenKota/$1');
