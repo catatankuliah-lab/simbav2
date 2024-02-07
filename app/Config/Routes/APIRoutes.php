@@ -50,4 +50,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     // PBP Januari
     $routes->get('pbp/getkecamatanbykabupaten/(:any)', 'PBPJanuari\PBPJanuariController::showByKabupatenKota/$1');
     $routes->get('pbp/getdesabykecamatan/(:any)', 'PBPJanuari\PBPJanuariController::showByDesa/$1');
+
+    // LO NANA
+    $routes->get('lo/1/dashboard', 'LO\LOJanuariController::dashboard');
+    // $routes->get('lo/2/dasshboard/februari', 'LO\LOJanuariController::index');
+    // $routes->get('lo/dasshboard/maret', 'LO\LOJanuariController::index');
+    // $routes->get('lo/dasshboard/april', 'LO\LOJanuariController::index');
+    // $routes->get('lo/dasshboard/mei', 'LO\LOJanuariController::index');
+    // $routes->get('lo/dasshboard/juni', 'LO\LOJanuariController::index');
 });

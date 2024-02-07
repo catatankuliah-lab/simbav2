@@ -14,10 +14,7 @@
     <!-- Custom CSS -->
     <link href="<?= base_url('assetss/extra-libs/c3/c3.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assetss/extra-libs/jvector/jquery-jvectormap-2.0.2.css') ?>" rel="stylesheet" />
-    <link href="<?= base_url('assetss/libs/fullcalendar/dist/fullcalendar.min.css') ?>" rel="stylesheet" />
     <!-- Custom CSS -->
-    <script src="<?= base_url('assetss/libs/jquery/dist/jquery.min.js') ?>"></script>
-
     <link href="<?= base_url('dist/css/style.min.css') ?>" rel="stylesheet">
 
     <!-- Load jQuery -->

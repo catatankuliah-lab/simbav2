@@ -220,6 +220,8 @@ function getDataAllWO(idkantor) {
   });
 }
 
-function name(params) {
-  
+function generatereport() {
+  window.location.href =
+    "http://localhost:8080/kantorcabang/lo/generatelaporanwo/" +
+    $("#datatanggal").val();
 }
