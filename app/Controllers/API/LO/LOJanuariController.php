@@ -2,7 +2,9 @@
 
 namespace App\Controllers\API\LO;
 
+use App\Models\JanuariSJModel;
 use App\Models\LOJanuariModel;
+use App\Models\PBPJanuariModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -11,10 +13,14 @@ class LOJanuariController extends ResourceController
 
     use ResponseTrait;
     protected $model;
+    protected $modelSJ;
+    protected $modelPBP;
 
     public function __construct()
     {
         $this->model = new LOJanuariModel();
+        $this->modelSJ = new JanuariSJModel();
+        $this->modelPBP = new PBPJanuariModel();
     }
 
     public function getSession()
@@ -83,6 +89,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
+    // NANA DASHBOARD
     public function dashboard()
     {
         $data = $this->model->dashboard(session()->get('id_akun'));
@@ -91,5 +98,54 @@ class LOJanuariController extends ResourceController
         } else {
             return $this->failNotFound('Record LO aktif tidak ditemukan.');
         }
+    }
+
+    // NANA CEK NOMOR LO
+    public function ceknomorlo()
+    {
+        $data = $this->model->ceknomorlo(session()->get('id_akun'));
+        if ($data) {
+            $bahannomorlo = [
+                "status" => "200",
+                "data" => $data,
+            ];
+            return $this->respond($bahannomorlo);
+        } else {
+            $bahannomorlo = [
+                "status" => "404",
+                "id_gudang" => session()->get('id_gudang'),
+                "id_kantor_cabang" => session()->get('id_kantor_cabang'),
+                "id_akun" => session()->get('id_akun'),
+            ];
+            return $this->respond($bahannomorlo);
+        }
+    }
+
+    public function create()
+    {
+        $data = $this->request->getJSON();
+        $datapbp = $this->modelPBP->find($data->id_pbp);
+        $this->model->insert($data);
+        $this->modelSJ->insert($data);
+        $datapbpupdate = [
+            "jumlah_alokasi" => $datapbp->jumlah_alokasi - $data->jumlah_penyaluran_januari,
+        ];
+        $this->modelPBP->update($data->id_pbp, $datapbpupdate);
+        $datainsert = [
+            "status" => "200",
+        ];
+        return $this->respond($datainsert);
+    }
+
+    public function deletelo($nomorlo)
+    {
+        $datahapus = [
+            "nomor_lo" => $nomorlo,
+        ];
+        $this->model->deletelo($datahapus);
+        $data = [
+            "status" => "200",
+        ];
+        return $this->respond($data);
     }
 }

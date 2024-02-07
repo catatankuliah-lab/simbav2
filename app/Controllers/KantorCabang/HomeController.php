@@ -84,7 +84,6 @@ class HomeController extends Controller
 
     public function generateLaporanwo($nomorwo)
     {
-
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator('PT Delapan Delapan Logistics');
         $pdf->SetAuthor('PT Delapan Delapan Logistics');

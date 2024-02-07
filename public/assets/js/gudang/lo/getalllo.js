@@ -1,58 +1,13 @@
-var idgudang = "";
-var idkantor = "";
-var idakun = "";
-var idalokasi = "";
-var idspm = "";
-var kodekabupatenkota = "";
-var kodekecamatan = "";
-var kodealokasi = "";
-var alokasitahap = "";
 const datalo = $("#datalo");
-var dataprosesspm = {};
 
-$.ajax({
-  url: "http://localhost:8080/api/v1/lo/sessionya",
-  method: "GET",
-  dataType: "json",
-  success: function (data) {
-    idgudang = data.id_gudang;
-    idakun = data.id_akun;
-    getDetailGudang(data.id_gudang);
-  },
-  error: function (error) {
-    console.error("Gagal mengambil data sesi:", error);
-  },
-});
-
-$.ajax({
-  url: "http://localhost:8080/api/v1/alokasi",
-  type: "GET",
-  dataType: "json",
-  success: function (data) {
-    const alokasi = $("#alokasi");
-    $.each(data, function (index, dataalokasi) {
-      const listalokasi =
-        "<option data-id_alokasi='" +
-        dataalokasi.id_alokasi +
-        "' value='" +
-        dataalokasi.kode_alokasi +
-        "'>" +
-        dataalokasi.nama_alokasi +
-        "</option>";
-      alokasi.append(listalokasi);
-    });
-  },
-  error: function (error) {
-    console.error("Error:", error);
-  },
-});
-
+// GET DETAIL GUDANG
 function getDetailGudang(idgudang) {
   $.ajax({
-    url: "http://localhost:8080/api/v1/gudang/" + idgudang,
+    url: "http://localhost:8080/api/gudang/" + idgudang,
     type: "GET",
     dataType: "json",
     success: function (data) {
+      console.log(data);
       $("#pilihgudang").val(data.nama_gudang);
       idkantor = data.id_kantor;
       getWilayahKerja(data.id_kantor);
@@ -63,19 +18,19 @@ function getDetailGudang(idgudang) {
   });
 }
 
+// GET WILAYAH KERJA/ GET WILAYAH KERJA
 function getWilayahKerja(idkantor) {
+  datadtt.empty();
   $.ajax({
-    url: "http://localhost:8080/api/v1/wilayahkerja/" + idkantor,
+    url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
     type: "GET",
     dataType: "json",
     success: function (data) {
       const kabupatenkota = $("#pilihkabupatenkota");
       $.each(data, function (index, listkabupatenkota) {
         const listoptionkabupatenkota =
-          "<option data-nama_kabupaten='" +
+          "<option value='" +
           listkabupatenkota.nama_kabupaten_kota +
-          "' value='" +
-          listkabupatenkota.kode_kabupaten_kota +
           "'>" +
           listkabupatenkota.nama_kabupaten_kota +
           "</option>";
@@ -83,10 +38,10 @@ function getWilayahKerja(idkantor) {
       });
     },
     error: function (error) {
-      console.error("Error:", error);
     },
   });
 }
+
 
 function showKecamatan() {
   const kabupatenkotadipilih = $("#pilihkabupatenkota").find(":selected").val();
@@ -98,7 +53,7 @@ function showKecamatan() {
   }
   $.ajax({
     url:
-      "http://localhost:8080/api/v1/kecamatan/kabupatenkota/" +
+      "http://localhost:8080/api/kecamatan/kabupatenkota/" +
       kabupatenkotadipilih,
     type: "GET",
     dataType: "json",
