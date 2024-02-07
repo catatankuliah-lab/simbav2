@@ -16,8 +16,11 @@ class WOJanuariModel extends Model
     public function showWoByIdKantor($idkantor)
     {
         $query = $this->db->table('januari_wo')
-            ->select('januari_wo.*, kantor_cabang.*')
+            ->select('januari_wo.*, kantor_cabang.*, januari_lo.*, januari_sj.*, januari_pbp.*')
             ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = januari_wo.id_kantor_cabang')
+            ->join('januari_lo', 'januari_lo.id_akun = januari_wo.id_akun')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
             ->where('januari_wo.id_kantor_cabang', $idkantor)
             ->get();
         return $query->getResult();

@@ -73,11 +73,9 @@ $("#filterWO").on("click", function () {
   const alokasidipilih = $("#alokasi").val();
   if (alokasidipilih == "1") {
     dataJanuari(alokasidipilih);
-    // $("#filterWO").removeClass("d-none");
     $("#tableWO").removeClass("d-none");
     $("#tombolDownload").removeClass("d-none");
   } else {
-    // $("#filterWO").addClass("d-none");
     $("#tableWO").addClass("d-none");
     $("#tombolDownload").addClass("d-none");
   }
@@ -113,24 +111,19 @@ function getDataAllWO(idkantor) {
     $("#tablewo").DataTable().destroy();
   }
   $.ajax({
-    url: "http://localhost:8080/api/wo/getalldatawo/" + idkantor,
+    url: "http://localhost:8080/api/wo/getwobyidkantor/" + idkantor,
     method: "GET",
     dataType: "json",
     success: function (data) {
+      console.log(data);
       var datanya = [];
       $.each(data, function (index, lo) {
         datanya.push({
           tanggal_wo: lo.tanggal_wo,
           nomor_wo: lo.nomor_wo,
-          pengirim:
-            lo.nomor_mobil +
-            " / " +
-            lo.nama_driver +
-            "(" +
-            lo.nomor_driver +
-            ")",
-          muatan: lo.jumlah_penyaluran_januari,
-          status: lo.status_dokumen_muat,
+          pengirim: lo.nama_kabupaten_kota,
+          muatan: lo.nama_kecamatan,
+          status: lo.nama_desa_kelurahan,
           link: "http://localhost:8080/kantorcabang/lo/detail/" + lo.nomor_wo,
         });
       });
@@ -168,7 +161,17 @@ function getDataAllWO(idkantor) {
 
     error: function (error) {
       datawo.empty();
-      console.error("Gagal mengambil data sesi:", error);
+      Swal.fire({
+        icon: "warning",
+        title: "Peringatan!",
+        text:
+          "Data Alokasi Bulan " +
+          $("#alokasi option:selected").text() +
+          " Tidak Ditemukan",
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
     },
   });
 }
