@@ -17,18 +17,11 @@
                     <label for="alokasi" class="h6">Pilih Tanggal</label>
                     <input type="text" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Range Tanggal" onchange="generatereport()">
                 </div>
-
-                <div class="col-md-4 my-3">
-                    <label for="alokasi" class="h6">Pilih No Work Order</label>
-                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihwo" name="pilihwo" style="height: 50px !important; font-size: 14px;" placeholder="pilihwo">
-                        <option data-nomor_wo="0" value="0">Pilih Work Order (WO)</option>
-                    </select>
-                </div>
-                <div class="col-md-12 my-3">
+                <div class="col-md-4 my-3 mt-5">
                     <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterWO" name="filterWO">Filter Document</button>
                 </div>
             </div>
-            <div class="row d-none" id="filterKabupaten">
+            <div class="row d-none" id="filterSearch">
                 <div class="col-md-6 col-sm-12 my-3">
                     <label for="keyword" class="h6">Pencarian</label>
                     <input oninput="cari()" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Keyword Pencarian" id="keyword" name="keyword">

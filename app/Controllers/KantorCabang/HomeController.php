@@ -69,26 +69,21 @@ class HomeController extends Controller
 
         return view('kantorcabang/lo/detail', $data);
     }
-
-    public function detail_suratjalan($id_dokumen_muat)
+    public function detail_wo($nomorwo)
     {
-
-        $datalo = $this->muatJanuari->getDetailSuratJalan($id_dokumen_muat);
+        $datawo = $this->woJanuari->getDetailWo($nomorwo);
         $data = [
             'menu1' => '',
             'menu2' => 'selected',
             'menu3' => '',
             'menu4' => '',
-            'nomorlo' => $datalo[0]->nomor_lo,
-            'idspmbast' => $datalo[0]->id_dokumen_muat,
+            'nomorwo' => $datawo[0]->nomor_wo,
         ];
-
-        return view('kantorcabang/spmbast/detailsuratjalan', $data);
+        return view('kantorcabang/laporan/detail', $data);
     }
+
     public function generateLaporanwo($nomorwo)
     {
-
-
 
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator('PT Delapan Delapan Logistics');

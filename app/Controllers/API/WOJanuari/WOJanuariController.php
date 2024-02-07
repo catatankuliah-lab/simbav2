@@ -4,6 +4,7 @@ namespace App\Controllers\API\WOJanuari;
 
 use App\Models\WOJanuariModel;
 use CodeIgniter\RESTful\ResourceController;
+use Config\Session;
 
 class WOJanuariController extends ResourceController
 {
@@ -34,12 +35,33 @@ class WOJanuariController extends ResourceController
         }
     }
 
-    public function getalldatawo($idkantor) {
+    public function getalldatawo($idkantor)
+    {
         $data = $this->modelWOJanuari->getAllByIdKantor($idkantor, session()->get("id_akun"));
         if ($data) {
             return $this->respond($data);
         } else {
             return $this->failNotFound('Data WO Kantor tidak ditemukan.');
+        }
+    }
+
+    public function getAlokasiFilter($awal, $akhir)
+    {
+        $data = $this->modelWOJanuari->getAlokasiFilter($awal, $akhir, session()->get("id_kantor_cabang"));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data WO Kantor tidak ditemukan.');
+        }
+    }
+
+    function showDetailWo($nomorwo, $idkantor)
+    {
+        $data = $this->modelWOJanuari->getDetailWo($nomorwo, $idkantor);
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data WO tidak ditemukan.');
         }
     }
 }
