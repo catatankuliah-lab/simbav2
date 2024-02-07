@@ -114,7 +114,7 @@ class HomeController extends Controller
 
             $pdf->SetFont('poppins', '', 10);
             $pdf->SetXY(10, 50);
-            $pdf->MultiCell(0, 10, 'MAS ANIS MAS ANIS.', 0, 'L');
+            $pdf->MultiCell(0, 10, 'MAS ANIS MAS ANIS MAASS ANIS.', 0, 'L');
         }
         if (!file_exists($pathhasil)) {
             mkdir($pathhasil, 0777, true);
