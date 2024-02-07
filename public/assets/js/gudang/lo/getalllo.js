@@ -183,8 +183,7 @@ $(document).ready(function () {
 $("#filterSPM").on("click", function () {
   var alokasi = $("#alokasi option:selected").data("id_alokasi");
   var namakabupaten = $("#pilihkabupatenkota option:selected").data(
-    "nama_kabupaten"
-  );
+    "nama_kabupaten" );
   var namakecamatan = $("#pilihkecamatan").val();
 
   console.log({

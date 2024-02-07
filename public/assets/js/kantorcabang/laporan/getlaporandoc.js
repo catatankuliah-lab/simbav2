@@ -1,6 +1,7 @@
 var idkantor = "";
 const datawo = $("#datawo");
 
+// DATA ALOKASI
 $.ajax({
   url: "http://localhost:8080/api/alokasi",
   method: "GET",
@@ -19,11 +20,20 @@ $.ajax({
   },
 });
 
-$("#alokasi").on("change", function () {
-  const alokasidipilih = $("#alokasi").val();
-  if (alokasidipilih == "1") {
-    dataJanuari(alokasidipilih);
-  }
+$(function () {
+  $('input[name="datatanggal"]').daterangepicker(
+    {
+      opens: "left",
+    },
+    function (start, end, label) {
+      console.log(
+        "A new date selection was made: " +
+          start.format("YYYY-MM-DD") +
+          " to " +
+          end.format("YYYY-MM-DD")
+      );
+    }
+  );
 });
 
 function dataJanuari(alokasidipilih) {
@@ -39,7 +49,6 @@ function dataJanuari(alokasidipilih) {
 
       getDataAllWO(idkantor);
       getWoByIdKantor(idkantor);
-      getWilayahKerja(idkantor);
     },
 
     error: function (error) {
@@ -47,6 +56,32 @@ function dataJanuari(alokasidipilih) {
     },
   });
 }
+
+$("#filterWO").on("click", function () {
+  if ($("#alokasi").val() === null) {
+    Swal.fire({
+      icon: "warning",
+      title: "Peringatan!",
+      text: "Anda harus memilih alokasi terlebih dahulu",
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    });
+    return;
+  }
+
+  const alokasidipilih = $("#alokasi").val();
+  if (alokasidipilih == "1") {
+    dataJanuari(alokasidipilih);
+    // $("#filterWO").removeClass("d-none");
+    $("#tableWO").removeClass("d-none");
+    $("#tombolDownload").removeClass("d-none");
+  } else {
+    // $("#filterWO").addClass("d-none");
+    $("#tableWO").addClass("d-none");
+    $("#tombolDownload").addClass("d-none");
+  }
+});
 
 function getWoByIdKantor(idkantor) {
   $.ajax({
@@ -73,100 +108,10 @@ function getWoByIdKantor(idkantor) {
   });
 }
 
-function getWilayahKerja(idkantor) {
-  $.ajax({
-    url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
-    type: "GET",
-    dataType: "json",
-    success: function (data) {
-      const kabupatenkota = $("#pilihkabupaten");
-      $.each(data, function (index, listkabupatenkota) {
-        const listoptionkabupatenkota =
-          "<option data-nama_kabupaten='" +
-          listkabupatenkota.nama_kabupaten_kota +
-          "' value='" +
-          listkabupatenkota.nama_kabupaten_kota +
-          "'>" +
-          listkabupatenkota.nama_kabupaten_kota +
-          "</option>";
-        kabupatenkota.append(listoptionkabupatenkota);
-      });
-    },
-    error: function (error) {
-      console.error("Error:", error);
-    },
-  });
-}
-
-function showKecamatan() {
-  const kabupatenkotadipilih = $("#pilihkabupaten").find(":selected").val();
-  const kecamatan = $("#pilihkecamatan");
-  if (kabupatenkotadipilih == 0) {
-    kecamatan.empty();
-    var listoptionkecamatan = "<option value='0'>Pilih Kecamatan</option>";
-    kecamatan.append(listoptionkecamatan);
-  }
-  $.ajax({
-    url:
-      "http://localhost:8080/api/pbp/getkecamatanbykabupaten/" +
-      kabupatenkotadipilih,
-    type: "GET",
-    dataType: "json",
-    success: function (data) {
-      kecamatan.empty();
-      var listoptionkecamatan = "<option value='0'>Pilih Kecamatan</option>";
-      kecamatan.append(listoptionkecamatan);
-      $.each(data, function (index, listkecamatan) {
-        listoptionkecamatan =
-          "<option value='" +
-          listkecamatan.nama_kecamatan +
-          "'>" +
-          listkecamatan.nama_kecamatan +
-          "</option>";
-        kecamatan.append(listoptionkecamatan);
-      });
-    },
-    error: function (error) {
-      console.error("Error:", error);
-    },
-  });
-}
-
-function showDesa() {
-  const kecamatandipilih = $("#pilihkecamatan").find(":selected").val();
-  const desa = $("#pilihdesa");
-  if (kecamatandipilih == 0) {
-    desa.empty();
-    var listoptiondesa = "<option value='0'>Pilih Desa</option>";
-    desa.append(listoptiondesa);
-  }
-
-  $.ajax({
-    url:
-      " http://localhost:8080/api/pbp/getdesabykecamatan/" + kecamatandipilih,
-    type: "GET",
-    dataType: "json",
-    success: function (data) {
-      desa.empty();
-      var listoptiondesa = "<option value='0'>Pilih Desa</option>";
-      desa.append(listoptiondesa);
-      $.each(data, function (index, listdesa) {
-        listoptiondesa =
-          "<option value='" +
-          listdesa.nama_desa_kelurahan +
-          "'>" +
-          listdesa.nama_desa_kelurahan +
-          "</option>";
-        desa.append(listoptiondesa);
-      });
-    },
-    error: function (error) {
-      console.error("Error:", error);
-    },
-  });
-}
-
 function getDataAllWO(idkantor) {
+  if ($.fn.DataTable.isDataTable("#tablewo")) {
+    $("#tablewo").DataTable().destroy();
+  }
   $.ajax({
     url: "http://localhost:8080/api/wo/getalldatawo/" + idkantor,
     method: "GET",
@@ -222,24 +167,20 @@ function getDataAllWO(idkantor) {
     },
 
     error: function (error) {
+      datawo.empty();
       console.error("Gagal mengambil data sesi:", error);
     },
   });
 }
 
-function cariKabupaten() {
-  var keyword = $("#pilihkabupaten").val();
-  $("#tablewo").DataTable().columns(2).search(keyword).draw();
+function cari() {
+  var keyword = $("#keyword").val();
+  $("#tablewo").DataTable().search(keyword).draw();
 }
 
-function cariKecamatan() {
-  var keyword = $("#pilihkecamatan").val();
-  $("#tablewo").DataTable().columns(3).search(keyword).draw();
-}
-
-function cariDesa() {
-  var keyword = $("#pilihdesa").val();
-  $("#tablewo").DataTable().columns(4).search(keyword).draw();
+function banyaknya() {
+  var selectedLength = $("#banyaknya").val();
+  $("#tablewo").DataTable().page.len(selectedLength).draw();
 }
 
 // function generatereport() {
@@ -247,19 +188,3 @@ function cariDesa() {
 //     "http://localhost:8080/kantorcabang/lo/generatelaporanwo/" +
 //     $("#datatanggal").val();
 // }
-
-// $(function () {
-//   $('input[name="datatanggal"]').daterangepicker(
-//     {
-//       opens: "left",
-//     },
-//     function (start, end, label) {
-//       console.log(
-//         "A new date selection was made: " +
-//           start.format("YYYY-MM-DD") +
-//           " to " +
-//           end.format("YYYY-MM-DD")
-//       );
-//     }
-//   );
-// });

@@ -20,6 +20,10 @@
     <!-- Load jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- Masukkan kode ini di bagian <head> halaman Anda -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+
     <!-- Load DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('dist/css/jquery.dataTables.min.css') ?>">
 
@@ -29,6 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 
     <link href="<?= base_url('dist/css/style.min.css') ?>" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

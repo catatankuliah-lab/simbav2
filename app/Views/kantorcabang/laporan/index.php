@@ -28,21 +28,23 @@
                     <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterWO" name="filterWO">Filter Document</button>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-12 my-3">
-                    <label for="keyword" class="h6">Pilih Kabupaten</label>
-                    <input oninput="cariKabupaten()" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kabupaten" id="pilihkabupaten" name="pilihkabupaten">
+            <div class="row d-none" id="filterKabupaten">
+                <div class="col-md-6 col-sm-12 my-3">
+                    <label for="keyword" class="h6">Pencarian</label>
+                    <input oninput="cari()" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Keyword Pencarian" id="keyword" name="keyword">
                 </div>
-                <div class="col-md-4 col-sm-12 my-3">
-                    <label for="keyword" class="h6">Pilih Kecamatan</label>
-                    <input oninput="cariKecamatan()" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kecamatan" id="pilihkecamatan" name="pilihkecamatan">
-                </div>
-                <div class="col-md-4 col-sm-12 my-3">
-                    <label for="keyword" class="h6">Pilih Desa</label>
-                    <input oninput="cariDesa()" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Desa" id="pilihdesa" name="pilihdesa">
+                <div class="col-md-6 col-sm-12 my-3">
+                    <label for="banyaknya" class="h6">Tampilkan Dalam (Data)</label>
+                    <select onchange="banyaknya()" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="banyaknya" name="banyaknya" style="height: 50px !important; font-size: 14px;" placeholder="">
+                        <option value="10">10 Data</option>
+                        <option value="25">25 Data</option>
+                        <option value="50">50 Data</option>
+                        <option value="100">100 Data</option>
+                    </select>
                 </div>
             </div>
-            <div class="row">
+
+            <div class="row d-none" id="tableWO">
                 <div class="col-12">
                     <div class="table-responsive h6 mt-3">
                         <table class="display" id="tablewo">
@@ -63,13 +65,15 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-3">
+
+            <div class="row d-none" id="tombolDownload">
                 <div class="col-12">
-                    <h6 class="card-subtitle mb-3" id="tomboldownload">
+                    <h6 class="card-subtitle mb-3">
                         <a onclick="generatereport()" style="font-weight: bolder;" class='text-primary' id='downloadspm'>Download</a> File Rekap Working Order
                     </h6>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
