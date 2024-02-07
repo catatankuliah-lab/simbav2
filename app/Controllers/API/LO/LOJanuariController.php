@@ -30,7 +30,7 @@ class LOJanuariController extends ResourceController
 
     public function getbyidkantor($idkantor)
     {
-        $dataspm = $this->model->getAllLOByCabang($idkantor, session()->get('id_kantor'));
+        $dataspm = $this->model->getAllLOByCabang($idkantor);
         if ($dataspm) {
             return $this->respond($dataspm);
         } else {

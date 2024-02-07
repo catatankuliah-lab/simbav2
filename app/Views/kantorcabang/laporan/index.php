@@ -13,7 +13,7 @@
                     </select>
                 </div>
                 <div class="col-md-4 my-3">
-                    <input type="text" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Range Tanggal" onchange="generatereport()">
+                    <input type="text" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Range Tanggal">
                 </div>
 
                 <div class="col-md-4 my-3">
@@ -63,11 +63,12 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <h6 class="card-subtitle mb-3" id="tomboldownload">
+                        <a onclick="generatereport()" style="font-weight: bolder;" class='text-primary' id='downloadspm'>Download</a> File Rekap Working Order
                     </h6>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets\js\kantorcabang\laporan\getlaporandoc.js') ?>"></script>
+<script src="<?= base_url('assets/js/kantorcabang/laporan/getlaporandoc.js') ?>"></script>
 <?php $this->endSection() ?>

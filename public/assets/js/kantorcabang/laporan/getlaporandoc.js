@@ -9,9 +9,9 @@ $(function () {
     function (start, end, label) {
       console.log(
         "A new date selection was made: " +
-          start.format("YYYY-MM-DD") +
-          " to " +
-          end.format("YYYY-MM-DD")
+        start.format("YYYY-MM-DD") +
+        " to " +
+        end.format("YYYY-MM-DD")
       );
     }
   );
@@ -220,12 +220,7 @@ function getDataAllWO(idkantor) {
   });
 }
 
+
 function generatereport() {
-  $("#tomboldownload").empty();
-  var tanggalWO = $("#datatanggal option:selected").data("tanggal_wo");
-  var tomboldownload =
-    "<a href='http://localhost:8080/kantorcabang/lo/generatelaporanwo/" +
-    tanggal_wo +
-    "' style='font-weight: bolder;' class='text-primary' id='downloadspm'>Download</a> File Rekap Working Order";
-  $("#tomboldownload").append(tomboldownload);
+  window.location.href = "http://localhost:8080/kantorcabang/lo/generatelaporanwo/" + $('#datatanggal').val();
 }
