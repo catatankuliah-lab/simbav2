@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\API\PBPJanuari;
+namespace App\Controllers\API\PBP;
 
 use App\Models\PBPJanuariModel;
 use CodeIgniter\RESTful\ResourceController;
@@ -43,5 +43,27 @@ class PBPJanuariController extends ResourceController
         } else {
             return $this->failNotFound('Record kecamatan tidak ditemukan.');
         }
+    }
+
+    // NANA SHOW KECAMATAN BY KABUPATEN
+    public function kecamatanbykabupaten($namakabupatenkota)
+    {
+        $data = $this->modelPBP->kecamatanbykabupaten($namakabupatenkota);
+        $datakecamatan = [
+            "status" => "200",
+            "datakecamatan" => $data,
+        ];
+        return $this->respond($datakecamatan);
+    }
+
+    // NANA SHOW DESA BY KECAMATAN
+    public function desabykecamatan($namakecamatan)
+    {
+        $data = $this->modelPBP->desabykecamatan($namakecamatan);
+        $datadesakelurhan = [
+            "status" => "200",
+            "datadesakelurahan" => $data,
+        ];
+        return $this->respond($datadesakelurhan);
     }
 }

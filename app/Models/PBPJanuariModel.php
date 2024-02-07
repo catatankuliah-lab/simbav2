@@ -32,4 +32,25 @@ class PBPJanuariModel extends Model
         return $query->getResult();
     }
 
+    // NANA AMBIL NAMA KECAMATAN
+    public function kecamatanbykabupaten($namakabupatenkota)
+    {
+        $query = $this->db->table('januari_pbp')
+            ->select('januari_pbp.nama_kecamatan')
+            ->where('januari_pbp.nama_kabupaten_kota', $namakabupatenkota)
+            ->groupBy('januari_pbp.nama_kecamatan')
+            ->get();
+        return $query->getResult();
+    }
+
+    // NANA AMBIL NAMA DESA
+    public function desabykecamatan($namakecamatan)
+    {
+        $query = $this->db->table('januari_pbp')
+            ->select('januari_pbp.*')
+            ->where('januari_pbp.nama_kecamatan', $namakecamatan)
+            ->groupBy('januari_pbp.nama_desa_kelurahan')
+            ->get();
+        return $query->getResult();
+    }
 }

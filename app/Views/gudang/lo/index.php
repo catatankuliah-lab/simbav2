@@ -12,12 +12,18 @@
                 <div class="col-12 h6">Pilih Berdasarkan</div>
                 <div class="col-md-3 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi">
-                        <option data-id_alokasi='0' value="0">Pilih Alokasi</option>
+                        <option value="0">Pilih Alokasi</option>
+                        <option value="1">Januari 2024</option>
+                        <option value="2">Februari 2024</option>
+                        <option value="3">Maret 2024</option>
+                        <option value="4">April 2024</option>
+                        <option value="5">Mei 2024</option>
+                        <option value="6">Juni 2024</option>
                     </select>
                 </div>
                 <div class="col-md-3 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkabupatenkota" name="pilihkabupatenkota" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kabupaten Kota" onchange="showKecamatan()">
-                        <option data-nama_kabupaten='0' value="0">Pilih Nama Kabupaten/Kota</option>
+                        <option value="0">Pilih Nama Kabupaten/Kota</option>
                     </select>
                 </div>
                 <div class="col-md-3 my-3">
@@ -29,7 +35,7 @@
                     <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterSPM" name="filterSPM">Tampilkan</button>
                 </div>
             </div>
-            <div class="row">
+            <div class="row d-none" id="filterdatatable">
                 <div class="col-md-6 col-sm-12 my-3">
                     <label for="keyword" class="h6">Pencarian</label>
                     <input oninput="cari()" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Keyword Pencarian" id="keyword" name="keyword">
@@ -45,7 +51,7 @@
                 </div>
             </div>
             <div class="table-responsive h6 mt-3">
-                <table class="display" id="tablelo">
+                <table class="display d-none" id="tablelo">
                     <thead>
                         <tr>
                             <th scope="col">Tanggal</th>

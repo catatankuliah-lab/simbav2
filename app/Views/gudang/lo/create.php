@@ -11,12 +11,18 @@
             <div class="row mt-4">
                 <div class="col-md-4 mb-3">
                     <label for="tanggal_pembuatan" class="h6">Tanggal Dokumen</label>
-                    <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="date" style="height: 50px !important; font-size: 14px;" placeholder="" id="tanggal_pembuatan" name="tanggal_pembuatan">
+                    <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="date" style="height: 50px !important; font-size: 14px;" placeholder="" value="<?= date('Y-m-d') ?>" id="tanggal_pembuatan" name="tanggal_pembuatan">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="alokasi" class="h6">Pilih Alokasi</label>
-                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi" onchange="cekNomorLO()">
+                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi">
                         <option value="0">Pilih Alokasi</option>
+                        <option value="1">Januari 2024</option>
+                        <option value="2">Februari 2024</option>
+                        <option value="3">Maret 2024</option>
+                        <option value="4">April 2024</option>
+                        <option value="5">Mei 2024</option>
+                        <option value="6">Juni 2024</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -36,10 +42,6 @@
                     <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan No DO Disini" id="nomor_do" name="nomor_do">
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="gudang" class="h6">Gudang Pengiriman</label>
-                    <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan No DO Disini" id="gudang" name="gudang" readonly>
-                </div>
-                <div class="col-md-4 mb-3">
                     <label for="nopolmobil" class="h6">Nopol Mobil</label>
                     <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan Nopol Mobil Disini" id="nopolmobil" name="nopolmobil">
                 </div>
@@ -50,6 +52,10 @@
                 <div class="col-md-4 mb-3">
                     <label for="nomordriver" class="h6">Nomor Telpon Driver</label>
                     <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan No Telpon Driver Disini" id="nomordriver" name="nomordriver">
+                </div>
+                <div class="col-md-4 mb-3 d-none" id="containergudang">
+                    <label for="gudang" class="h6">Gudang Pengiriman</label>
+                    <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan No DO Disini" id="gudang" name="gudang" value="<?= session()->get('id_gudang') ?>" readonly>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="pilihkabupatenkota" class="h6">Pilih Kabupaten/Kota</label>
@@ -81,7 +87,7 @@
                                     <th scope="col" class="text-center">Proses</th>
                                 </tr>
                             </thead>
-                            <tbody id="datadtt">
+                            <tbody id="datalo">
                             </tbody>
                         </table>
                     </div>

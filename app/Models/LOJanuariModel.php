@@ -115,6 +115,8 @@ class LOJanuariModel extends Model
             ->get();
         return $query->getResult();
     }
+
+    // NANA DASHBOARD GUDANG
     public function dashboard($idakun)
     {
         $query = $this->db->table('januari_lo')
@@ -122,5 +124,32 @@ class LOJanuariModel extends Model
             ->where('januari_lo.id_akun', $idakun)
             ->get();
         return $query->getResult();
+    }
+
+    // NANA CEK NOMOR LO
+    public function ceknomorlo($idakun)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*')
+            ->where('januari_lo.id_akun', $idakun)
+            ->where('januari_lo.status_dokumen_muat', "DIBUAT")
+            ->get();
+        return $query->getRow();
+    }
+
+    public function ceknomorlodisj($idakun)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*')
+            ->where('januari_lo.id_akun', $idakun)
+            ->where('januari_lo.status_dokumen_muat', "DIBUAT")
+            ->get();
+        return $query->getRow();
+    }
+
+    public function deletelo($nomorlo)
+    {
+        // Hapus data berdasarkan kondisi
+        return $this->db->table($this->table)->delete($nomorlo);
     }
 }

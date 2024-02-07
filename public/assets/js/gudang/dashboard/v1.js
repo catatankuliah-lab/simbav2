@@ -20,8 +20,7 @@ $("#alokasi").on("change", function () {
 
 function prosestampilkandashboard(idalokasi) {
     Swal.fire({
-        title: 'Dashboard',
-        text: 'Memuat Data, Mohon Tunggu.',
+        text: 'Memuat Data...',
         allowOutsideClick: false,
         allowEscapeKey: false,
         showConfirmButton: false,

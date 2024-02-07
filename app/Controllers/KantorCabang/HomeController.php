@@ -88,19 +88,5 @@ class HomeController extends Controller
 
     public function generateLaporanwo($nomorwo)
     {
-        // $datawo = $this->woJanuari->getWOyNomorWO($nomorwo);
-        $pdf = new TCPDF();
-        $pdf->SetCreator('PT Delapan Delapan Logistics');
-        $pdf->SetAuthor('PT Delapan Delapan Logistics');
-        $pdf->SetTitle('LAPORAN PENYERAHAN-' . "CEK");
-        $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-        $pdf->AddPage('P', 'A4');
-        $filePath = FCPATH . DIRECTORY_SEPARATOR . 'LAPORAN-' . "CEK" . '.pdf';
-        // Compress File
-        $pdf->SetCompression(true);
-        // Save the PDF to the specified directory
-        $pdf->Output($filePath, 'F');
-        $pdf->Output($filePath, 'D');
     }
 }
