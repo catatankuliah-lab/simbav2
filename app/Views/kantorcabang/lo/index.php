@@ -79,5 +79,5 @@
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets\js\kantorcabang\lo\getalllokantor.js') ?>"></script>
+<script src="<?= base_url('assets/js/kantorcabang/lo/getalllokantor.js') ?>"></script>
 <?php $this->endSection() ?>

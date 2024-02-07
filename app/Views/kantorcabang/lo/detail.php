@@ -43,5 +43,5 @@
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets\js\kantorcabang\lo\getdetaillo.js') ?>"></script>
+<script src="<?= base_url('assets/js/kantorcabang/lo/getdetaillo.js') ?>"></script>
 <?php $this->endSection() ?>

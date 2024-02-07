@@ -220,12 +220,6 @@ function getDataAllWO(idkantor) {
   });
 }
 
-function generatereport() {
-  $("#tomboldownload").empty();
-  var tanggalWO = $("#datatanggal option:selected").data("tanggal_wo");
-  var tomboldownload =
-    "<a href='http://localhost:8080/kantorcabang/lo/generatelaporanwo/" +
-    tanggal_wo +
-    "' style='font-weight: bolder;' class='text-primary' id='downloadspm'>Download</a> File Rekap Working Order";
-  $("#tomboldownload").append(tomboldownload);
+function name(params) {
+  
 }

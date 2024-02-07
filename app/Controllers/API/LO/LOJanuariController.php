@@ -30,9 +30,9 @@ class LOJanuariController extends ResourceController
 
     public function getbyidkantor($idkantor)
     {
-        $dataspm = $this->model->getAllLOByCabang($idkantor, session()->get('id_kantor'));
-        if ($dataspm) {
-            return $this->respond($dataspm);
+        $data = $this->model->getAllLOByCabang($idkantor, session()->get('id_kantor'));
+        if ($data) {
+            return $this->respond($data);
         } else {
             return $this->failNotFound('Record LO Kantor Cabang aktif tidak ditemukan.');
         }
