@@ -44,13 +44,9 @@ class GudangController extends Controller
 
     public function detail_lo($nomorspm)
     {
-
-        $dataspm = $this->model->getSPMByNomorSPM($nomorspm, session()->get('id_akun'));
-
         $data = [
             'menu1' => '',
-            'menu2' => 'selected',
-            'nomorlo' => $dataspm[0]->nomor_spm,
+            'menu2' => 'selected'
         ];
 
         return view('gudang/lo/detail', $data);

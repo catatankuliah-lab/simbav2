@@ -10,9 +10,9 @@
             </h6>
             <div class="row mt-4">
                 <div class="col-12 h6">Pilih Berdasarkan</div>
-                <div class="col-md-3 my-3">
+                <div class="col-md-4 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi">
-                        <option value="0">Pilih Alokasi</option>
+                        <option value="0" disabled selected>Pilih Alokasi</option>
                         <option value="1">Januari 2024</option>
                         <option value="2">Februari 2024</option>
                         <option value="3">Maret 2024</option>
@@ -21,18 +21,14 @@
                         <option value="6">Juni 2024</option>
                     </select>
                 </div>
-                <div class="col-md-3 my-3">
-                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkabupatenkota" name="pilihkabupatenkota" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kabupaten Kota" onchange="showKecamatan()">
-                        <option value="0">Pilih Nama Kabupaten/Kota</option>
-                    </select>
+                <div class="col-md-4 my-3">
+                    <input type="text" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Range Tanggal">
                 </div>
-                <div class="col-md-3 my-3">
-                    <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkecamatan" name="pilihkecamatan" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kecamatan">
-                        <option value="0">Pilih Kecamatan</option>
-                    </select>
+                <div class="col-md-4 d-none my-3">
+                    <input type="text" name="gudang" id="gudang" value="<?= session()->get('id_gudang') ?>">
                 </div>
-                <div class="col-md-3 my-3">
-                    <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterSPM" name="filterSPM">Tampilkan</button>
+                <div class="col-md-4 my-3">
+                    <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="tamilkanlo" name="tamilkanlo">Tampilkan</button>
                 </div>
             </div>
             <div class="row d-none" id="filterdatatable">
@@ -55,9 +51,11 @@
                     <thead>
                         <tr>
                             <th scope="col">Tanggal</th>
+                            <th scope="col">No WO</th>
                             <th scope="col">No Loading Order (LO)</th>
                             <th scope="col">Nopol Mobil/Driver</th>
                             <th scope="col">Total Muatan (Kg)</th>
+                            <th scope="col">Status</th>
                             <th scope="col" class="text-center">Detail</th>
                         </tr>
                     </thead>

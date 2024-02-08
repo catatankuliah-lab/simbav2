@@ -73,7 +73,6 @@ function cekNomorLO(idalokasi) {
         dataType: "json",
         success: function (data) {
             if (data.status == "200") {
-                console.log("DITEMUKAN : ", data.data);
                 $('#tanggal_pembuatan').val(data.data.tanggal_pembuatan);
                 $('#nomor_so').val(data.data.nomor_so);
                 $('#nomor_do').val(data.data.nomor_do);
@@ -84,7 +83,6 @@ function cekNomorLO(idalokasi) {
                 $('#nomordriver').val(data.data.nomor_driver);
                 $('#alokasi').prop('disabled', true);
             } else {
-                console.log("TIDAK DITEMUKAN : ", data);
                 generateNomorLo(idalokasi, data.id_gudang, data.id_kantor_cabang);
                 $('#alokasi').prop('disabled', true);
             }
@@ -116,8 +114,21 @@ function generateNomorLo(idalokasi, id_gudang, id_kantor_cabang) {
         'idgudangjadi': idgudangjadi,
         'idkantorjadi': idkantorjadi
     });
-    var nomorlo = "LO-88LOGISTICS" + kodealokasijadi + idkantorjadi + idgudangjadi + "-1";
-    $("#nomor_lo").val(nomorlo);
+
+    $.ajax({
+        url: "http://localhost:8080/api/lo/" + idalokasi + "/bahannomorlo",
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            var no = parseInt(data.data.jumlahnya);
+            no = no + 1;
+            var nomorlo = "LO-88LOGISTICS" + kodealokasijadi + idkantorjadi + idgudangjadi + "-" + no;
+            $("#nomor_lo").val(nomorlo);
+        },
+        error: function (error) {
+            console.log("ERROR BARU : ", error);
+        },
+    });
 }
 
 // GET SEMUA KECAMATAN SESUAI DENGAN NAMA KABUPATEN KOTA
@@ -269,7 +280,7 @@ function proses(idpbp, index) {
                                             'jumlah_penyaluran_januari': $('#input' + index).val(),
                                             'alokasifix': $('#alokasifix' + index).val(),
                                             'nomor_do': $('#nomor_do').val(),
-                                            'nomor_so_bulog': $('#nomor_so').val(),
+                                            'nomor_so': $('#nomor_so').val(),
                                             'nomor_wo': $('#nomor_wo').val(),
                                             'nomor_surat_jalan': nomor_surat_jalan,
                                         };
@@ -309,7 +320,7 @@ function proses(idpbp, index) {
                                             'jumlah_penyaluran_januari': $('#input' + index).val(),
                                             'alokasifix': $('#alokasifix' + index).val(),
                                             'nomor_do': $('#nomor_do').val(),
-                                            'nomor_so_bulog': $('#nomor_so').val(),
+                                            'nomor_so': $('#nomor_so').val(),
                                             'nomor_wo': $('#nomor_wo').val(),
                                             'nomor_surat_jalan': nomor_surat_jalan,
                                         };
@@ -489,7 +500,25 @@ $("#simpanspm").on("click", function () {
         cancelButtonColor: '#FF4F70'
     }).then((result) => {
         if (result.isConfirmed) {
-            // loadingswal();
+            $.ajax({
+                url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/ceknomorlosubmit",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    Swal.close();
+                    Swal.fire({
+                        icon: "success",
+                        title: "Loading Order (LO)",
+                        text: "Data Loading Order (LO) berhasil ditambahkan.",
+                        showConfirmButton: false,
+                        timer: 3000,
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                },
+                error: function (error) {
+                },
+            });
         }
     });
 });

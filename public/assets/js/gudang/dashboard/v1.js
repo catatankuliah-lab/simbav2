@@ -57,6 +57,7 @@ function prosestampilkandashboard(idalokasi) {
             $('#card3').text(tidak);
         },
         error: function (error) {
+            Swal.close();
             $('#card1').text(0);
             $('#card2').text(0);
             $('#card3').text(0);

@@ -67,15 +67,31 @@ class LOJanuariController extends ResourceController
         }
     }
 
+    // function showDetailLo($nomorlo)
+    // {
+    //     $data = $this->model->LOKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan, session()->get('id_kantor'));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
+    //     }
+    // }
+
       // Mengambil LO dari Nomor LO  (Panji)
     function showDetailLo($nomorlo) 
     {
         $data = $this->model->getLOByNomorLo($nomorlo);
         if ($data) {
-            return $this->respond($data);
+            $datalo = [
+                "status" => "200",
+                "data" => $data
+            ];
         } else {
-            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+            $datalo = [
+                "status" => "404",
+            ];
         }
+        return $this->respond($datalo);
     }
 
      // Mengambil data Surat Jalan dari Id_lo (Panji)
@@ -121,6 +137,31 @@ class LOJanuariController extends ResourceController
         }
     }
 
+    // NANA CEK NOMOR LO
+    public function ceknomorlosubmit()
+    {
+        $data = $this->model->ceknomorlo(session()->get('id_akun'));
+        $dataupdate = [
+            "status_dokumen_muat" => "BELUM LENGKAP"
+        ];
+        $this->model->update($data->id_lo, $dataupdate);
+        $bahannomorlo = [
+            "status" => "200"
+        ];
+        return $this->respond($bahannomorlo);
+    }
+
+    // NANA CEK NOMOR LO
+    public function bahannomorlo()
+    {
+        $data = $this->model->bahannomorlo(session()->get('id_akun'));
+        $bahannomorlo = [
+            "status" => "200",
+            "data" => $data
+        ];
+        return $this->respond($bahannomorlo);
+    }
+
     public function create()
     {
         $data = $this->request->getJSON();
@@ -147,5 +188,20 @@ class LOJanuariController extends ResourceController
             "status" => "200",
         ];
         return $this->respond($data);
+    }
+    public function filter($awal, $akhir)
+    {
+        $data = $this->model->filter($awal, $akhir, session()->get('id_akun'));
+        if ($data) {
+            $datalo = [
+                "status" => "200",
+                "data" => $data
+            ];
+        } else {
+            $datalo = [
+                "status" => "404",
+            ];
+        }
+        return $this->respond($datalo);
     }
 }

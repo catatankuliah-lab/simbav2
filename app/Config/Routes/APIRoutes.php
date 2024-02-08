@@ -21,6 +21,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('lo/namakabupatenkantor/(:any)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
     $routes->get('lo/kabupatenkecamatankantor/(:any)/(:any)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');
     $routes->get('lo/detail/(:any)', 'LO\LOJanuariController::showDetailLo/$1');
+    $routes->get('lo/detail/suratjalan/(:segment)', 'LO\LOJanuariController::showDetailSuratJalan/$1');
 
 
     // Alokasi (Panji)
@@ -127,6 +128,14 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->delete('lo/5/deletelo/(:segment)', 'LO\LOMeiController::deletelo/$1');
     $routes->delete('lo/6/deletelo/(:segment)', 'LO\LOJuniController::deletelo/$1');
 
+    // CEK LO SESUAI ALOKASI NANA
+    $routes->get('lo/1/bahannomorlo', 'LO\LOJanuariController::bahannomorlo');
+    $routes->get('lo/2/bahannomorlo', 'LO\LOFebruariController::bahannomorlo');
+    $routes->get('lo/3/bahannomorlo', 'LO\LOMaretController::bahannomorlo');
+    $routes->get('lo/4/bahannomorlo', 'LO\LOAprilController::bahannomorlo');
+    $routes->get('lo/5/bahannomorlo', 'LO\LOMeiController::bahannomorlo');
+    $routes->get('lo/6/bahannomorlo', 'LO\LOJuniController::bahannomorlo');
+
     // SURAT JALAN CREATE
     $routes->post('suratjalan/1/create', 'SJ\SJJanuariController::create');
     $routes->post('suratjalan/2/create', 'SJ\SJFebruariController::create');
@@ -134,4 +143,28 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->post('suratjalan/4/create', 'SJ\SJAprilController::create');
     $routes->post('suratjalan/5/create', 'SJ\SJMeiController::create');
     $routes->post('suratjalan/6/create', 'SJ\SJJuniController::create');
+
+    // CEK LO SESUAI ALOKASI NANA
+    $routes->get('lo/1/filter/(:segment)/(:segment)', 'LO\LOJanuariController::filter/$1/$2');
+    $routes->get('lo/2/filter/(:segment)/(:segment)', 'LO\LOFebruariController::filter/$1/$2');
+    $routes->get('lo/3/filter/(:segment)/(:segment)', 'LO\LOMaretController::filter/$1/$2');
+    $routes->get('lo/4/filter/(:segment)/(:segment)', 'LO\LOAprilController::filter/$1/$2');
+    $routes->get('lo/5/filter/(:segment)/(:segment)', 'LO\LOMeiController::filter/$1/$2');
+    $routes->get('lo/6/filter/(:segment)/(:segment)', 'LO\LOJuniController::filter/$1/$2');
+
+    // CEK LO SESUAI ALOKASI NANA
+    $routes->get('lo/1/ceknomorlosubmit', 'LO\LOJanuariController::ceknomorlosubmit');
+    $routes->get('lo/2/ceknomorlosubmit', 'LO\LOFebruariController::ceknomorlosubmit');
+    $routes->get('lo/3/ceknomorlosubmit', 'LO\LOMaretController::ceknomorlosubmit');
+    $routes->get('lo/4/ceknomorlosubmit', 'LO\LOAprilController::ceknomorlosubmit');
+    $routes->get('lo/5/ceknomorlosubmit', 'LO\LOMeiController::ceknomorlosubmit');
+    $routes->get('lo/6/ceknomorlosubmit', 'LO\LOJuniController::ceknomorlosubmit');
+
+    // LO BY NOMOR LO
+    $routes->get('lo/detail/1/(:segment)', 'LO\LOJanuariController::detaillo/$1');
+    $routes->get('lo/detail/2/(:segment)', 'LO\LOFebruariController::detaillo/$1');
+    $routes->get('lo/detail/3/(:segment)', 'LO\LOMaretController::detaillo/$1');
+    $routes->get('lo/detail/4/(:segment)', 'LO\LOAprilController::detaillo/$1');
+    $routes->get('lo/detail/5/(:segment)', 'LO\LOMeiController::detaillo/$1');
+    $routes->get('lo/detail/6/(:segment)', 'LO\LOJuniController::detaillo/$1');
 });
