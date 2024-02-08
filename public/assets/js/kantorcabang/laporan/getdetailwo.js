@@ -65,27 +65,36 @@ $.ajax({
   },
 });
 
-$("#downloadwo").on("click", function () {
-  var status_dokumen_muat = "LENGKAP";
-
-  var url = "http://localhost:8080/api/wo/1/downloadwo/" + status_dokumen_muat;
-
-  $.ajax({
-    url: url,
-    type: "GET",
-    success: function (response) {
-      window.location.href = "http://localhost:8080/LAPORAN-CEK.pdf";
-    },
-    error: function (error) {
-      console.error("Error saat mengunduh dokumen:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Gagal Mengunduh Dokumen",
-        text: "Terjadi kesalahan saat mengunduh dokumen.",
-        timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-      });
-    },
+$(document).ready(function () {
+  $("#downloadwo").on("click", function () {
+    var status_dokumen_muat = "LENGKAP";
+    var url =
+      "http://localhost:8080/api/wo/1/downloadwo/" + status_dokumen_muat;
+    $.ajax({
+      url: url,
+      type: "GET",
+      success: function (response) {
+        console.log("Success:", response);
+        Swal.fire({
+          icon: "success",
+          title: "Laporan berhasil diunduh",
+          text: "Laporan WO telah berhasil diunduh.",
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+      },
+      error: function (error) {
+        console.error("Error:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Gagal Mengunduh Laporan",
+          text: "Terjadi kesalahan saat mengunduh laporan WO.",
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+      },
+    });
   });
 });

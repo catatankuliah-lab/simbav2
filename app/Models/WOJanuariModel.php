@@ -66,12 +66,12 @@ class WOJanuariModel extends Model
     public function getAlokasiFilter($awal, $akhir, $idkantor)
     {
         $query = $this->db->table('januari_wo')
-        ->select('januari_wo.*, kantor_cabang.*, januari_lo.*, januari_sj.*, januari_pbp.*')
-        ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = januari_wo.id_kantor_cabang')
-        ->join('januari_lo', 'januari_lo.id_akun = januari_wo.id_akun')
-        ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
-        ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
-        ->where('januari_wo.id_kantor_cabang', $idkantor)
+            ->select('januari_wo.*, kantor_cabang.*, januari_lo.*, januari_sj.*, januari_pbp.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = januari_wo.id_kantor_cabang')
+            ->join('januari_lo', 'januari_lo.id_akun = januari_wo.id_akun')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_wo.id_kantor_cabang', $idkantor)
             ->where('januari_wo.tanggal_wo >=', $awal)
             ->where('januari_wo.tanggal_wo <=', $akhir)
             ->get();
@@ -92,16 +92,30 @@ class WOJanuariModel extends Model
         return $query->getResult();
     }
 
-    public function downloadDokumenWo($status_dokumen_muat) 
+    public function downloadDokumenWo($status_dokumen_muat)
     {
         $query = $this->db->table('januari_wo')
-        ->select('januari_wo.*, kantor_cabang.*, januari_lo.*, januari_sj.*, januari_pbp.*')
-        ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = januari_wo.id_kantor_cabang')
-        ->join('januari_lo', 'januari_lo.id_akun = januari_wo.id_akun')
-        ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
-        ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
-        ->where('januari_lo.status_dokumen_muat', $status_dokumen_muat)
+            ->select('januari_wo.*, kantor_cabang.*, januari_lo.*, januari_sj.*, januari_pbp.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = januari_wo.id_kantor_cabang')
+            ->join('januari_lo', 'januari_lo.id_akun = januari_wo.id_akun')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_lo.status_dokumen_muat', $status_dokumen_muat)
             ->get();
         return $query->getResult();
     }
+
+    public function laporanWO($nomorwo)
+    {
+        $query = $this->db->table('januari_wo')
+            ->select('januari_wo.*, kantor_cabang.*, januari_lo.*, januari_sj.*, januari_pbp.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = januari_wo.id_kantor_cabang')
+            ->join('januari_lo', 'januari_lo.id_akun = januari_wo.id_akun')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_wo.nomor_wo', $nomorwo)
+            ->get();
+        return $query->getResult();
+    }
+
 }
