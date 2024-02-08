@@ -14,21 +14,24 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
         $routes->delete('(:num)', 'UserController::delete/$1');
     });
 
-    // Loading Order (Panji)
-    $routes->get('lo/1/sessionya', 'LO\LOJanuariController::getSession');
+    // Loading Order Routes
+    $routes->get('lo/', 'LO\LOJanuariController::index');
+    $routes->get('lo/(:num)', 'LO\LOJanuariController::show/$1');
+    $routes->post('lo/', 'LO\LOJanuariController::create');
+    $routes->put('lo/(:num)', 'LO\LOJanuariController::update/$1');
+    $routes->delete('lo/(:num)', 'LO\LOJanuariController::delete/$1');
+    $routes->get('lo/sessionya', 'LO\LOJanuariController::getSession');
     $routes->get('lo/getbyidkantor/(:num)', 'LO\LOJanuariController::getbyidkantor/$1');
     $routes->get('lo/namagudangkantor/(:any)', 'LO\LOJanuariController::getGudangByIdKantor/$1');
     $routes->get('lo/namakabupatenkantor/(:any)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
     $routes->get('lo/kabupatenkecamatankantor/(:any)/(:any)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');
-    $routes->get('lo/detail/(:any)', 'LO\LOJanuariController::showDetailLo/$1');
     $routes->get('lo/detail/suratjalan/(:segment)', 'LO\LOJanuariController::showDetailSuratJalan/$1');
 
-
-    // Alokasi (Panji)
+    // Alokasi
     $routes->get('alokasi', 'Alokasi\AlokasiController::index');
     $routes->get('alokasi/(:num)', 'Alokasi\AlokasiController::show/$1');
 
-    // Gudang (Panji)
+    // Gudang
     $routes->get('gudang', 'Gudang\GudangController::index');
     $routes->get('gudang/(:num)', 'Gudang\GudangController::show/$1');
     $routes->get('gudang/kantor/(:num)', 'Gudang\GudangController::showbykantor/$1');
@@ -36,10 +39,10 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->put('gudang/(:num)', 'Gudang\GudangController::update/$1');
     $routes->delete('gudang/(:num)', 'Gudang\GudangController::delete/$1');
 
-    // Wilayah Kerja (Panji)
+    // Wilayah Kerja
     $routes->get('wilayahkerja/(:num)', 'WilayahKerja\WilayahKerjaController::getWilayahKerjaByIdKantor/$1');
 
-    // WO Januari (Panji)
+    // WO Januari
     $routes->get('wo/getwobyidkantor/(:any)', 'WOJanuari\WOJanuariController::getWoByIdKantor/$1');
     $routes->get('wo/getalldatawo/(:any)', 'WOJanuari\WOJanuariController::showDetailWo/$1');
     $routes->get('wo/alokasi/1/awal/(:segment)/akhir/(:segment)', 'WOJanuari\WOJanuariController::getAlokasiFilter/$1/$2');
