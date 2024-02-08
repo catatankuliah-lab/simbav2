@@ -40,8 +40,7 @@ class LOJanuariModel extends Model
     ];
 
 
-    // Mengambil data Loading Order dari Kantor Cabang (Panji)
-    public function getAllLoByCabang($idkantor) 
+    public function getAllLoByCabang($idkantor)
     {
         $query = $this->db->table('januari_lo')
             ->select('januari_lo.*, gudang.*, januari_sj.*')
@@ -56,8 +55,7 @@ class LOJanuariModel extends Model
         return $query->getResult();
     }
 
-    // Mengambil data Gudang dari Kantor Cabang (Panji)
-    public function LOGudangByIdKantor($namaGudang, $idkantor) 
+    public function LOGudangByIdKantor($namaGudang, $idkantor)
     {
         $query = $this->db->table('januari_lo')
             ->select('januari_lo.*, gudang.*, januari_sj.*')
@@ -73,7 +71,6 @@ class LOJanuariModel extends Model
         return $query->getResult();
     }
 
-    // Mengambil data Kabupaten dari Kantor Cabang (Panji)
     public function LOKabupatenByIdKantor($namaKabupaten, $idkantor)
     {
         $query = $this->db->table('januari_lo')
@@ -91,8 +88,39 @@ class LOJanuariModel extends Model
         return $query->getResult();
     }
 
-    // Mengambil LO dari Nomor LO  (Panji)
-    public function getLOByNomorLo($nomorlo) 
+    public function LOKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan, $idkantor)
+    {
+        $query = $this->db->table('dokumen_muat_januari')
+            ->select('dokumen_muat_januari.*,gudang.*, kabupaten_kota.*, pbp_januari.*, surat_jalan_januari.*, kecamatan.*')
+            ->selectSum('surat_jalan_januari.jumlah_penyaluran_januari', 'total')
+            ->join('gudang', 'gudang.id_gudang = dokumen_muat_januari.id_gudang')
+            ->join('surat_jalan_januari', 'surat_jalan_januari.nomor_lo = dokumen_muat_januari.nomor_lo')
+            ->join('pbp_januari', 'pbp_januari.id_pbp_januari = surat_jalan_januari.id_pbp')
+            ->join('kabupaten_kota', 'kabupaten_kota.kode_kabupaten_kota = pbp_januari.kode_kabupaten_kota')
+            ->join('kecamatan', 'kecamatan.kode_kecamatan = pbp_januari.kode_kecamatan')
+            ->where('dokumen_muat_januari.id_kantor', $idkantor)
+            ->where('kabupaten_kota.nama_kabupaten_kota', $namaKabupaten)
+            ->where('kecamatan.nama_kecamatan', $namaKecamatan)
+            ->groupBy('surat_jalan_januari.nomor_lo')
+            ->orderBy('dokumen_muat_januari.tanggal_muat', 'DESC')
+            ->orderBy('dokumen_muat_januari.id_dokumen_muat', 'DESC')
+            ->get();
+        return $query->getResult();
+    }
+
+    public function FilterAllLOByCabang($namaKabupaten, $idkantor)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*, januari_pbp.*, januari_sj.*')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_lo.id_kantor', $idkantor)
+            ->where('januari_pbp.nama_kabupaten_kota', $namaKabupaten)
+            ->get();
+        return $query->getResult();
+    }
+
+    public function getDokumenMuatByNomorLo($nomorlo)
     {
         $query = $this->db->table('januari_lo')
             ->select('januari_lo.*, januari_sj.*, januari_pbp.*')
@@ -104,8 +132,7 @@ class LOJanuariModel extends Model
         return $query->getResult();
     }
 
-    // Mengambil data Surat Jalan dari Id_lo (Panji)
-    public function getDetailSuratJalan($id_lo) 
+    public function getDetailSuratJalan($id_lo)
     {
         $query = $this->db->table('januari_lo')
             ->select('januari_lo.*, januari_sj.*')
