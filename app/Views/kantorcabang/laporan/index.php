@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-md-4 my-3">
                     <label for="alokasi" class="h6">Pilih Tanggal</label>
-                    <input type="text" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Range Tanggal" onchange="generatereport()">
+                    <input type="text" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="datatanggal" name="datatanggal" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Range Tanggal">
                 </div>
                 <div class="col-md-4 my-3 mt-5">
                     <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterWO" name="filterWO">Filter Document</button>
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <div class="row d-none" id="tableWO">
+            <div class="row d-none" id="tabelhilangdulu">
                 <div class="col-12">
                     <div class="table-responsive h6 mt-3">
                         <table class="display" id="tablewo">
@@ -58,17 +58,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row d-none" id="tombolDownload">
-                <div class="col-12">
-                    <h6 class="card-subtitle mb-3">
-                        <a onclick="generatereport()" style="font-weight: bolder;" class='text-primary' id='downloadspm'>Download</a> File Rekap Working Order
-                    </h6>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
+
 <script src="<?= base_url('assets/js/kantorcabang/laporan/getlaporandoc.js') ?>"></script>
 <?php $this->endSection() ?>

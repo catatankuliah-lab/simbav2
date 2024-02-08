@@ -1,6 +1,4 @@
-// GET ALOKASI
-// ONCLICK BUTTON KONDISI ALOKASI DIPILIH DAN TANGGAL
-// DETAIL MENGGUNAKAN NO_WO
+const datawo = $("#datawo");
 
 $.ajax({
   url: "http://localhost:8080/api/alokasi",
@@ -76,20 +74,27 @@ $("#filterWO").on("click", function () {
       success: function (data) {
         console.log("Data Semua LO : ", data);
         $("#filterSearch").removeClass("d-none");
-        $("#tableWO").removeClass("d-none");
+        $("#tabelhilangdulu").removeClass("d-none");
         $("#tombolDownload").removeClass("d-none");
         var datanya = [];
         $.each(data, function (index, lo) {
           datanya.push({
             tanggal_wo: lo.tanggal_wo,
             nomor_wo: lo.nomor_wo,
-            pengirim: lo.nama_kabupaten_kota,
-            muatan: lo.nama_kecamatan,
-            status: lo.nama_desa_kelurahan,
+            nama_kabupaten_kota: lo.nama_kabupaten_kota,
+            nama_kecamatan: lo.nama_kecamatan,
+            nama_desa_kelurahan: lo.nama_desa_kelurahan,
             link:
-              "http://localhost:8080/kantorcabang/wo/" + $("#alokasi").val() + "/getdetailwo/" + lo.nomor_wo,
+              "http://localhost:8080/kantorcabang/wo/" +
+              $("#alokasi").val() +
+              "/getdetailwo/" +
+              lo.nomor_wo,
           });
         });
+        var tablewo = $("#tablewo").DataTable();
+        if (tablewo !== null) {
+          tablewo.destroy();
+        }
         $("#tablewo").DataTable({
           paging: true,
           info: false,
@@ -103,9 +108,9 @@ $("#filterWO").on("click", function () {
           columns: [
             { data: "tanggal_wo" },
             { data: "nomor_wo" },
-            { data: "pengirim" },
-            { data: "muatan" },
-            { data: "status" },
+            { data: "nama_kabupaten_kota" },
+            { data: "nama_kecamatan" },
+            { data: "nama_desa_kelurahan" },
             {
               data: "link",
               render: function (data, type, row, meta) {
@@ -137,6 +142,10 @@ $("#filterWO").on("click", function () {
           timerProgressBar: true,
           showConfirmButton: false,
         });
+
+        $("#filterSearch").addClass("d-none");
+        $("#tabelhilangdulu").addClass("d-none");
+        $("#tombolDownload").addClass("d-none");
       },
     });
   }
