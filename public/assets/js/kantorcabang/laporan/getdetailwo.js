@@ -66,15 +66,15 @@ $.ajax({
 });
 
 $("#downloadwo").on("click", function () {
+  var status_dokumen_muat = "LENGKAP";
+
+  var url = "http://localhost:8080/api/wo/1/downloadwo/" + status_dokumen_muat;
+
   $.ajax({
-    url: "http://localhost:8080/api/wo/1/" + $("#alokasi").val() + "/download/" + $('#nomor_wo').val(),
+    url: url,
     type: "GET",
-    data: {
-      status_dokumen_muat: "DIBUAT",
-    },
     success: function (response) {
-      // Handle success, mungkin tampilkan pesan atau manipulasi data jika diperlukan
-      window.location.href = response.file_url;
+      window.location.href = "http://localhost:8080/LAPORAN-CEK.pdf";
     },
     error: function (error) {
       console.error("Error saat mengunduh dokumen:", error);

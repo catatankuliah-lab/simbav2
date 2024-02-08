@@ -82,8 +82,7 @@ class HomeController extends Controller
         ];
         return view('kantorcabang/laporan/detail', $data);
     }
-
-    public function generateLaporanwo($nomorwo)
+    public function generateLaporanwo()
     {
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator('PT Delapan Delapan Logistics');
@@ -110,9 +109,13 @@ class HomeController extends Controller
         $pdf->AddPage(); // Page Untuk Dokumen DO (Drop Out)
         $imagePath = FCPATH . 'assets/img/do.jpg';
         $pdf->Image($imagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight()); // x, y, widht. height
+
         // Simpan PDF ke file di server
         $filePath = FCPATH . 'LAPORAN-CEK.pdf';
         $pdf->Output($filePath, 'F');
-        $pdf->Output($filePath, 'D');
+
+        // Mendownload file PDF yang dihasilkan
+        return $this->response->download($filePath, null);
     }
+
 }
