@@ -82,35 +82,36 @@ class HomeController extends Controller
         return view('kantorcabang/laporan/detail', $data);
     }
 
-    public function generateLaporanwo()
+    public function generateLaporanwo($nomorwo)
     {
+        $data = $this->woJanuari->woPDF($nomorwo);
+
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator('PT Delapan Delapan Logistics');
         $pdf->SetAuthor('PT Delapan Delapan Logistics');
-        $pdf->SetTitle('LAPORAN PENYERAHAN-' . "CEK");
+        $pdf->SetTitle('LAPORAN PENYERAHAN-' . $data[0]->nomor_wo);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-        $pdf->AddPage(); // Page Untuk Dokumen Work Order
-        $imagePath = FCPATH . 'assets/img/contohWO.png';
-        $pdf->Image($imagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight()); // x, y, widht. height
+        $pathhasil = $data[0]->path_wo;
+        $pdf->AddPage('P', 'A4');
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $pathhasil . DIRECTORY_SEPARATOR . $data[0]->file_wo;
+        $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
+        foreach ($data as $row) {
+            $pdf->AddPage('P', 'A4');
+            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_wo . DIRECTORY_SEPARATOR . $row->file_dokumen_muat;
+            $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
-        $pdf->AddPage(); // Page Untuk Dokumen Rekapitulasi
-        $imagePath = FCPATH . 'assets/img/contohRekapitulasi.png';
-        $pdf->Image($imagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight()); // x, y, widht. height
-
-        $pdf->AddPage(); // Page Untuk Dokumen Loading Order
-        $imagePath = FCPATH . 'assets/img/lo.jpg';
-        $pdf->Image($imagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight()); // x, y, widht. height
-
-        $pdf->AddPage(); // Page Untuk Dokumen LO Surat Jalan
-        $imagePath = FCPATH . 'assets/img/losj.jpg';
-        $pdf->Image($imagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight()); // x, y, widht. height
-
-        $pdf->AddPage(); // Page Untuk Dokumen DO (Drop Out)
-        $imagePath = FCPATH . 'assets/img/do.jpg';
-        $pdf->Image($imagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight()); // x, y, widht. height
-        // Simpan PDF ke file di server
-        $filePath = FCPATH . 'LAPORAN-CEK.pdf';
+            $pdf->AddPage('P', 'A4');
+            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_wo . DIRECTORY_SEPARATOR . $row->file_surat_jalan;
+            $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
+        }
+        if (!file_exists($pathhasil)) {
+            mkdir($pathhasil, 0777, true);
+        }
+        $filePath = FCPATH . DIRECTORY_SEPARATOR . $pathhasil . DIRECTORY_SEPARATOR . ' LAPORAN-WO-' . $data[0]->nomor_wo . '.pdf';
+        // Compress File
+        $pdf->SetCompression(true);
+        // Save the PDF to the specified directory
         $pdf->Output($filePath, 'F');
         $pdf->Output($filePath, 'D');
     }

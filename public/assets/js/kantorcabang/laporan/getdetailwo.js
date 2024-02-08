@@ -74,7 +74,8 @@ $(document).ready(function () {
       success: function (response) {
         console.log("Success:", response);
         window.location.href =
-          "http://localhost:8080/kantorcabang/wo/1/generatelaporanwo";
+          "http://localhost:8080/kantorcabang/wo/1/generatelaporanwo/" +
+          $("#nomorwo").val();
         Swal.fire({
           icon: "success",
           title: "Laporan berhasil diunduh",

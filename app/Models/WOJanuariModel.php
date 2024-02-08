@@ -105,7 +105,7 @@ class WOJanuariModel extends Model
         return $query->getResult();
     }
 
-    public function laporanWO($nomorwo)
+    public function woPDF($nomorwo)
     {
         $query = $this->db->table('januari_wo')
             ->select('januari_wo.*, kantor_cabang.*, januari_lo.*, januari_sj.*, januari_pbp.*')
@@ -117,5 +117,6 @@ class WOJanuariModel extends Model
             ->get();
         return $query->getResult();
     }
+    
 
 }
