@@ -1,3 +1,8 @@
+var alokasidipilih;
+$("#alokasi").on("change", function () {
+  alokasidipilih = $(this).val();
+});
+
 $.ajax({
   url: "http://localhost:8080/api/wo/1/detailwo/" + $("#nomorwo").val(),
   type: "GET",
@@ -43,13 +48,6 @@ $.ajax({
         "<td>" +
         wo.status_dokumen_muat +
         "</td>" +
-        // "<td class='text-center'>" +
-        // "<a href='http://localhost:8080/kantorcabang/lo/suratjalan/" +
-        // wo.id_lo +
-        // "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-        // "<i class='fas fa-search-plus'></i>" +
-        // "</a>" +
-        // "</td>" +
         "</tr >";
       datalo.append(listwo);
     });
@@ -75,6 +73,8 @@ $(document).ready(function () {
       type: "GET",
       success: function (response) {
         console.log("Success:", response);
+        window.location.href =
+          "http://localhost:8080/kantorcabang/wo/1/generatelaporanwo";
         Swal.fire({
           icon: "success",
           title: "Laporan berhasil diunduh",
