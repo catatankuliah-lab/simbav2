@@ -53,10 +53,6 @@
                     </table>
                 </div>
             </div>
-            <h6 class="card-subtitle mb-3">
-                <a href="<?= base_url('kantorcabang/wo/1/laporan/generatelaporan/' . $nomorwo) ?>" style="font-weight: bolder;" class="text-primary" id="downloadspm">Download</a> File Bukti Penyerahan Loading Order (LO) & Surat Jalan
-            </h6>
-
         </div>
     </div>
 </div>

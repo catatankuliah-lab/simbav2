@@ -103,12 +103,106 @@ class HomeController extends Controller
 
         // Halaman untuk dokumet penyaluran
         $pdf->AddPage('L', 'A4');
-        $pdf->Cell(0, 10, 'REKAPITULASI HARIAN BANTUAN PANGAN CADANGAN BERAS PEMERINTAH', +$data[0]->tanggal_muat, 0, false, 'C', 0, '', 0, false, 'M', 'M');
-        $pdf->Ln(10); // Spasi antara tabel dan entri baru
-        $pdf->Cell(0, 10, 'TRANSPORTER : PT LOGISTICS DELAPAN DELAPAN', 0, false, 'C', 0, '', 0, false, 'M', 'M');
-        $pdf->Cell(0, 10, 'GUDANG MUAT : ', + $data[0]->nama_gudang, 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $pdf->SetFont('times', 'B', 10);
+        $pdf->Cell(0, 10, 'REKAPITULASI HARIAN', 0, 1, 'C');
+        $pdf->Cell(0, 0, 'BANTUAN PANGAN CADANGAN BERAS PEMERINTAH 2024 ', $data[0], 0, 1, 'C');
+        $pdf->Ln(10);
+        $html = '<hr>';
+        // Output the HTML content to the PDF
+        $pdf->writeHTML('<hr>', true, false, true, false, '');
+        $pdf->SetFont('times', 'B', 10);
+        $pdf->Ln(10);
+
+        $pdf->SetFont('times', 'B', 8);
+
+        $html = '<table border="1" style="width:100%" cellspacing="0" cellpadding="5">';
+        $html .= '<tr>
+                    <td width="25%">Transporter</td>
+                    <td width="25%">: ' . "PT DELAPAN DELAPAN LOGISTICS" . '</td>
+                    <td width="25%">Kabupaten/Kota</td>
+                    <td width="25%">: ' . $data[0]->nama_kabupaten_kota . '</td>
+                </tr>';
+        $html .= '<tr>
+                    <td width="25%">Gudang Muat</td>
+                    <td width="25%">: ' . $data[0]->nama_gudang . '</td>
+                    <td width="25%">Kantor Cabang</td>
+                    <td width="25%">: ' . $data[0]->nama_kantor . '</td>
+                </tr>';
+        $html .= '<tr>
+                    <td width="25%">Tanggal</td>
+                    <td width="25%">: ' . $data[0]->tanggal_muat . '</td>
+                    <td width="25%">Keterangan</td>
+                    <td width="25%">: ' . $data[0]->nama_kantor . '</td>
+                </tr>';
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->Ln(0);
+        $pdf->SetFont('times', 'B', 7);
+        // Add table header
+        $html = '<table border="1" style="width:100%" cellspacing="0" cellpadding="5">';
+        $html .= '<tr style="text-align: center">
+                    <th style="width: 30px">NO</th>
+                    <th style="width: 30%">NOPOL</th>
+                    <th style="width: 10%">DRIVER</th>
+                    <th style="width: 7.5%">KECAMATAN</th>
+                    <th style="width: 7.5%">KELURAHAN/DESA</th>
+                    <th style="width: 7.5%">KOLL (Bags)</th>
+                    <th style="width: 7.5%">KUANTUM</th>
+                    <th style="width: 7.5%">NO DANOM</th>
+                    <th style="width: 7.5%">NO DOC OUT</th>
+                    <th style="width: *%">NO SO</th>
+                </tr>';
+        $jumlah = 0;
+        $no = 1;
+        foreach ($data as $row) {
+            $jumlah = $jumlah + $row->jumlah_penyaluran_januari;
+            $html .= '<tr>';
+            $html .= '<td style="text-align : center">' . $no++ . '</td>';
+            $html .= '<td style="text-align : center" >' . $row->nomor_mobil . '</td>';
+            $html .= '<td style="text-align : center" >' . $row->nama_driver . '</td>';
+            $html .= '<td style="text-align : center" >' . $row->nama_kecamatan . '</td>';
+            $html .= '<td style="text-align : center" >' . $row->nama_desa_kelurahan . '</td>';
+            $html .= '<td style="text-align : center" >' . $row->jumlah_penyaluran_januari / 10 . '</td>';
+            $html .= '<td style="text-align : center" >' . $row->jumlah_penyaluran_januari . '</td>';
+            $html .= '<td style="text-align : center" >NO DANOM</td>';
+            $html .= '<td style="text-align : center" >' . $row->nomor_do . '</td>';
+            $html .= '<td style="text-align : center" >' . $row->nomor_so . '</td>';
+            $html .= '</tr>';
+        }
+        $html .= '<tr>
+                    <td colspan="5" style="text-align: center;">TOTAL REALISASI HARIAN</td>
+                    <td>' . $data[0]->jumlah_penyaluran_januari / 10  . '</td>
+                    <td>' . $data[0]->jumlah_penyaluran_januari . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>';
+        $html .= '</table>';
+        $pdf->writeHTML($html, true, false, true, false, '');
 
 
+        // Table ke dua
+        $html = '<table border="1" style="width:100%" cellspacing="0" cellpadding="5">';
+        $html .= '<tr>
+            <td colspan="2" style="text-align: center;">TOTAL ALOKASI DESA</td>
+          </tr>';
+
+        $jumlah = 0;
+        $no = 1;
+        foreach ($data as $row) {
+            $jumlah = $jumlah + $row->jumlah_penyaluran_januari;
+            $html .= '<tr>';
+            $html .= '<td style="text-align : center" >' . $row->nama_desa_kelurahan . '</td>';
+            $html .= '<td style="text-align : center" >' . $row->jumlah_penyaluran_januari . '</td>';
+            $html .= '</tr>';
+        }
+        $html .= '<tr>
+                    <td >TOTAL</td>
+                    <td>' . $jumlah . '</td>
+                </tr>';
+        $html .= '</table>';
+        $pdf->writeHTML($html, true, false, true, false, '');
 
         // Looping data Loading Order (LO)
         foreach ($data as $row) {
