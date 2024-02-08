@@ -12,10 +12,7 @@ $.ajax({
 });
 
 $("#alokasi").on("change", function () {
-    const alokasidipilih = $('#alokasi').val();
-    if (alokasidipilih == "1") {
-        prosestampilkandashboard(alokasidipilih);
-    }
+    prosestampilkandashboard($('#alokasi').val());
 });
 
 function prosestampilkandashboard(idalokasi) {
@@ -52,6 +49,7 @@ function prosestampilkandashboard(idalokasi) {
             $('#card3').text(tidak);
         },
         error: function (error) {
+            Swal.close();
             $('#card1').text(0);
             $('#card2').text(0);
             $('#card3').text(0);
