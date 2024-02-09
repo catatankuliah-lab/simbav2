@@ -50,6 +50,12 @@
 </head>
 
 <body>
+    <?php
+    if (session()->get('login') == null) {
+        header("Location:" . base_url(''));
+        exit();
+    }
+    ?>
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>

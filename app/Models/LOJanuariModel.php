@@ -19,6 +19,9 @@ class LOJanuariModel extends Model
         "nomor_lo",
         "nomor_do",
         "nomor_so",
+        "kode_wo",
+        "kode_do",
+        "kode_so",
         "tanggal_muat",
         "nama_driver",
         "nomor_driver",
@@ -210,6 +213,7 @@ class LOJanuariModel extends Model
         return $query->getResult();
     }
 
+    // NANA AMBIL DATA BUAT LO DETAIL
     public function detaillo($nomorlo)
     {
         $query = $this->db->table('januari_lo')
@@ -218,6 +222,43 @@ class LOJanuariModel extends Model
             ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
             ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
             ->where('januari_lo.nomor_lo', $nomorlo)
+            ->get();
+        return $query->getRow();
+    }
+
+    // NANA AMBIL DATA BUAT SJ PAKE LO
+    public function getallsjbynomorlo($nomorlo)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*, januari_sj.*, januari_pbp.*')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_lo.nomor_lo', $nomorlo)
+            ->get();
+        return $query->getRow();
+    }
+
+    // NANA AMBIL DATA BUAT SJ PAKE LO
+    public function downloadPDF($nomorlo)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*, januari_sj.*, januari_pbp.*, gudang.nama_gudang')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
+            ->where('januari_lo.nomor_lo', $nomorlo)
+            ->get();
+        return $query->getResult();
+    }
+    // NANA AMBIL DATA KEBUTUHAN UPLOAD
+    public function getkebutuhanupload($idlo)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*, januari_sj.*, januari_pbp.*, gudang.nama_gudang')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
+            ->where('januari_lo.id_lo', $idlo)
             ->get();
         return $query->getRow();
     }
