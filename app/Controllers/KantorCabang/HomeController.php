@@ -93,6 +93,7 @@ class HomeController extends Controller
 
     public function generateLaporanwo($nomorwo)
     {
+
         $data = $this->loJanuari->woPDF($nomorwo);
 
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -101,11 +102,14 @@ class HomeController extends Controller
         $pdf->SetTitle('LAPORAN PENYERAHAN-' . $data[0]->nomor_wo);
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-        $pathhasil = $data[0]->path_wo;
+        $pathhasil = $data[0]->path_lo;
 
         // Halaman untuk dokument working order
         $pdf->AddPage('P', 'A4');
-        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $pathhasil . DIRECTORY_SEPARATOR . $data[0]->file_wo;
+        // $leftImagePath = FCPATH . 'assets/img/Wo01.png';
+        $leftImagePath =  base_url('UPLOAD/1/LO/SIDARAJA/2024-02-08/logo.png');
+        // dd($data[0]->file_upload_wo);
+
         $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
         // Halaman untuk dokumet penyaluran
@@ -215,39 +219,35 @@ class HomeController extends Controller
         foreach ($data as $row) {
             // LO 
             $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_wo . DIRECTORY_SEPARATOR . $row->file_uplaod_lo;
+            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_uplaod_lo;
             $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
             // lopiing surat jalan by nomor lo
             foreach ($data as $row) {
                 $pdf->AddPage('P', 'A4');
-                $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_wo . DIRECTORY_SEPARATOR . $row->file_surat_jalan;
+                $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_surat_jalan;
                 $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
             }
 
             // Dokumen DO BULOG
             $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_wo . DIRECTORY_SEPARATOR . $row->file_upload_do;
+            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_do;
             $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
             // Dokumen Surat Jalan BULOG
             $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_wo . DIRECTORY_SEPARATOR . $row->file_upload_sj_bulog;
+            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_sj_bulog;
             $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
             // Dokumen BAST BULOG
             $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_wo . DIRECTORY_SEPARATOR . $row->file_upload_bast_bulog;
+            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_bast_bulog;
             $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
-        }
-        if (!file_exists($pathhasil)) {
-            mkdir($pathhasil, 0777, true);
         }
         $filePath = FCPATH . DIRECTORY_SEPARATOR . $pathhasil . DIRECTORY_SEPARATOR . ' LAPORAN-WO-' . $data[0]->nomor_wo . '.pdf';
         // Compress File
         $pdf->SetCompression(true);
         // Save the PDF to the specified directory
-        $pdf->Output($filePath, 'F');
         $pdf->Output($filePath, 'D');
     }
 
@@ -389,5 +389,22 @@ class HomeController extends Controller
         $xlsxWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($excel, 'Xlsx');
         $xlsxWriter = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($excel);
         exit($xlsxWriter->save('php://output'));
+    }
+
+    public function getwobykodewo($alokasi, $kodewo)
+    {
+        $data = [
+            'menu1' => '',
+            'menu2' => 'selected',
+            'menu3' => '',
+            'menu4' => '',
+            'alokasi' => $alokasi,
+            'kodewo' => $kodewo,
+        ];
+        return view('kantorcabang/laporan/detail', $data);
+    }
+
+    public function downloadwo()
+    {
     }
 }

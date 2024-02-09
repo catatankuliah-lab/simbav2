@@ -22,7 +22,15 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->delete('lo/(:num)', 'LO\LOJanuariController::delete/$1');
     $routes->get('lo/sessionya', 'LO\LOJanuariController::getSession');
     $routes->get('lo/1/getbyidkantor/(:num)', 'LO\LOJanuariController::getbyidkantor/$1');
-    $routes->get('lo/1/detaillo/(:any)', 'LO\LOJanuariController::getLoByNoLo/$1');
+
+    $routes->get('lo/1/laporan/detail/(:segment)', 'LO\LOJanuariController::getwobykodewo/$1');
+    // $routes->get('lo/2/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
+    // $routes->get('lo/3/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
+    // $routes->get('lo/4/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
+    // $routes->get('lo/5/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
+    // $routes->get('lo/6/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
+
+    $routes->get('lo/alokasi/1/awal/(:segment)/akhir/(:segment)', 'LO\LOJanuariController::getWoByIdKantor/$1/$2');
     $routes->get('lo/namagudangkantor/(:any)', 'LO\LOJanuariController::getGudangByIdKantor/$1');
     $routes->get('lo/namakabupatenkantor/(:any)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
     $routes->get('lo/kabupatenkecamatankantor/(:any)/(:any)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');
@@ -42,13 +50,6 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
 
     // Wilayah Kerja
     $routes->get('wilayahkerja/(:num)', 'WilayahKerja\WilayahKerjaController::getWilayahKerjaByIdKantor/$1');
-
-    // WO Januari
-    $routes->get('wo/getwobyidkantor/(:any)', 'WOJanuari\WOJanuariController::getWoByIdKantor/$1');
-    $routes->get('wo/getalldatawo/(:any)', 'WOJanuari\WOJanuariController::showDetailWo/$1');
-    $routes->get('wo/alokasi/1/awal/(:segment)/akhir/(:segment)', 'WOJanuari\WOJanuariController::getAlokasiFilter/$1/$2');
-    $routes->get('wo/1/detailwo/(:any)', 'WOJanuari\WOJanuariController::getDetailWO/$1');
-    $routes->get('wo/1/downloadwo/(:any)', 'WOJanuari\WOJanuariController::downloadWO/$1');
 
     // PBP Januari
     $routes->get('pbp/getkecamatanbykabupaten/(:any)', 'PBP\PBPJanuariController::showByKabupatenKota/$1');

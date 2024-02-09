@@ -15,15 +15,15 @@ class WOJanuariController extends ResourceController
         $this->modelWOJanuari = new WOJanuariModel();
     }
 
-    public function getWoByIdKantor($idkantor)
-    {
-        $data = $this->modelWOJanuari->showWoByIdKantor($idkantor, session()->get("id_akun"));
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data WO Kantor tidak ditemukan.');
-        }
-    }
+    // public function getWoByIdKantor($idkantor)
+    // {
+    //     $data = $this->modelWOJanuari->showWoByIdKantor($idkantor, session()->get("id_akun"));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data WO Kantor tidak ditemukan.');
+    //     }
+    // }
 
     public function showKabupatenByIdKantor($namaKabupaten)
     {
