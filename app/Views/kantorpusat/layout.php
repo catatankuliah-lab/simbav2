@@ -49,9 +49,12 @@
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
+    <?php
+    if (session()->get('login') == null) {
+        header("Location:" . base_url(''));
+        exit();
+    }
+    ?>
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -210,8 +213,6 @@
     <script src="<?= base_url('assetss/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') ?>"></script>
     <script src="<?= base_url('assetss/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') ?>"></script>
     <script src="<?= base_url('dist/js/pages/dashboards/dashboard1.min.js') ?>"></script>
-
-
     <script>
         function dashboard() {
             window.location.href = "<?= base_url('kantorpusat/') ?>"

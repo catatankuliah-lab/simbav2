@@ -35,6 +35,12 @@
 </head>
 
 <body>
+    <?php
+    if (session()->get('login') == null) {
+        header("Location:" . base_url(''));
+        exit();
+    }
+    ?>
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
@@ -93,7 +99,7 @@
                                 <img src="<?= base_url('assetss/images/users/profile-pic.jpg') ?>" alt="user" class="rounded-circle" width="40">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="mt-2 dropdown-item" href="<?= base_url('auth/login') ?>"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                                <a class="mt-2 dropdown-item" href="<?= base_url('') ?>"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
                                     Logout</a>
                             </div>
                         </li>
@@ -137,8 +143,8 @@
             <?= $this->renderSection('content') ?>
         </div>
     </div>
-    <script src="<?= base_url('assetss/libs/popper.js/dist/umd/popper.min.js') ?>"></script>
-    <script src="<?= base_url('assetss/libs/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script src="<?= base_url('dist/js/app-style-switcher.js') ?>"></script>
     <script src="<?= base_url('dist/js/feather.min.js') ?>"></script>
     <script src="<?= base_url('assetss/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') ?>"></script>

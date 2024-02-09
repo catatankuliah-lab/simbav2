@@ -131,6 +131,7 @@ class AkunController extends ResourceController
             session()->set('id_kantor_cabang', $data->id_kantor_cabang);
             session()->set('id_hak_akses', $data->id_hak_akses);
             session()->set('nama_lengkap', $data->nama_lengkap);
+            session()->set('login', true);
             return $this->respond($data);
         } else {
             return $this->respond("Username atau Password Salah");

@@ -173,4 +173,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('lo/detail/4/(:segment)', 'LO\LOAprilController::detaillo/$1');
     $routes->get('lo/detail/5/(:segment)', 'LO\LOMeiController::detaillo/$1');
     $routes->get('lo/detail/6/(:segment)', 'LO\LOJuniController::detaillo/$1');
+
+    // UPLOAD FILE
+    $routes->post('lo/1/uploadfile/(:segment)', 'LO\LOJanuariController::uploadfile/$1');
+    $routes->post('lo/2/uploadfile/(:segment)', 'LO\LOFebruariController::uploadfile/$1');
+    $routes->post('lo/3/uploadfile/(:segment)', 'LO\LOMaretController::uploadfile/$1');
+    $routes->post('lo/4/uploadfile/(:segment)', 'LO\LOAprilController::uploadfile/$1');
+    $routes->post('lo/5/uploadfile/(:segment)', 'LO\LOMeiController::uploadfile/$1');
+    $routes->post('lo/6/uploadfile/(:segment)', 'LO\LOJuniController::uploadfile/$1');
 });
