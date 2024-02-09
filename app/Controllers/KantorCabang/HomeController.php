@@ -106,7 +106,10 @@ class HomeController extends Controller
 
         // Halaman untuk dokument working order
         $pdf->AddPage('P', 'A4');
-        $leftImagePath = FCPATH  . $data[0]->path_upload_wo . $data[0]->file_upload_wo;
+        // $leftImagePath = FCPATH . 'assets/img/Wo01.png';
+        $leftImagePath =  base_url('UPLOAD/1/LO/SIDARAJA/2024-02-08/logo.png');
+        // dd($data[0]->file_upload_wo);
+
         $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
         // Halaman untuk dokumet penyaluran
