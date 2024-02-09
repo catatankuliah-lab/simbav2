@@ -107,9 +107,9 @@ $('#filebast').change(function (e) {
 
 // PERSIAPAN UPLOAD DAN UPDATE
 function ceknomor() {
-  var nomor_wo = $("#nomor_wo").val();
-  var nomor_do = $("#nomor_do").val();
-  var nomor_so = $("#nomor_so").val();
+  nomor_wo = $("#nomor_wo").val();
+  nomor_do = $("#nomor_do").val();
+  nomor_so = $("#nomor_so").val();
   kode_wo = nomor_wo.replace(/[\/.]/g, '');
   kode_do = nomor_do.replace(/[\/.]/g, '');
   kode_so = nomor_so.replace(/[\/.]/g, '');
@@ -126,7 +126,6 @@ function ceknomor() {
 
 // PROSES UPLOAD DAN UPDATE
 $('#prosesupdate').click(function (e) {
-  console.log("CLIK");
   ceknomor();
   var formData = new FormData($('#uploadForm')[0]);
   var additionalData = {
@@ -138,6 +137,7 @@ $('#prosesupdate').click(function (e) {
     'nomor_so': nomor_so,
     'idlo': $('#idlo').val()
   };
+  console.log(additionalData);
   formData.append('additionalData', JSON.stringify(additionalData));
   $.ajax({
     url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/uploadfile/" + $('#idlo').val(),
