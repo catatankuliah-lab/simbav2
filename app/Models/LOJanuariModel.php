@@ -221,4 +221,104 @@ class LOJanuariModel extends Model
             ->get();
         return $query->getRow();
     }
+    public function showlobynomorlo($nomorlo)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*,gudang.*, januari_sj.*, januari_pbp.*, ')
+            ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_lo.nomor_lo', $nomorlo)
+            ->get();
+        return $query->getRow();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getSPMPerKecamtan($idKantor)
+    {
+        $query = $this->db->table('januari_lo')
+        ->select('januari_lo.*, januari_sj.*, januari_pbp.*, gudang.*, kantor_cabang.*')
+        ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+        ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+        ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
+        ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = januari_lo.id_kantor')
+        ->where('januari_lo.id_kantor', $idKantor)
+        ->groupBy('januari_lo.id_gudang')
+        ->get();
+        return $query->getResult();
+    }
+    public function getRekap($idGudang)
+    {
+        $query = $this->db->table('januari_lo')
+        ->select('januari_lo.*, januari_sj.*, januari_pbp.*, gudang.*')
+        ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+        ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+        ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
+        ->where('januari_lo.id_gudang', $idGudang)
+        ->get();
+        return $query->getResult();
+    }
 }

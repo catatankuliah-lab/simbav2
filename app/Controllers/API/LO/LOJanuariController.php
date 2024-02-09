@@ -199,4 +199,111 @@ class LOJanuariController extends ResourceController
         }
         return $this->respond($datalo);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getLoByNoLo($nomorlo)
+    {
+        $data = $this->model->showlobynomorlo($nomorlo);
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+        }
+    }
 }

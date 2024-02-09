@@ -21,7 +21,8 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->put('lo/(:num)', 'LO\LOJanuariController::update/$1');
     $routes->delete('lo/(:num)', 'LO\LOJanuariController::delete/$1');
     $routes->get('lo/sessionya', 'LO\LOJanuariController::getSession');
-    $routes->get('lo/getbyidkantor/(:num)', 'LO\LOJanuariController::getbyidkantor/$1');
+    $routes->get('lo/1/getbyidkantor/(:num)', 'LO\LOJanuariController::getbyidkantor/$1');
+    $routes->get('lo/1/detaillo/(:any)', 'LO\LOJanuariController::getLoByNoLo/$1');
     $routes->get('lo/namagudangkantor/(:any)', 'LO\LOJanuariController::getGudangByIdKantor/$1');
     $routes->get('lo/namakabupatenkantor/(:any)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
     $routes->get('lo/kabupatenkecamatankantor/(:any)/(:any)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');

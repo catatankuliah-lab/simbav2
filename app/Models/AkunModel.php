@@ -75,10 +75,10 @@ class AkunModel extends Model
     {
         $query = $this->db->table('akun')
             ->select('akun.*, kantor_cabang.*, hak_akses.*')
-            ->join('kantor_cabang', 'kantor_cabang.id_kantor = akun.id_kantor', 'left')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = akun.id_kantor_cabang', 'left')
             ->join('hak_akses', 'hak_akses.id_hak_akses = akun.id_hak_akses', 'left')
             ->join('gudang', 'gudang.id_gudang = akun.id_gudang', 'left')
-            ->where('akun.id_kantor', $idKantor)
+            ->where('akun.id_kantor_cabang', $idKantor)
             ->where('akun.id_gudang !=', null)
             ->get();
         return $query->getResult();
