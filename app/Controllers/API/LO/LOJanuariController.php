@@ -288,4 +288,39 @@ class LOJanuariController extends ResourceController
             return $this->respond($response, 400);
         }
     }
+
+
+    public function getWoByIdKantor($awal, $akhir)
+    {
+        $data = $this->model->showWoByIdKantor(session()->get('id_kantor_cabang'), $awal, $akhir);
+        if ($data) {
+            $response = [
+                'status' => "200",
+                'data'=> $data
+            ];
+            return $this->respond($response);
+        } else {
+            $response = [
+                'status' => "404",
+            ];
+            return $this->respond($response);
+        }
+    }
+
+    public function getwobykodewo($kodewo) 
+    {
+        $data = $this->model->getwobykodewo($kodewo);
+        if ($data) {
+            $response = [
+                'status' => "200",
+                'data' => $data
+            ];
+            return $this->respond($response);
+        } else {
+            $response = [
+                'status' => "404",
+            ];
+            return $this->respond($response);
+        }
+    }
 }

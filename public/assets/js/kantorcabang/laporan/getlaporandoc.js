@@ -62,69 +62,91 @@ $("#filterWO").on("click", function () {
 
     $.ajax({
       url:
-        "http://localhost:8080/api/wo/alokasi/" +
+        "http://localhost:8080/api/lo/alokasi/" +
         $("#alokasi").val() +
         "/awal/" +
         tanggalMulai +
         "/akhir/" +
         tanggalAkhir,
-
       method: "GET",
       dataType: "json",
       success: function (data) {
-        console.log("Data Semua LO : ", data);
-        $("#filterSearch").removeClass("d-none");
-        $("#tabelhilangdulu").removeClass("d-none");
-        $("#tombolDownload").removeClass("d-none");
-        var datanya = [];
-        $.each(data, function (index, lo) {
-          datanya.push({
-            tanggal_wo: lo.tanggal_wo,
-            nomor_wo: lo.nomor_wo,
-            nama_kabupaten_kota: lo.nama_kabupaten_kota,
-            nama_kecamatan: lo.nama_kecamatan,
-            nama_desa_kelurahan: lo.nama_desa_kelurahan,
-            link:
-              "http://localhost:8080/kantorcabang/wo/" +
-              $("#alokasi").val() +
-              "/getdetailwo/" +
-              lo.nomor_wo,
+        console.log(data);
+        if (data.status == "200") {
+          $("#filterdatatable").removeClass("d-none");
+          $("#tablelo").removeClass("d-none");
+          var datanya = [];
+          var nomorwo = "";
+          $.each(data.data, function (index, lo) {
+            if (lo.nomor_wo == "") {
+              nomorwo = "BELUM DIISI";
+            } else {
+              nomorwo = lo.nomor_wo;
+            }
+            datanya.push({
+              tanggal_muat: lo.tanggal_muat,
+              nomor_wo: nomorwo,
+              nomor_lo: lo.nomor_lo,
+              pengirim:
+                lo.nomor_mobil +
+                " / " +
+                lo.nama_driver +
+                " (" +
+                lo.nomor_driver +
+                ")",
+              muatan: lo.total,
+              status: lo.status_dokumen_muat,
+              link:
+                "http://localhost:8080/kantorcabang/lo/laporan/1/detail/" +
+                lo.kode_wo,
+            });
           });
-        });
-        var tablewo = $("#tablewo").DataTable();
-        if (tablewo !== null) {
-          tablewo.destroy();
-        }
-        $("#tablewo").DataTable({
-          paging: true,
-          info: false,
-          language: {
-            paginate: {
-              next: ">",
-              previous: "<",
-            },
-          },
-          data: datanya,
-          columns: [
-            { data: "tanggal_wo" },
-            { data: "nomor_wo" },
-            { data: "nama_kabupaten_kota" },
-            { data: "nama_kecamatan" },
-            { data: "nama_desa_kelurahan" },
-            {
-              data: "link",
-              render: function (data, type, row, meta) {
-                return (
-                  "<a href=" +
-                  data +
-                  " type='button' class='text-primary' style='border-radius: 5px;'>" +
-                  "<i class='fas fa-search-plus'></i></a>"
-                );
+          $("#tablelo").DataTable({
+            paging: true,
+            info: false,
+            language: {
+              paginate: {
+                next: ">",
+                previous: "<",
               },
-              className: "text-center",
             },
-          ],
-        });
+            data: datanya,
+            columns: [
+              { data: "tanggal_muat" },
+              { data: "nomor_wo" },
+              { data: "nomor_lo" },
+              { data: "pengirim" },
+              {
+                data: "muatan",
+                className: "text-center",
+              },
+              { data: "status" },
+              {
+                data: "link",
+                render: function (data, type, row, meta) {
+                  return (
+                    "<a href=" +
+                    data +
+                    " type='button' class='text-primary' style='border-radius: 5px;'>" +
+                    "<i class='fas fa-search-plus'></i></a>"
+                  );
+                },
+                className: "text-center",
+              },
+            ],
+          });
+        } else {
+          $("#filterdatatable").addClass("d-none");
+          $("#tablelo").addClass("d-none");
+          $("#tablelo_paginate").addClass("d-none");
+          Swal.fire({
+            icon: "error",
+            title: "Loading Order (LO)",
+            text: "Data Loading Order (LO) tidak ditemukan.",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
       },
 
       error: function (error) {

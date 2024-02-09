@@ -36,27 +36,22 @@
                     </select>
                 </div>
             </div>
-
-            <div class="row d-none" id="tabelhilangdulu">
-                <div class="col-12">
-                    <div class="table-responsive h6 mt-3">
-                        <table class="display" id="tablewo">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Tanggal</th>
-                                    <th scope="col">No Working Order (WO)</th>
-                                    <th scope="col">Kabupaten</th>
-                                    <th scope="col">Kecamatan</th>
-                                    <th scope="col">Desa</th>
-                                    <th scope="col" class="text-center">Detail</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="datawo">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="table-responsive h6 mt-3">
+                <table class="display d-none" id="tablelo">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tanggal</th>
+                            <th scope="col">No WO</th>
+                            <th scope="col">No Loading Order (LO)</th>
+                            <th scope="col">Nopol Mobil/Driver</th>
+                            <th scope="col">Total Muatan (Kg)</th>
+                            <th scope="col">Status</th>
+                            <th scope="col" class="text-center">Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody id="datalo">
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
