@@ -54,6 +54,16 @@ class LOJanuariController extends ResourceController
         }
     }
 
+    function showDetailSuratJalan($id_sj)
+    {
+        $data = $this->model->detailsuratjalan($id_sj);
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+        }
+    }
+
     // public function gudangbykantor($namaGudang)
     // {
     //     $data = $this->model->gudangbykantor($namaGudang, session()->get('id_kantor_cabang'));
@@ -331,6 +341,16 @@ class LOJanuariController extends ResourceController
                 'status' => "404",
             ];
             return $this->respond($response);
+        }
+    }
+
+    public function downloadWO($status_dokumen_muat)
+    {
+        $data = $this->model->downloadDokumenWo($status_dokumen_muat, session()->get("id_kantor_cabang"));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data WO Kantor tidak ditemukan.');
         }
     }
 }

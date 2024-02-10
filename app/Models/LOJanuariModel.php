@@ -70,14 +70,14 @@ class LOJanuariModel extends Model
         return $query->getResult();
     }
 
-    public function detailsuratjalan($idlo)
+    public function detailsuratjalan($id_sj)
     {
         $query = $this->db->table('januari_lo')
             ->select('januari_lo.*, januari_sj.*, januari_pbp.*')
             ->selectSum('januari_sj.jumlah_penyaluran_januari', 'total')
             ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
             ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
-            ->where('januari_lo.id_lo', $idlo)
+            ->where('januari_sj.id_sj', $id_sj)
             ->get();
         return $query->getResult();
     }
@@ -353,6 +353,18 @@ class LOJanuariModel extends Model
             ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
             ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
             ->where('januari_lo.kode_wo', $kodewo)
+            ->get();
+        return $query->getResult();
+    }
+
+    public function downloadDokumenWo($status_dokumen_muat)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*, kantor_cabang.*, januari_sj.*, januari_pbp.*')
+            ->join('kantor_cabang', 'kantor_cabang.id_kantor_cabang = januari_lo.id_kantor')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_lo.status_dokumen_muat', $status_dokumen_muat)
             ->get();
         return $query->getResult();
     }

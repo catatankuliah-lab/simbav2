@@ -65,13 +65,13 @@ class WOJanuariController extends ResourceController
         }
     }
 
-    public function downloadWO($status_dokumen_muat)
-    {
-        $data = $this->modelWOJanuari->downloadDokumenWo($status_dokumen_muat, session()->get("id_kantor_cabang"));
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data WO Kantor tidak ditemukan.');
-        }
-    }
+    // public function downloadWO($status_dokumen_muat)
+    // {
+    //     $data = $this->modelWOJanuari->downloadDokumenWo($status_dokumen_muat, session()->get("id_kantor_cabang"));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data WO Kantor tidak ditemukan.');
+    //     }
+    // }
 }

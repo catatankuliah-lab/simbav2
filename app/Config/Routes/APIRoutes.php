@@ -114,6 +114,15 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('pbp/5/getdesabykecamatan/(:any)', 'PBP\PBPMeiController::showByDesa/$1');
     $routes->get('pbp/6/getdesabykecamatan/(:any)', 'PBP\PBPJuniController::showByDesa/$1');
 
+    // MENU DOWNLOAD DOC WORKING ORDER
+    $routes->get('lo/1/downloadwo/(:segment)', 'LO\LOJanuariController::downloadWO/$1');
+    $routes->get('lo/2/downloadwo/(:segment)', 'LO\LOJanuariController::downloadWO/$1');
+    $routes->get('lo/3/downloadwo/(:segment)', 'LO\LOJanuariController::downloadWO/$1');
+    $routes->get('lo/4/downloadwo/(:segment)', 'LO\LOJanuariController::downloadWO/$1');
+    $routes->get('lo/5/downloadwo/(:segment)', 'LO\LOJanuariController::downloadWO/$1');
+    $routes->get('lo/6/downloadwo/(:segment)', 'LO\LOJanuariController::downloadWO/$1');
+
+
     // ======================================= END ROUTES AKUN KANTOR CABANG  ============================================ //
 
     // Gudang
