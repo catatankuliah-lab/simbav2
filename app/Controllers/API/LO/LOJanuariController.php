@@ -44,35 +44,55 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    public function getGudangByIdKantor($namaGudang)
+    function showdetaillo($nomorlo)
     {
-        $data = $this->model->LOGudangByIdKantor($namaGudang, session()->get('id_kantor'));
+        $data = $this->model->detaillocabang($nomorlo);
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
         }
     }
 
-    public function getKabupatenByIdKantor($namaKabupaten)
-    {
-        $data = $this->model->LOKabupatenByIdKantor($namaKabupaten, session()->get('id_kantor'));
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
-        }
-    }
+    // public function gudangbykantor($namaGudang)
+    // {
+    //     $data = $this->model->gudangbykantor($namaGudang, session()->get('id_kantor_cabang'));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Gudang tidak ditemukan.');
+    //     }
+    // }
 
-    public function getKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan)
-    {
-        $data = $this->model->LOKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan, session()->get('id_kantor'));
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
-        }
-    }
+    // public function getKabupatenByIdKantor($namaKabupaten)
+    // {
+    //     $data = $this->model->LOKabupatenByIdKantor($namaKabupaten, session()->get('id_kantor_cabang'));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
+    //     }
+    // }
+
+    // public function getKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan)
+    // {
+    //     $data = $this->model->LOKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan, session()->get('id_kantor_cabang'));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
+    //     }
+    // }
+
+    // function showDetailSuratJalan($id_lo)
+    // {
+    //     $data = $this->model->getDetailSuratJalan($id_lo);
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+    //     }
+    // }
 
     function detaillo($nomorlo)
     {
@@ -88,16 +108,6 @@ class LOJanuariController extends ResourceController
             ];
         }
         return $this->respond($datalo);
-    }
-
-    function showDetailSuratJalan($id_lo)
-    {
-        $data = $this->model->getDetailSuratJalan($id_lo);
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
-        }
     }
 
     // NANA DASHBOARD
@@ -296,7 +306,7 @@ class LOJanuariController extends ResourceController
         if ($data) {
             $response = [
                 'status' => "200",
-                'data'=> $data
+                'data' => $data
             ];
             return $this->respond($response);
         } else {
@@ -307,7 +317,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    public function getwobykodewo($kodewo) 
+    public function getwobykodewo($kodewo)
     {
         $data = $this->model->getwobykodewo($kodewo);
         if ($data) {

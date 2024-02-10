@@ -14,6 +14,7 @@
                 <div class="col-md-4 d-none my-3">
                     <input type="text" name="kantor" id="kantor" value="<?= session()->get('id_kantor_cabang') ?>">
                 </div>
+                
                 <div class="col-md-3 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi">
                         <option value="0" selected disabled>Pilih Alokasi</option>

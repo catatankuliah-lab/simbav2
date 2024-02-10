@@ -14,6 +14,10 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
         $routes->delete('(:num)', 'UserController::delete/$1');
     });
 
+    // Alokasi
+    $routes->get('alokasi', 'Alokasi\AlokasiController::index');
+    $routes->get('alokasi/(:num)', 'Alokasi\AlokasiController::show/$1');
+
     // Loading Order Routes
     $routes->get('lo/', 'LO\LOJanuariController::index');
     $routes->get('lo/(:num)', 'LO\LOJanuariController::show/$1');
@@ -21,24 +25,96 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->put('lo/(:num)', 'LO\LOJanuariController::update/$1');
     $routes->delete('lo/(:num)', 'LO\LOJanuariController::delete/$1');
     $routes->get('lo/sessionya', 'LO\LOJanuariController::getSession');
+
+    // ========================================= ROUTES AKUN KANTOR CABANG  ============================================ //
+
+    // (MENU LOADING ORDER)
+
+    // GET LOADING ORDER BY ID_KANTOR
     $routes->get('lo/1/getbyidkantor/(:num)', 'LO\LOJanuariController::getbyidkantor/$1');
+    $routes->get('lo/2/getbyidkantor/(:num)', 'LO\LOFebruariController::getbyidkantor/$1');
+    $routes->get('lo/3/getbyidkantor/(:num)', 'LO\LOMaretController::getbyidkantor/$1');
+    $routes->get('lo/4/getbyidkantor/(:num)', 'LO\LOAprilController::getbyidkantor/$1');
+    $routes->get('lo/5/getbyidkantor/(:num)', 'LO\LOMeiController::getbyidkantor/$1');
+    $routes->get('lo/6/getbyidkantor/(:num)', 'LO\LOJuniController::getbyidkantor/$1');
 
-    $routes->get('lo/1/laporan/detail/(:segment)', 'LO\LOJanuariController::getwobykodewo/$1');
-    // $routes->get('lo/2/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
-    // $routes->get('lo/3/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
-    // $routes->get('lo/4/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
-    // $routes->get('lo/5/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
-    // $routes->get('lo/6/laporan/detaillo/(:segment)', 'LO\LOJanuariController::getLoByNoLo/$1');
+    // SHOW DETAIL LO BY NOMOR LO 
+    $routes->get('lo/1/detail/(:segment)', 'LO\LOJanuariController::showdetaillo/$1');
+    $routes->get('lo/2/detail/(:segment)', 'LO\LOJanuariController::showdetaillo/$1');
+    $routes->get('lo/3/detail/(:segment)', 'LO\LOJanuariController::showdetaillo/$1');
+    $routes->get('lo/4/detail/(:segment)', 'LO\LOJanuariController::showdetaillo/$1');
+    $routes->get('lo/5/detail/(:segment)', 'LO\LOJanuariController::showdetaillo/$1');
+    $routes->get('lo/6/detail/(:segment)', 'LO\LOJanuariController::showdetaillo/$1');
 
+
+    // SHOW DETAIL SURAT JALAN BY NOMOR ID_LO
+    $routes->get('lo/1/detail/suratjalan/(:segment)', 'LO\LOJanuariController::showDetailSuratJalan/$1');
+    $routes->get('lo/2/detail/suratjalan/(:segment)', 'LO\LOFebruariController::showDetailSuratJalan/$1');
+    $routes->get('lo/3/detail/suratjalan/(:segment)', 'LO\LOMaretController::showDetailSuratJalan/$1');
+    $routes->get('lo/4/detail/suratjalan/(:segment)', 'LO\LOAprilController::showDetailSuratJalan/$1');
+    $routes->get('lo/5/detail/suratjalan/(:segment)', 'LO\LOMeiController::showDetailSuratJalan/$1');
+    $routes->get('lo/6/detail/suratjalan/(:segment)', 'LO\LOJuniController::showDetailSuratJalan/$1');
+
+    // GUDANG BY ID_KANTOR
+    $routes->get('lo/1/gudangbykantor/(:segment)', 'LO\LOJanuariController::gudangbykantor/$1');
+    $routes->get('lo/2/gudangbykantor/(:segment)', 'LO\LOFebruariController::gudangbykantor/$1');
+    $routes->get('lo/3/gudangbykantor/(:segment)', 'LO\LOMaretController::gudangbykantor/$1');
+    $routes->get('lo/4/gudangbykantor/(:segment)', 'LO\LOAprilController::gudangbykantor/$1');
+    $routes->get('lo/5/gudangbykantor/(:segment)', 'LO\LOMeiController::gudangbykantor/$1');
+    $routes->get('lo/6/gudangbykantor/(:segment)', 'LO\LOJuniController::gudangbykantor/$1');
+
+    // KABUPATEN BY ID_KANTOR
+    $routes->get('lo/1/namakabupatenkantor/(:segment)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
+    $routes->get('lo/2/namakabupatenkantor/(:segment)', 'LO\LOFebruariController::getKabupatenByIdKantor/$1');
+    $routes->get('lo/3/namakabupatenkantor/(:segment)', 'LO\LOMaretController::getKabupatenByIdKantor/$1');
+    $routes->get('lo/4/namakabupatenkantor/(:segment)', 'LO\LOAprilController::getKabupatenByIdKantor/$1');
+    $routes->get('lo/5/namakabupatenkantor/(:segment)', 'LO\LOMeiController::getKabupatenByIdKantor/$1');
+    $routes->get('lo/6/namakabupatenkantor/(:segment)', 'LO\LOJuniController::getKabupatenByIdKantor/$1');
+
+    // KABUPATEN BY KECAMATAN
+    $routes->get('lo/1/kabupatenkecamatankantor/(:segment)/(:segment)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');
+    $routes->get('lo/2/kabupatenkecamatankantor/(:segment)/(:segment)', 'LO\LOFebruariController::getKabupatenKecamatanByIdKantor/$1/$2');
+    $routes->get('lo/3/kabupatenkecamatankantor/(:segment)/(:segment)', 'LO\LOMaretController::getKabupatenKecamatanByIdKantor/$1/$2');
+    $routes->get('lo/4/kabupatenkecamatankantor/(:segment)/(:segment)', 'LO\LOAprilController::getKabupatenKecamatanByIdKantor/$1/$2');
+    $routes->get('lo/5/kabupatenkecamatankantor/(:segment)/(:segment)', 'LO\LOMeiController::getKabupatenKecamatanByIdKantor/$1/$2');
+    $routes->get('lo/6/kabupatenkecamatankantor/(:segment)/(:segment)', 'LO\LOJuniController::getKabupatenKecamatanByIdKantor/$1/$2');
+
+
+    // (MENU LAPORAN DOC)
+
+    // GET WORKING ORDER BY ID_KANTOR
     $routes->get('lo/alokasi/1/awal/(:segment)/akhir/(:segment)', 'LO\LOJanuariController::getWoByIdKantor/$1/$2');
-    $routes->get('lo/namagudangkantor/(:any)', 'LO\LOJanuariController::getGudangByIdKantor/$1');
-    $routes->get('lo/namakabupatenkantor/(:any)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
-    $routes->get('lo/kabupatenkecamatankantor/(:any)/(:any)', 'LO\LOJanuariController::getKabupatenKecamatanByIdKantor/$1/$2');
-    $routes->get('lo/detail/suratjalan/(:segment)', 'LO\LOJanuariController::showDetailSuratJalan/$1');
+    $routes->get('lo/alokasi/2/awal/(:segment)/akhir/(:segment)', 'LO\LOFebruariController::getWoByIdKantor/$1/$2');
+    $routes->get('lo/alokasi/3/awal/(:segment)/akhir/(:segment)', 'LO\LOMaretController::getWoByIdKantor/$1/$2');
+    $routes->get('lo/alokasi/4/awal/(:segment)/akhir/(:segment)', 'LO\LOAprilController::getWoByIdKantor/$1/$2');
+    $routes->get('lo/alokasi/5/awal/(:segment)/akhir/(:segment)', 'LO\LOMeiController::getWoByIdKantor/$1/$2');
+    $routes->get('lo/alokasi/6/awal/(:segment)/akhir/(:segment)', 'LO\LOJuniController::getWoByIdKantor/$1/$2');
 
-    // Alokasi
-    $routes->get('alokasi', 'Alokasi\AlokasiController::index');
-    $routes->get('alokasi/(:num)', 'Alokasi\AlokasiController::show/$1');
+    // SHOW DETAIL WORKING ORDER BY KODE WO
+    $routes->get('lo/1/laporan/detail/(:segment)', 'LO\LOJanuariController::getwobykodewo/$1');
+    $routes->get('lo/2/laporan/detaillo/(:segment)', 'LO\LOFebruariController::getLoByNoLo/$1');
+    $routes->get('lo/3/laporan/detaillo/(:segment)', 'LO\LOMaretController::getLoByNoLo/$1');
+    $routes->get('lo/4/laporan/detaillo/(:segment)', 'LO\LOAprilController::getLoByNoLo/$1');
+    $routes->get('lo/5/laporan/detaillo/(:segment)', 'LO\LOMeiController::getLoByNoLo/$1');
+    $routes->get('lo/6/laporan/detaillo/(:segment)', 'LO\LOJuniController::getLoByNoLo/$1');
+
+    // (PBP) KECAMATAN BY KABUPATEN
+    $routes->get('pbp/1/getkecamatanbykabupaten/(:any)', 'PBP\PBPJanuariController::showByKabupatenKota/$1');
+    $routes->get('pbp/2/getkecamatanbykabupaten/(:any)', 'PBP\PBPFebruariController::showByKabupatenKota/$1');
+    $routes->get('pbp/3/getkecamatanbykabupaten/(:any)', 'PBP\PBPMaretController::showByKabupatenKota/$1');
+    $routes->get('pbp/4/getkecamatanbykabupaten/(:any)', 'PBP\PBPAprilController::showByKabupatenKota/$1');
+    $routes->get('pbp/5/getkecamatanbykabupaten/(:any)', 'PBP\PBPMeiController::showByKabupatenKota/$1');
+    $routes->get('pbp/6/getkecamatanbykabupaten/(:any)', 'PBP\PBPJuniController::showByKabupatenKota/$1');
+
+    // (PBP) DESA BY KECAMATAN
+    $routes->get('pbp/1/getdesabykecamatan/(:any)', 'PBP\PBPJanuariController::showByDesa/$1');
+    $routes->get('pbp/2/getdesabykecamatan/(:any)', 'PBP\PBPFebruariController::showByDesa/$1');
+    $routes->get('pbp/3/getdesabykecamatan/(:any)', 'PBP\PBPMaretController::showByDesa/$1');
+    $routes->get('pbp/4/getdesabykecamatan/(:any)', 'PBP\PBPAprilController::showByDesa/$1');
+    $routes->get('pbp/5/getdesabykecamatan/(:any)', 'PBP\PBPMeiController::showByDesa/$1');
+    $routes->get('pbp/6/getdesabykecamatan/(:any)', 'PBP\PBPJuniController::showByDesa/$1');
+
+    // ======================================= END ROUTES AKUN KANTOR CABANG  ============================================ //
 
     // Gudang
     $routes->get('gudang', 'Gudang\GudangController::index');
@@ -50,10 +126,6 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
 
     // Wilayah Kerja
     $routes->get('wilayahkerja/(:num)', 'WilayahKerja\WilayahKerjaController::getWilayahKerjaByIdKantor/$1');
-
-    // PBP Januari
-    $routes->get('pbp/getkecamatanbykabupaten/(:any)', 'PBP\PBPJanuariController::showByKabupatenKota/$1');
-    $routes->get('pbp/getdesabykecamatan/(:any)', 'PBP\PBPJanuariController::showByDesa/$1');
 
     // LO NANA
     $routes->get('lo/1/dashboard', 'LO\LOJanuariController::dashboard');

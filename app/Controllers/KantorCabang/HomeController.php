@@ -54,8 +54,7 @@ class HomeController extends Controller
 
     public function detail_lo($nomorlo)
     {
-
-        $datalo = $this->muatJanuari->getDokumenMuatByNomorLo($nomorlo);
+        $datalo = $this->muatJanuari->detaillocabang($nomorlo);
         $data = [
             'menu1' => '',
             'menu2' => 'selected',
@@ -63,7 +62,19 @@ class HomeController extends Controller
             'menu4' => '',
             'nomorlo' => $datalo[0]->nomor_lo,
         ];
+        return view('kantorcabang/lo/detail', $data);
+    }
 
+    public function detailsuratjalan($idLO)
+    {
+        $datalo = $this->muatJanuari->detailsuratjalan($idLO);
+        $data = [
+            'menu1' => '',
+            'menu2' => 'selected',
+            'menu3' => '',
+            'menu4' => '',
+            'idLO' => $datalo[0]->id_lo,
+        ];
         return view('kantorcabang/lo/detail', $data);
     }
 

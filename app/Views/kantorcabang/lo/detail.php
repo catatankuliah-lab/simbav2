@@ -8,9 +8,6 @@
             <h6 class="card-subtitle mb-3">
                 Klik <a style="font-weight: bolder;" href="<?= base_url('kantorcabang/spmbast') ?>">disini</a> untuk mengelola Loading Order (LO)
             </h6>
-
-
-            
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="tanggalpembuatan" class="h6">Tanggal Pembuatan</label>
@@ -18,7 +15,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="nomorlo" class="h6">No Loading Order (LO)</label>
-                    <input readonly class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan Nama Driver Disini" id="nomorlo" name="nomorlo">
+                    <input readonly class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan Nama Driver Disini" value="<?= $nomorlo ?>" id="nomorlo" name="nomorlo">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="nopoldriver" class="h6">Nopol Mobil / Driver</label>
