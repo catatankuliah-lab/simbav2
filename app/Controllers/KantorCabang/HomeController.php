@@ -376,13 +376,13 @@ class HomeController extends Controller
                 $sheet->setCellValue('A' . $mulai2, 'TOTAL ALOKASI DESA');
                 $sheet->mergeCells('A' . $mulai2 . ':D' . $mulai2);
                 $alignment = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                // foreach ($dataspm as $row) {
-                //     $total2 = $total2 + $row->total;
-                //     $sheet->setCellValue('A' . $mulai2 + 1, $row->nama_desa_kelurahan);
-                //     $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
-                //     $sheet->setCellValue('D' . $mulai2 + 1, $row->total);
-                //     $mulai2++;
-                // }
+                foreach ($bahan as $row) {
+                    $total2 = $total2 + $row->jumlah_penyaluran_januari;
+                    $sheet->setCellValue('A' . $mulai2 + 1, $row->nama_desa_kelurahan);
+                    $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
+                    $sheet->setCellValue('D' . $mulai2 + 1, $row->jumlah_penyaluran_januari);
+                    $mulai2++;
+                }
                 $sheet->setCellValue('A' . $mulai2 + 1, "TOTAL");
                 $sheet->setCellValue('D' . $mulai2 + 1, $total2);
                 $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
