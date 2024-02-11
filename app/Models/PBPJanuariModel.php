@@ -53,4 +53,16 @@ class PBPJanuariModel extends Model
             ->get();
         return $query->getResult();
     }
+
+    // NANA AMBIL NAMA DESA
+    public function bahandashboardkc($namakabupatenkota)
+    {
+        $query = $this->db->table('januari_pbp')
+            ->select('januari_pbp.nama_kabupaten_kota')
+            ->selectSum('januari_pbp.jumlah_pbp', 'jpbp')
+            ->selectSum('januari_pbp.jumlah_alokasi', 'jalokasi')
+            ->where('januari_pbp.nama_kabupaten_kota', $namakabupatenkota)
+            ->get();
+        return $query->getRow();
+    }
 }

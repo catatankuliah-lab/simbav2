@@ -66,4 +66,15 @@ class PBPJanuariController extends ResourceController
         ];
         return $this->respond($datadesakelurhan);
     }
+
+    // NANA SHOW DESA BY KECAMATAN
+    public function bahandashboardkc($namakabupaten)
+    {
+        $data = $this->modelPBP->bahandashboardkc($namakabupaten);
+        $dataperkabupaten = [
+            "status" => "200",
+            "data" => $data,
+        ];
+        return $this->respond($dataperkabupaten);
+    }
 }
