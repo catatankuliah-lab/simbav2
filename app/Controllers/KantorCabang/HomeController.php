@@ -107,8 +107,7 @@ class HomeController extends Controller
         // Halaman untuk dokument working order
         $pdf->AddPage('P', 'A4');
         // $leftImagePath = FCPATH . 'assets/img/Wo01.png';
-        $leftImagePath =  base_url('UPLOAD/1/LO/SIDARAJA/2024-02-08/logo.png');
-        // dd($data[0]->file_upload_wo);
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $data[0]->path_upload_wo . $data[0]->file_upload_wo;
 
         $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
@@ -219,36 +218,34 @@ class HomeController extends Controller
         foreach ($data as $row) {
             // LO 
             $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_uplaod_lo;
+            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog . $row->file_uplaod_lo;
             $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
             // lopiing surat jalan by nomor lo
             foreach ($data as $row) {
                 $pdf->AddPage('P', 'A4');
-                $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_surat_jalan;
+                $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog  . $row->file_uplaod_lo;
                 $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
             }
-
-            // Dokumen DO BULOG
-            $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_do;
-            $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
-
-            // Dokumen Surat Jalan BULOG
-            $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_sj_bulog;
-            $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
-
-            // Dokumen BAST BULOG
-            $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_bast_bulog;
-            $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
         }
-        $filePath = FCPATH . DIRECTORY_SEPARATOR . $pathhasil . DIRECTORY_SEPARATOR . ' LAPORAN-WO-' . $data[0]->nomor_wo . '.pdf';
+        // Dokumen DO BULOG
+        $pdf->AddPage('P', 'A4');
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog . $row->file_upload_do;
+        $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
+
+        // Dokumen Surat Jalan BULOG
+        $pdf->AddPage('P', 'A4');
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog . $row->file_upload_sj_bulog;
+        $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
+
+        // Dokumen BAST BULOG
+        $pdf->AddPage('P', 'A4');
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog . $row->file_upload_bast_bulog;
+        $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
         // Compress File
         $pdf->SetCompression(true);
-        // Save the PDF to the specified directory
-        $pdf->Output($filePath, 'D');
+        $namafile = $data[0]->kode_wo . ".pdf";
+        $pdf->Output($namafile, 'D');
     }
 
     public function generateReport($idalokasi)
