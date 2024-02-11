@@ -35,10 +35,53 @@ $("#filterLO").on("click", function () {
     var kabupaten = $("#pilihkabupatenkota").val();
     var kecamatan = $("#pilihkecamatan").val();
     var alokasi = $("#alokasi").val();
-    document.getElementById("idAlokasi").value = alokasi;
 
+    // DOWNLOAD EXCEL
+    document.getElementById("idAlokasi").value = alokasi;
     document.getElementById("formDownload").action =
       "http://localhost:8080/kantorcabang/lo/1/downloadexcel/" + alokasi;
+
+    // FILTER
+    // IF ALOKASI GUDANG
+    // IF GUDANG DAN KABUPATEN
+    // IF ALOKASI DAN KABUPATEN
+    // IF KABUPATEN DAN KECAMATAN
+
+    if (gudang != 0 && kabupaten == 0 && kecamatan == 0) {
+      $.ajax({
+        url:
+          "http://localhost:8080/api/lo/" +
+          alokasi +
+          "/gudangbykantor/" +
+          idkantor,
+        method: "GET",
+        dataType: "json",
+        success: function (data) {},
+      });
+    } else if (gudang != 0 && kabupaten != 0 && kecamatan == 0) {
+      $.ajax({
+        url: "",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {},
+      });
+    } else if (gudang == 0 && kabupaten != 0 && kecamatan == 0) {
+      $.ajax({
+        url: "",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {},
+      });
+    } else if (gudang == 0 && kabupaten != 0 && kecamatan != 0) {
+      $.ajax({
+        url: "",
+        method: "GET",
+        dataType: "json",
+        success: function (data) {},
+      });
+    }
+
+    // DATA LOADING ORDER BY ID_KANTOR
     $.ajax({
       url:
         " http://localhost:8080/api/lo/" +
@@ -53,6 +96,11 @@ $("#filterLO").on("click", function () {
         $("#filterSearch").removeClass("d-none");
         $("#tabelhilangdulu").removeClass("d-none");
         $("#hilang").removeClass("d-none");
+
+        if ($.fn.DataTable.isDataTable("#tablelo")) {
+          $("#tablelo").DataTable().destroy();
+        }
+
         var datanya = [];
         $.each(data, function (index, lo) {
           datanya.push({
@@ -109,8 +157,35 @@ $("#filterLO").on("click", function () {
       },
 
       error: function (error) {
-        console.error("Gagal mengambil data sesi:", error);
+        console.log("Error Semua LO : ", error);
+        datalo.empty();
+        console.log(error);
+        Swal.fire({
+          icon: "warning",
+          title: "Peringatan!",
+          text:
+            "Data Alokasi Bulan " +
+            $("#alokasi option:selected").text() +
+            " Tidak Ditemukan",
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+
+        $("#filterSearch").addClass("d-none");
+        $("#tabelhilangdulu").addClass("d-none");
+        $("#tombolDownload").addClass("d-none");
       },
     });
   }
 });
+
+function cari() {
+  var keyword = $("#keyword").val();
+  $("#tablelo").DataTable().search(keyword).draw();
+}
+
+function banyaknya() {
+  var selectedLength = $("#banyaknya").val();
+  $("#tablelo").DataTable().page.len(selectedLength).draw();
+}

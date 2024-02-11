@@ -58,6 +58,30 @@ class LOJanuariModel extends Model
         return $query->getResult();
     }
 
+    public function detaillocabang($nomorlo)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*, januari_sj.*, januari_pbp.*')
+            ->selectSum('januari_sj.jumlah_penyaluran_januari', 'total')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_lo.nomor_lo', $nomorlo)
+            ->get();
+        return $query->getResult();
+    }
+
+    public function detailsuratjalan($id_sj)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*, januari_sj.*, januari_pbp.*')
+            ->selectSum('januari_sj.jumlah_penyaluran_januari', 'total')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->where('januari_sj.id_sj', $id_sj)
+            ->get();
+        return $query->getResult();
+    }
+
     public function LOGudangByIdKantor($namaGudang, $idkantor)
     {
         $query = $this->db->table('januari_lo')
@@ -123,17 +147,7 @@ class LOJanuariModel extends Model
         return $query->getResult();
     }
 
-    public function getDokumenMuatByNomorLo($nomorlo)
-    {
-        $query = $this->db->table('januari_lo')
-            ->select('januari_lo.*, januari_sj.*, januari_pbp.*')
-            ->selectSum('januari_sj.jumlah_penyaluran_januari', 'total')
-            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
-            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
-            ->where('januari_lo.nomor_lo', $nomorlo)
-            ->get();
-        return $query->getResult();
-    }
+
 
     public function getDetailSuratJalan($id_lo)
     {
@@ -212,6 +226,7 @@ class LOJanuariModel extends Model
             ->get();
         return $query->getResult();
     }
+
 
     // NANA AMBIL DATA BUAT LO DETAIL
     public function cekstatusdokumen($idlo)
@@ -332,6 +347,8 @@ class LOJanuariModel extends Model
             ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
             ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
             ->where('januari_lo.id_kantor', $idkantor)
+            ->where('januari_lo.tanggal_muat >=', $awal)
+            ->where('januari_lo.tanggal_muat <=', $akhir)
             ->groupBy('januari_sj.nomor_lo')
             ->orderBy('januari_lo.tanggal_muat', 'DESC')
             ->orderBy('januari_lo.id_lo', 'DESC')

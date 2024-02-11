@@ -1,16 +1,16 @@
 $.ajax({
-  url: " http://localhost:8080/api/lo/1/detaillo/" + $("#nomorlo").val(),
+  url: "http://localhost:8080/api/lo/1/detail/" + $("#nomorlo").val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
-    console.log(data);
-    $("#tanggalpembuatan").val(data.tanggal_muat);
+    console.log("Detail LO Ditemukan", data);
+    $("#tanggalpembuatan").val(data[0].tanggal_muat);
     $("#nopoldriver").val(
-      data.nomor_mobil +
+      data[0].nomor_mobil +
         " / " +
-        data.nama_driver +
+        data[0].nama_driver +
         " (" +
-        data.nomor_driver +
+        data[0].nomor_driver +
         ")"
     );
     const datalo = $("#datalo");
@@ -37,8 +37,8 @@ $.ajax({
         spm.total +
         "</td>" +
         "<td class='text-center'>" +
-        "<a href='http://localhost:8080/kantorcabang/lo/suratjalan/" +
-        spm.id_lo +
+        "<a href='http://localhost:8080/kantorcabang/lo/1/detail/suratjalan/" +
+        spm.id_sj +
         "' type='button' class='text-primary' style='border-radius: 5px;'>" +
         "<i class='fas fa-search-plus'></i>" +
         "</a>" +

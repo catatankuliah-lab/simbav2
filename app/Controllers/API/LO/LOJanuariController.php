@@ -44,35 +44,65 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    public function getGudangByIdKantor($namaGudang)
+    function showdetaillo($nomorlo)
     {
-        $data = $this->model->LOGudangByIdKantor($namaGudang, session()->get('id_kantor'));
+        $data = $this->model->detaillocabang($nomorlo);
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
         }
     }
 
-    public function getKabupatenByIdKantor($namaKabupaten)
+    function showDetailSuratJalan($id_sj)
     {
-        $data = $this->model->LOKabupatenByIdKantor($namaKabupaten, session()->get('id_kantor'));
+        $data = $this->model->detailsuratjalan($id_sj);
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
         }
     }
 
-    public function getKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan)
-    {
-        $data = $this->model->LOKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan, session()->get('id_kantor'));
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
-        }
-    }
+    // public function gudangbykantor($namaGudang)
+    // {
+    //     $data = $this->model->gudangbykantor($namaGudang, session()->get('id_kantor_cabang'));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Gudang tidak ditemukan.');
+    //     }
+    // }
+
+    // public function getKabupatenByIdKantor($namaKabupaten)
+    // {
+    //     $data = $this->model->LOKabupatenByIdKantor($namaKabupaten, session()->get('id_kantor_cabang'));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
+    //     }
+    // }
+
+    // public function getKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan)
+    // {
+    //     $data = $this->model->LOKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan, session()->get('id_kantor_cabang'));
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
+    //     }
+    // }
+
+    // function showDetailSuratJalan($id_lo)
+    // {
+    //     $data = $this->model->getDetailSuratJalan($id_lo);
+    //     if ($data) {
+    //         return $this->respond($data);
+    //     } else {
+    //         return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+    //     }
+    // }
 
     function detaillo($nomorlo)
     {
@@ -88,16 +118,6 @@ class LOJanuariController extends ResourceController
             ];
         }
         return $this->respond($datalo);
-    }
-
-    function showDetailSuratJalan($id_lo)
-    {
-        $data = $this->model->getDetailSuratJalan($id_lo);
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
-        }
     }
 
     // NANA DASHBOARD
@@ -315,6 +335,16 @@ class LOJanuariController extends ResourceController
                 'status' => "404",
             ];
             return $this->respond($response);
+        }
+    }
+
+    public function downloadWO($status_dokumen_muat)
+    {
+        $data = $this->model->downloadDokumenWo($status_dokumen_muat, session()->get("id_kantor_cabang"));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data WO Kantor tidak ditemukan.');
         }
     }
 }

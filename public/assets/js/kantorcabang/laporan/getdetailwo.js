@@ -24,6 +24,7 @@ $.ajax({
       if (wo.status_pbp !== "DIBUAT") {
         DIBUAT = false;
       }
+
       var listwo =
         "<tr>" +
         "<td>" +

@@ -4,8 +4,6 @@ namespace App\Controllers\KantorCabang;
 
 use App\Models\JanuariSJModel;
 use App\Models\LOJanuariModel;
-use App\Models\WOJanuariModel;
-use App\Models\AkunModel;
 use CodeIgniter\Controller;
 use TCPDF;
 
@@ -13,19 +11,13 @@ use TCPDF;
 class HomeController extends Controller
 {
 
-    protected $muatJanuari;
-    protected $woJanuari;
     protected $loJanuari;
     protected $januariSJ;
-    protected $akunModel;
 
     public function __construct()
     {
-        $this->muatJanuari = new LOJanuariModel();
-        $this->woJanuari = new WOJanuariModel();
         $this->loJanuari = new LOJanuariModel();
         $this->januariSJ = new JanuariSJModel();
-        $this->akunModel = new AkunModel();
     }
 
     public function index()
@@ -54,8 +46,7 @@ class HomeController extends Controller
 
     public function detail_lo($nomorlo)
     {
-
-        $datalo = $this->muatJanuari->getDokumenMuatByNomorLo($nomorlo);
+        $datalo = $this->loJanuari->detaillocabang($nomorlo);
         $data = [
             'menu1' => '',
             'menu2' => 'selected',
@@ -63,8 +54,21 @@ class HomeController extends Controller
             'menu4' => '',
             'nomorlo' => $datalo[0]->nomor_lo,
         ];
-
         return view('kantorcabang/lo/detail', $data);
+    }
+
+    public function detailsuratjalan($id_sj)
+    {
+        $datalo = $this->loJanuari->detailsuratjalan($id_sj);
+        $data = [
+            'menu1' => '',
+            'menu2' => 'selected',
+            'menu3' => '',
+            'menu4' => '',
+            'nomorlo' => $datalo[0]->nomor_lo,
+            'id_sj' => $datalo[0]->id_sj,
+        ];
+        return view('kantorcabang/lo/detailsuratjalan', $data);
     }
 
     public function index_laporan()
@@ -76,6 +80,19 @@ class HomeController extends Controller
             'menu4' => '',
         ];
         return view('kantorcabang/laporan/index', $data);
+    }
+
+    public function getwobykodewo($alokasi, $kodewo)
+    {
+        $data = [
+            'menu1' => '',
+            'menu2' => '',
+            'menu3' => 'selected',
+            'menu4' => '',
+            'alokasi' => $alokasi,
+            'kodewo' => $kodewo,
+        ];
+        return view('kantorcabang/laporan/detail', $data);
     }
 
     public function detail_wo($nomorwo)
@@ -356,13 +373,13 @@ class HomeController extends Controller
                 $sheet->setCellValue('A' . $mulai2, 'TOTAL ALOKASI DESA');
                 $sheet->mergeCells('A' . $mulai2 . ':D' . $mulai2);
                 $alignment = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                // foreach ($dataspm as $row) {
-                //     $total2 = $total2 + $row->total;
-                //     $sheet->setCellValue('A' . $mulai2 + 1, $row->nama_desa_kelurahan);
-                //     $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
-                //     $sheet->setCellValue('D' . $mulai2 + 1, $row->total);
-                //     $mulai2++;
-                // }
+                foreach ($bahan as $row) {
+                    $total2 = $total2 + $row->jumlah_penyaluran_januari;
+                    $sheet->setCellValue('A' . $mulai2 + 1, $row->nama_desa_kelurahan);
+                    $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
+                    $sheet->setCellValue('D' . $mulai2 + 1, $row->jumlah_penyaluran_januari);
+                    $mulai2++;
+                }
                 $sheet->setCellValue('A' . $mulai2 + 1, "TOTAL");
                 $sheet->setCellValue('D' . $mulai2 + 1, $total2);
                 $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
@@ -386,22 +403,5 @@ class HomeController extends Controller
         $xlsxWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($excel, 'Xlsx');
         $xlsxWriter = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($excel);
         exit($xlsxWriter->save('php://output'));
-    }
-
-    public function getwobykodewo($alokasi, $kodewo)
-    {
-        $data = [
-            'menu1' => '',
-            'menu2' => 'selected',
-            'menu3' => '',
-            'menu4' => '',
-            'alokasi' => $alokasi,
-            'kodewo' => $kodewo,
-        ];
-        return view('kantorcabang/laporan/detail', $data);
-    }
-
-    public function downloadwo()
-    {
     }
 }

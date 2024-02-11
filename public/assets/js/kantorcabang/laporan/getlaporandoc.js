@@ -62,12 +62,8 @@ $("#filterWO").on("click", function () {
 
     $.ajax({
       url:
-        "http://localhost:8080/api/lo/alokasi/" +
-        $("#alokasi").val() +
-        "/awal/" +
-        tanggalMulai +
-        "/akhir/" +
-        tanggalAkhir,
+        "http://localhost:8080/api/lo/alokasi/" + $("#alokasi").val() + "/awal/" + tanggalMulai + "/akhir/" + tanggalAkhir,
+
       method: "GET",
       dataType: "json",
       success: function (data) {
