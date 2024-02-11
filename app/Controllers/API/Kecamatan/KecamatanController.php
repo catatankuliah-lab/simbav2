@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Controllers\API\Gudang;
+namespace App\Controllers\API\Kecamatan;
 
-use App\Models\GudangModel;
+use App\Models\KecamatanModel;
 use CodeIgniter\RESTful\ResourceController;
 
-class GudangController extends ResourceController
+class KecamatanController extends ResourceController
 {
     protected $model;
 
     public function __construct()
     {
-        $this->model = new GudangModel();
+        $this->model = new KecamatanModel();
     }
 
     public function index()
     {
+        $data = $this->model->findAll();
+        return $this->respondCreated($data);
     }
 
     public function show($id = null)
@@ -24,19 +26,30 @@ class GudangController extends ResourceController
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Record gudang tidak ditemukan.');
+            return $this->failNotFound('Record kecamatan tidak ditemukan.');
         }
     }
 
-    public function showbykantor($id = null)
+    public function showByKabupatenKota($id = null)
     {
-        $data = $this->model->showbykantor($id);
+        $data = $this->model->getByKabupatenKota($id);
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Record gudang tidak ditemukan.');
+            return $this->failNotFound('Record kecamatan tidak ditemukan.');
         }
     }
+
+    public function showByGudang($id = null)
+    {
+        $data = $this->model->getKecamatanByGudang($id);
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Record Gudang tidak ditemukan.');
+        }
+    }
+    
 
     public function create()
     {
@@ -44,7 +57,9 @@ class GudangController extends ResourceController
 
         if ($this->model->insert($data)) {
             $response = [
-                'messages' => 'Record Gudang Berhasil Ditambahkan.'
+                'status'   => 201,
+                'error'    => 0,
+                'messages' => 'Record kecamatan berhasil ditambahkan.'
             ];
             return $this->respond($response, 201);
         } else {
@@ -59,12 +74,14 @@ class GudangController extends ResourceController
         $existingData = $this->model->find($id);
 
         if (!$existingData) {
-            return $this->fail('Record gudang tidak ditemukan.', 404);
+            return $this->fail('Record kecamatan tidak ditemukan.', 404);
         }
 
         if ($this->model->update($id, $data)) {
             $response = [
-                'messages' => 'Record gudang berhasil diperbaharui.'
+                'status'   => 200,
+                'error'    => 0,
+                'messages' => 'Record kecamatan berhasil diperbaharui.'
             ];
             return $this->respond($response);
         } else {
@@ -75,14 +92,16 @@ class GudangController extends ResourceController
     public function delete($id = null)
     {
         $existingData = $this->model->find($id);
+
         if (!$existingData) {
-            return $this->fail('Record gudang tidak ditemukan.', 404);
+            return $this->fail('Record kecamatan tidak ditemukan.', 404);
         }
+
         if ($this->model->delete($id)) {
             $response = [
                 'status'   => 200,
                 'error'    => 0,
-                'messages' => 'Record gudang berhasil dihapus.'
+                'messages' => 'Record kecamatan berhasil dihapus.'
             ];
             return $this->respond($response);
         } else {

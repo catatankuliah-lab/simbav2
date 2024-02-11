@@ -18,6 +18,10 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('alokasi', 'Alokasi\AlokasiController::index');
     $routes->get('alokasi/(:num)', 'Alokasi\AlokasiController::show/$1');
 
+    // Kecamatan 
+    $routes->get('kecamatan/kabupatenkota/(:num)', 'Kecamatan\KecamatanController::showByKabupatenKota/$1');
+
+
     // Loading Order Routes
     $routes->get('lo/', 'LO\LOJanuariController::index');
     $routes->get('lo/(:num)', 'LO\LOJanuariController::show/$1');
@@ -56,12 +60,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('lo/6/detail/suratjalan/(:segment)', 'LO\LOJuniController::showDetailSuratJalan/$1');
 
     // GUDANG BY ID_KANTOR
-    $routes->get('lo/1/gudangbykantor/(:segment)', 'LO\LOJanuariController::gudangbykantor/$1');
-    $routes->get('lo/2/gudangbykantor/(:segment)', 'LO\LOFebruariController::gudangbykantor/$1');
-    $routes->get('lo/3/gudangbykantor/(:segment)', 'LO\LOMaretController::gudangbykantor/$1');
-    $routes->get('lo/4/gudangbykantor/(:segment)', 'LO\LOAprilController::gudangbykantor/$1');
-    $routes->get('lo/5/gudangbykantor/(:segment)', 'LO\LOMeiController::gudangbykantor/$1');
-    $routes->get('lo/6/gudangbykantor/(:segment)', 'LO\LOJuniController::gudangbykantor/$1');
+    // $routes->get('lo/1/gudangbykantor/(:num)', 'LO\LOJanuariController::gudangbykantor/$1');
+    // $routes->get('lo/2/gudangbykantor/(:num)', 'LO\LOFebruariController::gudangbykantor/$1');
+    // $routes->get('lo/3/gudangbykantor/(:num)', 'LO\LOMaretController::gudangbykantor/$1');
+    // $routes->get('lo/4/gudangbykantor/(:num)', 'LO\LOAprilController::gudangbykantor/$1');
+    // $routes->get('lo/5/gudangbykantor/(:num)', 'LO\LOMeiController::gudangbykantor/$1');
+    // $routes->get('lo/6/gudangbykantor/(:num)', 'LO\LOJuniController::gudangbykantor/$1');
 
     // KABUPATEN BY ID_KANTOR
     $routes->get('lo/1/namakabupatenkantor/(:segment)', 'LO\LOJanuariController::getKabupatenByIdKantor/$1');
@@ -128,10 +132,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     // Gudang
     $routes->get('gudang', 'Gudang\GudangController::index');
     $routes->get('gudang/(:num)', 'Gudang\GudangController::show/$1');
-    $routes->get('gudang/kantor/(:num)', 'Gudang\GudangController::showbykantor/$1');
     $routes->post('gudang', 'Gudang\GudangController::create');
     $routes->put('gudang/(:num)', 'Gudang\GudangController::update/$1');
     $routes->delete('gudang/(:num)', 'Gudang\GudangController::delete/$1');
+
+    $routes->get('gudang/kantor/(:num)', 'Gudang\GudangController::showbykantor/$1');
+
 
     // Wilayah Kerja
     $routes->get('wilayahkerja/(:num)', 'WilayahKerja\WilayahKerjaController::getWilayahKerjaByIdKantor/$1');

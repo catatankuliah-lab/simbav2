@@ -26,9 +26,9 @@ $(function () {
     function (start, end, label) {
       console.log(
         "A new date selection was made: " +
-        start.format("YYYY-MM-DD") +
-        " to " +
-        end.format("YYYY-MM-DD")
+          start.format("YYYY-MM-DD") +
+          " to " +
+          end.format("YYYY-MM-DD")
       );
     }
   );
@@ -62,7 +62,12 @@ $("#filterWO").on("click", function () {
 
     $.ajax({
       url:
-        "http://localhost:8080/api/lo/alokasi/" + $("#alokasi").val() + "/awal/" + tanggalMulai + "/akhir/" + tanggalAkhir,
+        "http://localhost:8080/api/lo/alokasi/" +
+        $("#alokasi").val() +
+        "/awal/" +
+        tanggalMulai +
+        "/akhir/" +
+        tanggalAkhir,
 
       method: "GET",
       dataType: "json",

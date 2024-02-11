@@ -20,6 +20,92 @@ $.ajax({
   },
 });
 
+$.ajax({
+  url: "http://localhost:8080/api/gudang/kantor/" + idkantor,
+  method: "GET",
+  dataType: "json",
+  success: function (data) {
+    console.log("Data Gudang Ditemukan :", data);
+    var gudang = $("#pilihgudang");
+    gudang.empty();
+    gudang.append('<option value="">Pilih Gudang</option>');
+    $.each(data, function (index, datagudang) {
+      const listgudang =
+        "<option data-nama_gudang='" +
+        datagudang.nama_gudang +
+        "' value='" +
+        datagudang.id_gudang +
+        "'>" +
+        datagudang.nama_gudang +
+        "</option>";
+      gudang.append(listgudang);
+    });
+  },
+  error: function (error) {
+    console.error("Gagal mengambil data Gudang:", error);
+  },
+});
+
+$.ajax({
+  url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
+  method: "GET",
+  dataType: "json",
+  success: function (data) {
+    console.log("Data Kabupaten Berdasarkan Wilayah Kerja Ditemukan :", data);
+    var kabupatenkota = $("#pilihkabupatenkota");
+    kabupatenkota.empty();
+    kabupatenkota.append('<option value="">Pilih Kabupaten/Kota</option>');
+    $.each(data, function (index, wilayah) {
+      const listKabupatenKota =
+        "<option data-nama_kabupaten='" +
+        wilayah.nama_kabupaten_kota +
+        "' value='" +
+        wilayah.kode_kabupaten_kota +
+        "'>" +
+        wilayah.nama_kabupaten_kota +
+        "</option>";
+      kabupatenkota.append(listKabupatenKota);
+    });
+  },
+  error: function (error) {
+    console.error("Gagal mengambil data Wilayah Kerja:", error);
+  },
+});
+
+function showKecamatan() {
+  const kabupatenkotadipilih = $("#pilihkabupatenkota").find(":selected").val();
+  const kecamatan = $("#pilihkecamatan");
+  if (kabupatenkotadipilih == 0) {
+    kecamatan.empty();
+    var listoptionkecamatan = "<option value='0'>Pilih Kecamatan</option>";
+    kecamatan.append(listoptionkecamatan);
+  }
+  $.ajax({
+    url:
+      "http://localhost:8080/api/kecamatan/kabupatenkota/" +
+      kabupatenkotadipilih,
+    type: "GET",
+    dataType: "json",
+    success: function (data) {
+      kecamatan.empty();
+      var listoptionkecamatan = "<option value='0'>Pilih Kecamatan</option>";
+      kecamatan.append(listoptionkecamatan);
+      $.each(data, function (index, listkecamatan) {
+        listoptionkecamatan =
+          "<option value='" +
+          listkecamatan.nama_kecamatan +
+          "'>" +
+          listkecamatan.nama_kecamatan +
+          "</option>";
+        kecamatan.append(listoptionkecamatan);
+      });
+    },
+    error: function (error) {
+      console.error("Error:", error);
+    },
+  });
+}
+
 $("#filterLO").on("click", function () {
   if ($("#alokasi").val() === null) {
     Swal.fire({
@@ -67,10 +153,16 @@ $("#filterLO").on("click", function () {
       });
     } else if (gudang == 0 && kabupaten != 0 && kecamatan == 0) {
       $.ajax({
-        url: "",
+        url:
+          "http://localhost:8080/lo/" +
+          alokasi +
+          "/namakabupatenkantor/" +
+          idkantor,
         method: "GET",
         dataType: "json",
-        success: function (data) {},
+        success: function (data) {
+          console.log(data);
+        },
       });
     } else if (gudang == 0 && kabupaten != 0 && kecamatan != 0) {
       $.ajax({

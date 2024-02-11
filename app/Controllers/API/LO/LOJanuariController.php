@@ -64,25 +64,25 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    // public function gudangbykantor($namaGudang)
-    // {
-    //     $data = $this->model->gudangbykantor($namaGudang, session()->get('id_kantor_cabang'));
-    //     if ($data) {
-    //         return $this->respond($data);
-    //     } else {
-    //         return $this->failNotFound('Data Gudang tidak ditemukan.');
-    //     }
-    // }
+    function gudangbykantor($namaGudang)
+    {
+        $data = $this->model->gudangbykantor($namaGudang, session()->get('id_kantor_cabang'));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data Gudang tidak ditemukan.');
+        }
+    }
 
-    // public function getKabupatenByIdKantor($namaKabupaten)
-    // {
-    //     $data = $this->model->LOKabupatenByIdKantor($namaKabupaten, session()->get('id_kantor_cabang'));
-    //     if ($data) {
-    //         return $this->respond($data);
-    //     } else {
-    //         return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
-    //     }
-    // }
+    public function getKabupatenByIdKantor($namaKabupaten)
+    {
+        $data = $this->model->LOKabupatenByIdKantor($namaKabupaten, session()->get('id_kantor_cabang'));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data Kabupaten tidak ditemukan.');
+        }
+    }
 
     // public function getKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan)
     // {

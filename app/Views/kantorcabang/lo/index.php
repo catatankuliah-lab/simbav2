@@ -19,12 +19,12 @@
                 </div>
                 <div class="col-md-3 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihgudang" name="pilihgudang" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Gudang">
-                        <option data-nama_gudang="0" value="0">Pilih Gudang</option>
+                        <option data-nama_gudang="0" value="0" >Pilih Gudang</option>
                     </select>
                 </div>
                 <div class="col-md-3 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkabupatenkota" name="pilihkabupatenkota" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kabupaten Kota" onchange="showKecamatan()">
-                        <option data-nama_kabupaten='0' value="0">Pilih Nama Kabupaten/Kota</option>
+                        <option data-nama_kabupaten='0' value="0" >Pilih Nama Kabupaten/Kota</option>
                     </select>
                 </div>
                 <div class="col-md-3 my-3">
