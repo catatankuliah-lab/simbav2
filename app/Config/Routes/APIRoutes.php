@@ -182,4 +182,20 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->post('lo/4/uploadfile/(:segment)', 'LO\LOAprilController::uploadfile/$1');
     $routes->post('lo/5/uploadfile/(:segment)', 'LO\LOMeiController::uploadfile/$1');
     $routes->post('lo/6/uploadfile/(:segment)', 'LO\LOJuniController::uploadfile/$1');
+
+    // SURAT JALAN DETAIL SJ NANA
+    $routes->get('sj/detailitemsj/1/(:segment)', 'SJ\SJJanuariController::detailitemsj/$1');
+    $routes->get('sj/detailitemsj/2/(:segment)', 'SJ\SJFebruariController::detailitemsj/$1');
+    $routes->get('sj/detailitemsj/3/(:segment)', 'SJ\SJMaretController::detailitemsj/$1');
+    $routes->get('sj/detailitemsj/4/(:segment)', 'SJ\SJAprilController::detailitemsj/$1');
+    $routes->get('sj/detailitemsj/5/(:segment)', 'SJ\SJMeiController::detailitemsj/$1');
+    $routes->get('sj/detailitemsj/6/(:segment)', 'SJ\SJJuniController::detailitemsj/$1');
+
+    // SURAT JALAN UPLOAD FILE SJ NANA
+    $routes->post('sj/1/uploadfile/(:segment)', 'SJ\SJJanuariController::uploadfile/$1');
+    $routes->post('sj/2/uploadfile/(:segment)', 'SJ\SJFebruariController::uploadfile/$1');
+    $routes->post('sj/3/uploadfile/(:segment)', 'SJ\SJMaretController::uploadfile/$1');
+    $routes->post('sj/4/uploadfile/(:segment)', 'SJ\SJAprilController::uploadfile/$1');
+    $routes->post('sj/5/uploadfile/(:segment)', 'SJ\SJMeiController::uploadfile/$1');
+    $routes->post('sj/6/uploadfile/(:segment)', 'SJ\SJJuniController::uploadfile/$1');
 });

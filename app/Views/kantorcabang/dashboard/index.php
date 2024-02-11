@@ -20,5 +20,5 @@
         </div>
     </div>
 </div>
-<!-- <script src="<?= base_url('assets/js/kantorcabang/dashboard/v2.js') ?>"></script> -->
+<script src="<?= base_url('assets/js/kantorcabang/dashboard/v2.js') ?>"></script>
 <?php $this->endSection() ?>

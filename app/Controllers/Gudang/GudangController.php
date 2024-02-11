@@ -117,7 +117,7 @@ class GudangController extends Controller
                     <td width="25%">Tanggal Penyerahan</td>
                     <td width="25%">: ' . $datalo[0]->tanggal_muat . '</td>
                     <td width="25%">Driver/Nopol</td>
-                    <td width="25%">: ' . $datalo[0]->nomor_mobil . '</td>
+                    <td width="25%">: ' . $datalo[0]->nama_driver . ' / ' . $datalo[0]->nomor_mobil . '</td>
                 </tr>';
         $html .= '</table>';
         // Output the HTML content to the PDF
@@ -306,5 +306,16 @@ class GudangController extends Controller
         $pdf->SetCompression(true);
         // Save the PDF to the specified directory
         $pdf->Output($namafilepdf, 'D');
+    }
+
+    public function detail_sj($alokasi, $idsj)
+    {
+        $data = [
+            'menu1' => '',
+            'menu2' => 'selected',
+            'idsj' => $idsj,
+            'alokasi' => $alokasi,
+        ];
+        return view('gudang/lo/detailsuratjalan', $data);
     }
 }

@@ -59,5 +59,5 @@
         </div>
     </div>
 </div>
-<script src="<?= $js ?>"></script>
+<script src="<?= base_url('assets/js/gudang/dashboard/v1.js') ?>"></script>
 <?php $this->endSection() ?>

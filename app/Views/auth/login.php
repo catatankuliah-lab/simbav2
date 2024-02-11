@@ -12,6 +12,8 @@
         <link href="<?= base_url('dist/css/style.min.css') ?>" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <meta name="theme-color" content="#FFFFFF" />
+        <link rel="manifest" href="<?= base_url('assets/js/web.webmanifest') ?>" />
     </head>
 
     <body style="background-color: #F0F5F9;">

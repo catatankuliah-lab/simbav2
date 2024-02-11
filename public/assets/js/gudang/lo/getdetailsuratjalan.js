@@ -1,147 +1,97 @@
+$('#alokasi').val();
+
+// get data sj by id sj
 $.ajax({
-  url: "http://localhost:8080/api/v1/spmbast/suratjalan/" + $('#idspmbast').val(),
+  url: "http://localhost:8080/api/sj/detailitemsj/" + $('#bahanalokasi').val() + "/" + $('#idsj').val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
-    console.log(data);
-    $('#tanggalpembuatan').val(data.tanggal_pembuatan);
-    $('#nopoldriver').val(data.nopol_mobil + ' / ' + data.nama_driver + ' (' + data.nomor_driver + ')');
-    $('#kabupaten').val(data.nama_kabupaten_kota);
-    $('#kecamatan').val(data.nama_kecamatan);
-    $('#desakelurahan').val(data.nama_desa_kelurahan);
-    $('#iddtt').val(data.id_dtt);
-    $('#totalpenyerahan').val(data.jumlah_penyaluran + ' Kg');
-    if (data.file_surat_jalan != null) {
-      $('#formsj').addClass('d-none');
-    }
-    if (data.file_penyerahan != null) {
-      $('#formdriver').addClass('d-none');
-    }
+    var output1 = $("#outsj");
+    output1.attr("src", "http://localhost:8080/" + data.data.path_surat_jalan + data.data.file_surat_jalan);
+    var output2 = $("#outbukti");
+    output2.attr("src", "http://localhost:8080/" + data.data.path_bukti_surat_jalan + data.data.file_bukti_surat_jalan);
+    $('#tanggal_pembuatan').val(data.data.tanggal_muat);
+    $('#alokasi').val($('#bahanalokasi').val());
+    $('#nomor_lo').val(data.data.nomor_lo);
+    $('#kabupatenkota').val(data.data.nama_kabupaten_kota);
+    $('#kecamatan').val(data.data.nama_kecamatan);
+    $('#desakelurahan').val(data.data.nama_desa_kelurahan);
+    $('#nopolmobil').val(data.data.nomor_mobil);
+    $('#namadriver').val(data.data.nama_driver);
+    $('#nomordriver').val(data.data.nomor_driver);
+    $('#totalpengiriman').val(data.data.jumlah_penyaluran_januari + " Kg");
   },
   error: function (error) {
-    console.error("Error:", error);
+    console.log("ERROR DATA SJ : ", error);
   },
 });
 
-$("#filebuktisj").on('change', function () {
-  $.ajax({
-    url: 'http://localhost:8080/api/v1/spmbast/suratjalan/' + $('#idspmbast').val(),
-    type: "GET",
-    dataType: "json",
-    success: function (data) {
-      var formData = new FormData($('#uploadForm')[0]);
-      var additionalData = {
-        'nomor_spm': $('#nomorlo').val(),
-        'id_spmbast': $('#idspmbast').val(),
-        'id_dtt': $('#iddtt').val(),
-        'nama_alokasi': data.nama_alokasi,
-        'nama_provinsi': data.nama_provinsi,
-        'nama_kantor': data.nama_kantor,
-        'jumlah_penyaluran': data.jumlah_penyaluran,
-        'nama_gudang': data.nama_gudang,
-      };
-      console.log(additionalData);
-      formData.append('additionalData', JSON.stringify(additionalData));
-      $.ajax({
-        url: 'http://localhost:8080/api/v1/spmbast/uploadsj',
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-          console.log(response);
-          if (response.status == "200") {
-            Swal.fire({
-              icon: "success",
-              title: "Surat Jalan",
-              text: response.message,
-              timer: 3000,
-              showConfirmButton: false,
-            });
-            $('#formsj').addClass('d-none');
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Surat Jalan",
-              text: "Berkas Surat Jalan gagal diupload (File harus berupa .jpg .jpeg atau .png)",
-              timer: 3000,
-              showConfirmButton: false,
-            });
-          }
-        },
-        error: function (error) {
-          Swal.fire({
-            icon: "error",
-            title: "Surat Jalan",
-            text: "Berkas Surat Jalan gagal diupload (File harus berupa .jpg .jpeg atau .png)",
-            timer: 3000,
-            showConfirmButton: false,
-          });
-        }
-      });
-    },
-    error: function (error) {
-      console.log("ERROR : ", error);
-    }
-  });
+$('#filesj').change(function (e) {
+  ceknomor();
+  var output = document.getElementById('outsj');
+  output.src = URL.createObjectURL(event.target.files[0]);
+});
+$('#filebukti').change(function (e) {
+  ceknomor();
+  var output = document.getElementById('outbukti');
+  output.src = URL.createObjectURL(event.target.files[0]);
 });
 
-$("#filebuktidriver").on('change', function () {
+// PERSIAPAN UPLOAD DAN UPDATE
+function ceknomor() {
+  var nopolmobil = $('#nopolmobil').val();
+  var namadriver = $('#namadriver').val();
+  var nomordriver = $('#nomordriver').val();
+  var lengkap = false;
+  if (nopolmobil == "" || namadriver == "" || nomordriver == "") {
+    lengkap = false;
+  } else {
+    lengkap = true;
+  }
+  return lengkap;
+}
+
+// PROSES UPLOAD DAN UPDATE
+$('#prosesupdate').click(function (e) {
+  if (ceknomor() == false) {
+    Swal.fire({
+      icon: "error",
+      title: "Surat Jalan",
+      text: "Mohon Lengkapi Data Surat Jalan Terlebih Dahulu.",
+      timer: 3000,
+      showConfirmButton: false,
+    });
+  } else {
+
+  }
+  var formData = new FormData($('#uploadForm')[0]);
+  var additionalData = {
+    'nomor_mobil': $('#nopolmobil').val(),
+    'nama_driver': $('#namadriver').val(),
+    'nomor_driver': $('#nomordriver').val(),
+    'id_sj': $('#idsj').val()
+  };
+  console.log(additionalData);
+  formData.append('additionalData', JSON.stringify(additionalData));
   $.ajax({
-    url: 'http://localhost:8080/api/v1/spmbast/suratjalan/' + $('#idspmbast').val(),
-    type: "GET",
-    dataType: "json",
-    success: function (data) {
-      var formData = new FormData($('#uploadForm2')[0]);
-      var additionalData = {
-        'nomor_spm': $('#nomorlo').val(),
-        'id_spmbast': $('#idspmbast').val(),
-        'nama_alokasi': data.nama_alokasi,
-        'nama_provinsi': data.nama_provinsi,
-        'nama_kantor': data.nama_kantor,
-        'nama_gudang': data.nama_gudang,
-      };
-      formData.append('additionalData', JSON.stringify(additionalData));
-      $.ajax({
-        url: 'http://localhost:8080/api/v1/spmbast/uploadsjdriver',
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-          console.log(response);
-          if (response.status == "200") {
-            Swal.fire({
-              icon: "success",
-              title: "Surat Jalan",
-              text: response.message,
-              timer: 3000,
-              showConfirmButton: false,
-            });
-            $('#formdriver').addClass('d-none');
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Surat Jalan",
-              text: "Berkas Surat Jalan gagal diupload (File harus berupa .jpg .jpeg atau .png)",
-              timer: 3000,
-              showConfirmButton: false,
-            });
-          }
-        },
-        error: function (error) {
-          Swal.fire({
-            icon: "error",
-            title: "Surat Jalan",
-            text: "Berkas Surat Jalan gagal diupload (File harus berupa .jpg .jpeg atau .png)",
-            timer: 3000,
-            showConfirmButton: false,
-          });
-        }
+    url: "http://localhost:8080/api/sj/" + $('#alokasi').val() + "/uploadfile/" + $('#idsj').val(),
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      Swal.fire({
+        icon: "success",
+        title: "Surat Jalan",
+        text: "Berkas Surat Jalan berhasil diupload.",
+        showConfirmButton: false,
+        timer: 3000,
+      }).then(() => {
+        window.history.back();
       });
     },
     error: function (error) {
-      console.log("ERROR : ", error);
+      console.log(error);
     }
   });
 });

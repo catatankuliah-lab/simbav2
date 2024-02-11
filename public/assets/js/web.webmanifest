@@ -1,7 +1,7 @@
 {
-  "name": "88 Logistic",
-  "short_name": "88 Logistic",
-  "description": "Versi Kearifan Lokal Sistem Infomrasi Penyaluran Bantuan",
+  "name": "Simba 88 Logistics",
+  "short_name": "Sistem Manajemen Bantuan Pangan 88 Logistics",
+  "description": "Sistem Manajemen Bantuan Pangan 88 Logistics Version 1.0",
   "icons": [
     {
       "src": "../images/icon.png",

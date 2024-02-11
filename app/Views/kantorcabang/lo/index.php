@@ -5,9 +5,6 @@
     <div class="col-md-12 col-lg-12">
         <div class="card-body">
             <h4 class="card-title mb-3">Loading Order (LO)</h4>
-            <h6 class="card-subtitle mb-3">
-                Klik <a style="font-weight: bolder;" href="<?= base_url('gudang/spmbast/create') ?>">disini</a> untuk mengelola Loading Order (LO)
-            </h6>
             <div class="row mt-4">
                 <div class="col-12 h6">Pilih Berdasarkan</div>
 

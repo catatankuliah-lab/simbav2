@@ -212,7 +212,6 @@ class LOJanuariController extends ResourceController
 
     public function uploadfile($idlo)
     {
-
         $datalo = $this->model->getkebutuhanupload($idlo);
         $namagudang = substr($datalo->nama_gudang, 5);
         $alamatnya = FCPATH  . 'UPLOAD/1/LO/' . $namagudang . '/' . $datalo->tanggal_muat . '/';
@@ -291,7 +290,7 @@ class LOJanuariController extends ResourceController
         if ($data) {
             $response = [
                 'status' => "200",
-                'data'=> $data
+                'data' => $data
             ];
             return $this->respond($response);
         } else {
@@ -302,7 +301,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    public function getwobykodewo($kodewo) 
+    public function getwobykodewo($kodewo)
     {
         $data = $this->model->getwobykodewo($kodewo);
         if ($data) {
