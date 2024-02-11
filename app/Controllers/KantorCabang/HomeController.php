@@ -348,14 +348,14 @@ class HomeController extends Controller
                 $alignment = $sheet->getStyle('F' . $mulai . ':G' . $mulai)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
                 $borderStyle = $sheet->getStyle('A8' . ':J' . $mulai)->getBorders();
                 $borderStyle->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-                $mulai2 = $mulai + 2;
-                $total2 = 0;
-                $greenFill = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getFill();
-                $greenFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-                $greenFill->getStartColor()->setARGB('ffd700');
-                $sheet->setCellValue('A' . $mulai2, 'TOTAL ALOKASI DESA');
-                $sheet->mergeCells('A' . $mulai2 . ':D' . $mulai2);
-                $alignment = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                // $mulai2 = $mulai + 2;
+                // $total2 = 0;
+                // $greenFill = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getFill();
+                // $greenFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                // $greenFill->getStartColor()->setARGB('ffd700');
+                // $sheet->setCellValue('A' . $mulai2, 'TOTAL ALOKASI DESA');
+                // $sheet->mergeCells('A' . $mulai2 . ':D' . $mulai2);
+                // $alignment = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 // foreach ($dataspm as $row) {
                 //     $total2 = $total2 + $row->total;
                 //     $sheet->setCellValue('A' . $mulai2 + 1, $row->nama_desa_kelurahan);
@@ -363,18 +363,18 @@ class HomeController extends Controller
                 //     $sheet->setCellValue('D' . $mulai2 + 1, $row->total);
                 //     $mulai2++;
                 // }
-                $sheet->setCellValue('A' . $mulai2 + 1, "TOTAL");
-                $sheet->setCellValue('D' . $mulai2 + 1, $total2);
-                $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
-                $alignment = $sheet->getStyle('A' . $mulai2 + 1 . ':C' . $mulai2 + 1)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $alignment = $sheet->getStyle('D' . $mulai2 + 1)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                $boldStyle = $sheet->getStyle('A' . $mulai + 2 . ':D' . $mulai2 + 1)->getFont();
-                $boldStyle->setBold(true);
-                $greenFill = $sheet->getStyle('A' . $mulai2 + 1 . ':D' . $mulai2 + 1)->getFill();
-                $greenFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-                $greenFill->getStartColor()->setARGB('ffd700');
-                $borderStyle = $sheet->getStyle('A' . $mulai + 2 . ':D' . $mulai2 + 1)->getBorders();
-                $borderStyle->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+                // $sheet->setCellValue('A' . $mulai2 + 1, "TOTAL");
+                // $sheet->setCellValue('D' . $mulai2 + 1, $total2);
+                // $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
+                // $alignment = $sheet->getStyle('A' . $mulai2 + 1 . ':C' . $mulai2 + 1)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                // $alignment = $sheet->getStyle('D' . $mulai2 + 1)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                // $boldStyle = $sheet->getStyle('A' . $mulai + 2 . ':D' . $mulai2 + 1)->getFont();
+                // $boldStyle->setBold(true);
+                // $greenFill = $sheet->getStyle('A' . $mulai2 + 1 . ':D' . $mulai2 + 1)->getFill();
+                // $greenFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                // $greenFill->getStartColor()->setARGB('ffd700');
+                // $borderStyle = $sheet->getStyle('A' . $mulai + 2 . ':D' . $mulai2 + 1)->getBorders();
+                // $borderStyle->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
             }
         }
 
