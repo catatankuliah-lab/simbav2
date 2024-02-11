@@ -1,59 +1,45 @@
-$(document).ready(function () {
-    $.ajax({
-        url: "http://localhost:8080/api/v1/akun/session",
-        method: "GET",
-        dataType: "json",
-        success: function (data) {
-            console.log(data);
-            getDataKantor(data.id_kantor);
-        },
-        error: function (error) {
-            console.error("Gagal mengambil data sesi:", error);
-        },
-    });
+var idkantor = $('#idk').val();
+
+$.ajax({
+    url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
+    method: "GET",
+    dataType: "json",
+    success: function (data) {
+        $('#namakantor').text(data[0].nama_kantor);
+    },
+    error: function (error) {
+    },
 });
 
-function getDataKantor(idkantor) {
+$("#alokasi").change(function () {
     $.ajax({
-        url: "http://localhost:8080/api/v1/kantor/" + idkantor,
+        url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
         method: "GET",
         dataType: "json",
         success: function (data) {
-            console.log(data);
-            getWilayahKerja(idkantor);
-        },
-        error: function (error) {
-            console.error("Gagal mengambil data sesi:", error);
-        },
-    });
-}
-
-function getWilayahKerja(idkantor) {
-    $.ajax({
-        url: "http://localhost:8080/api/v1/wilayahkerja/" + idkantor,
-        method: "GET",
-        dataType: "json",
-        success: function (data) {
-            let datadtt = [];
-            $.each(data, function (index, datawilayahkerja) {
+            $('#namakantor').text(data[0].nama_kantor);
+            let datagrafik = [];
+            $.each(data, function (index, datapbpperkabupatenkota) {
                 $.ajax({
                     type: 'get',
-                    url: "http://localhost:8080/api/v1/dtt/kabupatenkota/" + datawilayahkerja.kode_kabupaten_kota,
+                    url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/" + datapbpperkabupatenkota.nama_kabupaten_kota,
                     async: false,
                 }).done(function (response) {
-                    datadtt.push({
-                        'namakabupaten': response[0].nama_kabupaten_kota,
-                        'fix': response[0].fix,
-                        'alokasi': response[0].alokasi,
-                        'tersalurkan': response[0].tersalurkan,
-                        'sisa': response[0].sisa,
+                    $('#idgrafik').removeClass('d-none');
+                    $('#idgrafik').empty();
+                    datagrafik.push({
+                        'namakabupaten': response.data.nama_kabupaten_kota,
+                        'fix': response.data.jpbp * 10,
+                        'alokasi': response.data.jpbp * 10,
+                        'tersalurkan': (response.data.jpbp * 10) - (response.data.jalokasi),
+                        'sisa': response.data.jalokasi,
                     });
                 }).fail(function (error) {
-                    console.log(error)
+                    $('#idgrafik').addClass('d-none');
                 });
             });
 
-            $.each(datadtt, function (index, bahan) {
+            $.each(datagrafik, function (index, bahan) {
                 var containergrafik = "";
                 containergrafik = containergrafik + "<div class='col-md-6 col-sm-12 my-4'>" +
                     "<h6 id='namakabupaten" + index + "' class='my-3 text-primary' style='font-weight: bolder;'></h6>" +
@@ -61,7 +47,7 @@ function getWilayahKerja(idkantor) {
                     "<div id='chart" + index + "'></div>";
                 $("#idgrafik").append(containergrafik);
                 var options = {
-                    series: [parseInt(bahan.alokasi), parseInt(bahan.tersalurkan)],
+                    series: [parseInt(bahan.sisa), parseInt(bahan.tersalurkan)],
                     chart: {
                         width: 500,
                         type: 'pie',
@@ -86,7 +72,6 @@ function getWilayahKerja(idkantor) {
             });
         },
         error: function (error) {
-            console.error("Gagal mengambil data sesi:", error);
         },
     });
-}
+});

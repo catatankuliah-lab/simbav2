@@ -17,7 +17,9 @@ class JanuariSJModel extends Model
         "jumlah_penyaluran_januari",
         "nomor_surat_jalan",
         "file_surat_jalan",
-        "path_surat_jalan"
+        "path_surat_jalan",
+        "file_bukti_surat_jalan",
+        "path_bukti_surat_jalan"
     ];
 
     public function ceknomorsj($nomorsj)
@@ -42,8 +44,10 @@ class JanuariSJModel extends Model
     public function detailsj($idsj)
     {
         $query = $this->db->table('januari_sj')
-            ->select('januari_sj.*, januari_pbp.*')
+            ->select('januari_sj.*, januari_pbp.*, januari_lo.*, gudang.nama_gudang')
             ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->join('januari_lo', 'januari_lo.nomor_lo = januari_sj.nomor_lo')
+            ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
             ->where('januari_sj.id_sj', $idsj)
             ->get();
         return $query->getRow();

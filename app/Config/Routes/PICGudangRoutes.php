@@ -14,4 +14,6 @@ $routes->group('/gudang', ['namespace' => 'App\Controllers\Gudang'], function ($
     $routes->get('lo/downloadPDFLO/4/(:segment)', 'GudangController::downloadPDFLOApril/$1');
     $routes->get('lo/downloadPDFLO/5/(:segment)', 'GudangController::downloadPDFLOMei/$1');
     $routes->get('lo/downloadPDFLO/6/(:segment)', 'GudangController::downloadPDFLOJuni/$1');
+
+    $routes->get('sj/detailsuratjalan/(:segment)/(:segment)', 'GudangController::detail_sj/$1/$2');
 });

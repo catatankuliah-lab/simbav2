@@ -124,8 +124,7 @@ class HomeController extends Controller
         // Halaman untuk dokument working order
         $pdf->AddPage('P', 'A4');
         // $leftImagePath = FCPATH . 'assets/img/Wo01.png';
-        $leftImagePath =  base_url('UPLOAD/1/LO/SIDARAJA/2024-02-08/logo.png');
-        // dd($data[0]->file_upload_wo);
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $data[0]->path_upload_wo . $data[0]->file_upload_wo;
 
         $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
@@ -236,36 +235,34 @@ class HomeController extends Controller
         foreach ($data as $row) {
             // LO 
             $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_uplaod_lo;
+            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog . $row->file_uplaod_lo;
             $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
 
             // lopiing surat jalan by nomor lo
             foreach ($data as $row) {
                 $pdf->AddPage('P', 'A4');
-                $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_surat_jalan;
+                $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog  . $row->file_uplaod_lo;
                 $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
             }
-
-            // Dokumen DO BULOG
-            $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_do;
-            $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
-
-            // Dokumen Surat Jalan BULOG
-            $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_sj_bulog;
-            $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
-
-            // Dokumen BAST BULOG
-            $pdf->AddPage('P', 'A4');
-            $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_lo . DIRECTORY_SEPARATOR . $row->file_upload_bast_bulog;
-            $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
         }
-        $filePath = FCPATH . DIRECTORY_SEPARATOR . $pathhasil . DIRECTORY_SEPARATOR . ' LAPORAN-WO-' . $data[0]->nomor_wo . '.pdf';
+        // Dokumen DO BULOG
+        $pdf->AddPage('P', 'A4');
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog . $row->file_upload_do;
+        $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
+
+        // Dokumen Surat Jalan BULOG
+        $pdf->AddPage('P', 'A4');
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog . $row->file_upload_sj_bulog;
+        $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
+
+        // Dokumen BAST BULOG
+        $pdf->AddPage('P', 'A4');
+        $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog . $row->file_upload_bast_bulog;
+        $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
         // Compress File
         $pdf->SetCompression(true);
-        // Save the PDF to the specified directory
-        $pdf->Output($filePath, 'D');
+        $namafile = $data[0]->kode_wo . ".pdf";
+        $pdf->Output($namafile, 'D');
     }
 
     public function generateReport($idalokasi)
@@ -368,33 +365,33 @@ class HomeController extends Controller
                 $alignment = $sheet->getStyle('F' . $mulai . ':G' . $mulai)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
                 $borderStyle = $sheet->getStyle('A8' . ':J' . $mulai)->getBorders();
                 $borderStyle->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-                $mulai2 = $mulai + 2;
-                $total2 = 0;
-                $greenFill = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getFill();
-                $greenFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-                $greenFill->getStartColor()->setARGB('ffd700');
-                $sheet->setCellValue('A' . $mulai2, 'TOTAL ALOKASI DESA');
-                $sheet->mergeCells('A' . $mulai2 . ':D' . $mulai2);
-                $alignment = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                foreach ($bahan as $row) {
-                    $total2 = $total2 + $row->jumlah_penyaluran_januari;
-                    $sheet->setCellValue('A' . $mulai2 + 1, $row->nama_desa_kelurahan);
-                    $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
-                    $sheet->setCellValue('D' . $mulai2 + 1, $row->jumlah_penyaluran_januari);
-                    $mulai2++;
-                }
-                $sheet->setCellValue('A' . $mulai2 + 1, "TOTAL");
-                $sheet->setCellValue('D' . $mulai2 + 1, $total2);
-                $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
-                $alignment = $sheet->getStyle('A' . $mulai2 + 1 . ':C' . $mulai2 + 1)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $alignment = $sheet->getStyle('D' . $mulai2 + 1)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                $boldStyle = $sheet->getStyle('A' . $mulai + 2 . ':D' . $mulai2 + 1)->getFont();
-                $boldStyle->setBold(true);
-                $greenFill = $sheet->getStyle('A' . $mulai2 + 1 . ':D' . $mulai2 + 1)->getFill();
-                $greenFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
-                $greenFill->getStartColor()->setARGB('ffd700');
-                $borderStyle = $sheet->getStyle('A' . $mulai + 2 . ':D' . $mulai2 + 1)->getBorders();
-                $borderStyle->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+                // $mulai2 = $mulai + 2;
+                // $total2 = 0;
+                // $greenFill = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getFill();
+                // $greenFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                // $greenFill->getStartColor()->setARGB('ffd700');
+                // $sheet->setCellValue('A' . $mulai2, 'TOTAL ALOKASI DESA');
+                // $sheet->mergeCells('A' . $mulai2 . ':D' . $mulai2);
+                // $alignment = $sheet->getStyle('A' . $mulai2 . ':D' . $mulai2)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                // foreach ($dataspm as $row) {
+                //     $total2 = $total2 + $row->total;
+                //     $sheet->setCellValue('A' . $mulai2 + 1, $row->nama_desa_kelurahan);
+                //     $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
+                //     $sheet->setCellValue('D' . $mulai2 + 1, $row->total);
+                //     $mulai2++;
+                // }
+                // $sheet->setCellValue('A' . $mulai2 + 1, "TOTAL");
+                // $sheet->setCellValue('D' . $mulai2 + 1, $total2);
+                // $sheet->mergeCells('A' . $mulai2 + 1 . ':C' . $mulai2 + 1);
+                // $alignment = $sheet->getStyle('A' . $mulai2 + 1 . ':C' . $mulai2 + 1)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                // $alignment = $sheet->getStyle('D' . $mulai2 + 1)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                // $boldStyle = $sheet->getStyle('A' . $mulai + 2 . ':D' . $mulai2 + 1)->getFont();
+                // $boldStyle->setBold(true);
+                // $greenFill = $sheet->getStyle('A' . $mulai2 + 1 . ':D' . $mulai2 + 1)->getFill();
+                // $greenFill->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
+                // $greenFill->getStartColor()->setARGB('ffd700');
+                // $borderStyle = $sheet->getStyle('A' . $mulai + 2 . ':D' . $mulai2 + 1)->getBorders();
+                // $borderStyle->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
             }
         }
 

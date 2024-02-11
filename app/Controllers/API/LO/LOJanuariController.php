@@ -232,14 +232,8 @@ class LOJanuariController extends ResourceController
 
     public function uploadfile($idlo)
     {
-
         $datalo = $this->model->getkebutuhanupload($idlo);
         $namagudang = substr($datalo->nama_gudang, 5);
-        // $response = [
-        //     'status' => '200',
-        //     'message' => $datalo->nomor_lo
-        // ];
-        // return $this->respond($response);
         $alamatnya = FCPATH  . 'UPLOAD/1/LO/' . $namagudang . '/' . $datalo->tanggal_muat . '/';
         $path = 'UPLOAD/1/LO/' . $namagudang . '/' . $datalo->tanggal_muat . '/';
         $file1 = $this->request->getFile('filewo');
@@ -281,7 +275,7 @@ class LOJanuariController extends ResourceController
                     'file_upload_sj_bulog' => $namasj,
                     'file_upload_bast_bulog' => $namabast,
                     'path_upload_wo' => $path,
-                    'path_upload_do' => $path,
+                    'path_uplaod_do' => $path,
                     'path_upload_salur_bulog' => $path,
                     'path_uplaod_lo' => $path,
                     'path_upload_sj_bulog' => $path,

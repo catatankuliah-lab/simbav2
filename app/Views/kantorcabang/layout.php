@@ -31,22 +31,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    <meta name="theme-color" content="#FFFFFF" />
-    <link rel="manifest" href="<?= base_url('assets/js/web.webmanifest') ?>" />
-    <style>
-        .gapake {
-            border: none !important;
-            opacity: 0.5 !important;
-            color: grey !important;
-            font-size: 14px !important;
-        }
-
-        div.dataTables_wrapper div.dataTables_filter input {
-            display: none !important;
-        }
-    </style>
-
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
