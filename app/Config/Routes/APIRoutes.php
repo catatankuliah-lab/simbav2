@@ -198,4 +198,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->post('sj/4/uploadfile/(:segment)', 'SJ\SJAprilController::uploadfile/$1');
     $routes->post('sj/5/uploadfile/(:segment)', 'SJ\SJMeiController::uploadfile/$1');
     $routes->post('sj/6/uploadfile/(:segment)', 'SJ\SJJuniController::uploadfile/$1');
+
+    // DASHBOARD KANTOR CABANG
+    $routes->get('pbp/1/(:segment)', 'PBP\PBPJanuariController::bahandashboardkc/$1');
+    $routes->get('pbp/2/(:segment)', 'PBP\PBPFebruariController::bahandashboardkc/$1');
+    $routes->get('pbp/3/(:segment)', 'PBP\PBPMaretController::bahandashboardkc/$1');
+    $routes->get('pbp/4/(:segment)', 'PBP\PBPAprilController::bahandashboardkc/$1');
+    $routes->get('pbp/5/(:segment)', 'PBP\PBPMeiController::bahandashboardkc/$1');
+    $routes->get('pbp/6/(:segment)', 'PBP\PBPJuniController::bahandashboardkc/$1');
 });
