@@ -64,35 +64,56 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    function gudangbykantor($namaGudang)
+    public function gudangbykantor($namaGudang)
     {
         $data = $this->model->gudangbykantor($namaGudang, session()->get('id_kantor_cabang'));
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Data Gudang tidak ditemukan.');
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
         }
     }
 
-    public function getKabupatenByIdKantor($namaKabupaten)
+    public function kabupatenbykantor($kodekabupatenkota)
     {
-        $data = $this->model->LOKabupatenByIdKantor($namaKabupaten, session()->get('id_kantor_cabang'));
+        $data = $this->model->kabupatenbykantor($kodekabupatenkota, session()->get('id_kantor_cabang'));
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Data Kabupaten tidak ditemukan.');
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
         }
     }
 
-    // public function getKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan)
-    // {
-    //     $data = $this->model->LOKabupatenKecamatanByIdKantor($namaKabupaten, $namaKecamatan, session()->get('id_kantor_cabang'));
-    //     if ($data) {
-    //         return $this->respond($data);
-    //     } else {
-    //         return $this->failNotFound('Data Loading Order Kantor (LO) tidak ditemukan.');
-    //     }
-    // }
+
+    public function gudangdankabupaten($gudang, $kabupaten)
+    {
+        $data = $this->model->gudangdankabupaten($gudang, $kabupaten, session()->get('id_kantor_cabang'));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+        }
+    }
+
+    public function kecamatanbykabupaten($namaKabupaten, $kecamatan)
+    {
+        $data = $this->model->kecamatanbykabupaten($namaKabupaten, $kecamatan, session()->get('id_kantor_cabang'));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+        }
+    }
+
+    public function gudangkabupatenkecamatan($gudang, $kabupaten, $kecamatan)
+    {
+        $data = $this->model->gudangkabupatenkecamatan($gudang, $kabupaten,$kecamatan, session()->get('id_kantor_cabang'));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
+        }
+    }
 
     // function showDetailSuratJalan($id_lo)
     // {
