@@ -137,21 +137,15 @@ $("#filterLO").on("click", function () {
       showConfirmButton: false,
     });
   } else {
+    // DOWNLOAD EXCEL
+    document.getElementById("formDownload").action =
+      "http://localhost:8080/kantorcabang/lo/1/downloadexcel/" +
+      $("#alokasi").val();
+
     var gudang = $("#pilihgudang").val();
     var kabupaten = $("#pilihkabupatenkota").val();
     var kecamatan = $("#pilihkecamatan").val();
     var alokasi = $("#alokasi").val();
-
-    console.log({
-      gudang,
-      kabupaten,
-      kecamatan,
-    });
-
-    // DOWNLOAD EXCEL
-    document.getElementById("idAlokasi").value = alokasi;
-    document.getElementById("formDownload").action =
-      "http://localhost:8080/kantorcabang/lo/1/downloadexcel/" + alokasi;
 
     if ((alokasi != 0, gudang != 0 && kabupaten == 0 && kecamatan == 0)) {
       $.ajax({

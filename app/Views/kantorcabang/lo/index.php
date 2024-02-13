@@ -52,7 +52,6 @@
                 </div>
                 <div class="col-md-4 col-sm-12 my-3">
                     <form action="" id="formDownload" method="post">
-
                         <input type="text" id="idAlokasi" value="" hidden>
                         <label for="dok" class="h6">Download Excel</label>
                         <button type="submit" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="downloadexcel" name="downloadexcel">Download Excel</button>

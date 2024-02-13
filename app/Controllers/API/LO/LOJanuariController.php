@@ -34,6 +34,9 @@ class LOJanuariController extends ResourceController
         return $this->response->setJSON($userData);
     }
 
+    // ================================= MENU LOADING ORDER ===================================== //
+
+    // MENGAMBIL DATA LO BERDASARKAN KANTOR CABANG (PANJI)
     public function getbyidkantor($idkantor)
     {
         $dataspm = $this->model->getAllLOByCabang($idkantor);
@@ -44,6 +47,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
+    // MENAMPILKAN DATA LOADING ORDER BERDASARKAN NOMOR LO (PANJI)
     function showdetaillo($nomorlo)
     {
         $data = $this->model->detaillocabang($nomorlo);
@@ -54,6 +58,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
+    // MENAMPILKAN DATA SURAT JALAN BERDASARKAN ID_SURAT_JALAN (PANJI)
     function showDetailSuratJalan($id_sj)
     {
         $data = $this->model->detailsuratjalan($id_sj);
@@ -64,6 +69,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
+    // FILTER GUDANG BERDASARKAN KANTOR CABANG (PANJI)
     public function gudangbykantor($namaGudang)
     {
         $data = $this->model->gudangbykantor($namaGudang, session()->get('id_kantor_cabang'));
@@ -74,9 +80,10 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    public function kabupatenbykantor($kodekabupatenkota)
+    // FILTER KABUPATEN BERDASARKAN KANTOR CABANG (PANJI)
+    public function kabupatenbykantor($kabupaten)
     {
-        $data = $this->model->kabupatenbykantor($kodekabupatenkota, session()->get('id_kantor_cabang'));
+        $data = $this->model->kabupatenbykantor($kabupaten, session()->get('id_kantor_cabang'));
         if ($data) {
             return $this->respond($data);
         } else {
@@ -84,7 +91,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
-
+    // FILTER GUDANG DAN KABUPATEN BERDASARKAN KANTOR CABANG (PANJI)
     public function gudangdankabupaten($gudang, $kabupaten)
     {
         $data = $this->model->gudangdankabupaten($gudang, $kabupaten, session()->get('id_kantor_cabang'));
@@ -95,9 +102,11 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    public function kecamatanbykabupaten($namaKabupaten, $kecamatan)
+    // FILTER KABUPATEN, KECAMATAN BERDASARKAN KANTOR CABANG (PANJI)
+
+    public function kecamatanbykabupaten($kabupaten, $kecamatan)
     {
-        $data = $this->model->kecamatanbykabupaten($namaKabupaten, $kecamatan, session()->get('id_kantor_cabang'));
+        $data = $this->model->kecamatanbykabupaten($kabupaten, $kecamatan, session()->get('id_kantor_cabang'));
         if ($data) {
             return $this->respond($data);
         } else {
@@ -105,9 +114,10 @@ class LOJanuariController extends ResourceController
         }
     }
 
+    // FILTER GUDANG, KABUPATEN, KECAMATAN BERDASARKAN KANTOR CABANG (PANJI)
     public function gudangkabupatenkecamatan($gudang, $kabupaten, $kecamatan)
     {
-        $data = $this->model->gudangkabupatenkecamatan($gudang, $kabupaten,$kecamatan, session()->get('id_kantor_cabang'));
+        $data = $this->model->gudangkabupatenkecamatan($gudang, $kabupaten, $kecamatan, session()->get('id_kantor_cabang'));
         if ($data) {
             return $this->respond($data);
         } else {
@@ -115,16 +125,7 @@ class LOJanuariController extends ResourceController
         }
     }
 
-    // function showDetailSuratJalan($id_lo)
-    // {
-    //     $data = $this->model->getDetailSuratJalan($id_lo);
-    //     if ($data) {
-    //         return $this->respond($data);
-    //     } else {
-    //         return $this->failNotFound('Data Loading Order (LO)tidak ditemukan.');
-    //     }
-    // }
-
+    // MENAMPILKAN DETAIL LO
     function detaillo($nomorlo)
     {
         $data = $this->model->detaillo($nomorlo);
@@ -140,6 +141,58 @@ class LOJanuariController extends ResourceController
         }
         return $this->respond($datalo);
     }
+
+    // ================================= END MENU LOADING ORDER ===================================== //
+
+    // ================================= MENU WORDKING ORDER ======================================== //
+
+
+    public function getWoByIdKantor($awal, $akhir)
+    {
+        $data = $this->model->showWoByIdKantor(session()->get('id_kantor_cabang'), $awal, $akhir);
+        if ($data) {
+            $response = [
+                'status' => "200",
+                'data' => $data
+            ];
+            return $this->respond($response);
+        } else {
+            $response = [
+                'status' => "404",
+            ];
+            return $this->respond($response);
+        }
+    }
+
+    public function getwobykodewo($kodewo)
+    {
+        $data = $this->model->getwobykodewo($kodewo);
+        if ($data) {
+            $response = [
+                'status' => "200",
+                'data' => $data
+            ];
+            return $this->respond($response);
+        } else {
+            $response = [
+                'status' => "404",
+            ];
+            return $this->respond($response);
+        }
+    }
+
+    public function downloadWO($status_dokumen_muat)
+    {
+        $data = $this->model->downloadDokumenWo($status_dokumen_muat, session()->get("id_kantor_cabang"));
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('Data WO Kantor tidak ditemukan.');
+        }
+    }
+
+    // ================================= END MENU WORDKING ORDER ===================================== //
+
 
     // NANA DASHBOARD
     public function dashboard()
@@ -325,47 +378,5 @@ class LOJanuariController extends ResourceController
     }
 
 
-    public function getWoByIdKantor($awal, $akhir)
-    {
-        $data = $this->model->showWoByIdKantor(session()->get('id_kantor_cabang'), $awal, $akhir);
-        if ($data) {
-            $response = [
-                'status' => "200",
-                'data' => $data
-            ];
-            return $this->respond($response);
-        } else {
-            $response = [
-                'status' => "404",
-            ];
-            return $this->respond($response);
-        }
-    }
-
-    public function getwobykodewo($kodewo)
-    {
-        $data = $this->model->getwobykodewo($kodewo);
-        if ($data) {
-            $response = [
-                'status' => "200",
-                'data' => $data
-            ];
-            return $this->respond($response);
-        } else {
-            $response = [
-                'status' => "404",
-            ];
-            return $this->respond($response);
-        }
-    }
-
-    public function downloadWO($status_dokumen_muat)
-    {
-        $data = $this->model->downloadDokumenWo($status_dokumen_muat, session()->get("id_kantor_cabang"));
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Data WO Kantor tidak ditemukan.');
-        }
-    }
+   
 }
