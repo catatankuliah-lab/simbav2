@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="row d-none" id="filter">
+            <div class="row" id="">
                 <div class="col-md-4 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihgudang" name="pilihgudang" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Gudang">
                         <option data-nama_gudang="0" value="0">Pilih Gudang</option>
