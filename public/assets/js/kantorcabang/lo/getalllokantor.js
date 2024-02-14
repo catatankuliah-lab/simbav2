@@ -216,6 +216,7 @@ $("#filterLO").on("click", function () {
           $("#filterSearch").addClass("d-none");
           $("#tabelhilangdulu").addClass("d-none");
           $("#tombolDownload").addClass("d-none");
+          $("#filter").addClass("d-none");
         },
       });
     } else if (
@@ -288,6 +289,7 @@ $("#filterLO").on("click", function () {
           $("#filterSearch").addClass("d-none");
           $("#tabelhilangdulu").addClass("d-none");
           $("#tombolDownload").addClass("d-none");
+          $("#filter").addClass("d-none");
         },
       });
     } else if (
@@ -362,6 +364,7 @@ $("#filterLO").on("click", function () {
           $("#filterSearch").addClass("d-none");
           $("#tabelhilangdulu").addClass("d-none");
           $("#tombolDownload").addClass("d-none");
+          $("#filter").addClass("d-none");
         },
       });
     } else if (
@@ -436,6 +439,7 @@ $("#filterLO").on("click", function () {
           $("#filterSearch").addClass("d-none");
           $("#tabelhilangdulu").addClass("d-none");
           $("#tombolDownload").addClass("d-none");
+          $("#filter").addClass("d-none");
         },
       });
     } else if (
@@ -512,6 +516,7 @@ $("#filterLO").on("click", function () {
           $("#filterSearch").addClass("d-none");
           $("#tabelhilangdulu").addClass("d-none");
           $("#tombolDownload").addClass("d-none");
+          $("#filter").addClass("d-none");
         },
       });
     } else {
@@ -530,6 +535,7 @@ $("#filterLO").on("click", function () {
           $("#filterSearch").removeClass("d-none");
           $("#tabelhilangdulu").removeClass("d-none");
           $("#hilang").removeClass("d-none");
+          $("#filter").removeClass("d-none");
 
           if ($.fn.DataTable.isDataTable("#tablelo")) {
             $("#tablelo").DataTable().destroy();
@@ -609,6 +615,7 @@ $("#filterLO").on("click", function () {
           $("#filterSearch").addClass("d-none");
           $("#tabelhilangdulu").addClass("d-none");
           $("#tombolDownload").addClass("d-none");
+          $("#flter").addClass("d-none");
         },
       });
     }
