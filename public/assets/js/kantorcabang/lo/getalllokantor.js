@@ -159,42 +159,65 @@ $("#filterLO").on("click", function () {
         dataType: "json",
         success: function (data) {
           console.log("Data Gudang Ada", data);
-          datalo.empty();
-          $.each(data, function (index, spm) {
-            var listspm =
-              "<tr>" +
-              "<td>" +
-              spm.tanggal_muat +
-              "</td>" +
-              "<td>" +
-              spm.nama_gudang +
-              "</td>" +
-              "<td>" +
-              spm.nomor_lo +
-              "</td>" +
-              "<td>" +
-              spm.nomor_mobil +
-              " / " +
-              spm.nama_driver +
-              " (" +
-              spm.nomor_driver +
-              ")" +
-              "</td>" +
-              "<td>" +
-              spm.jumlah_penyaluran_januari +
-              "</td>" +
-              "<td>" +
-              spm.status_dokumen_muat +
-              "</td>" +
-              "<td class='text-center'>" +
-              "<a href='http://localhost:8080/gudang/spmbast/detail/" +
-              spm.nomor_spm +
-              "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-              "<i class='fas fa-search-plus'></i>" +
-              "</a>" +
-              "</td>" +
-              "</tr >";
-            datalo.append(listspm);
+          $("#filterSearch").removeClass("d-none");
+          $("#tabelhilangdulu").removeClass("d-none");
+          $("#tombolDownload").removeClass("d-none");
+          if ($.fn.DataTable.isDataTable("#tablelo")) {
+            $("#tablelo").DataTable().destroy();
+          }
+
+          var datanya = [];
+          $.each(data, function (index, lo) {
+            datanya.push({
+              tanggal_muat: lo.tanggal_muat,
+              gudang: lo.nama_gudang,
+              nomor_lo: lo.nomor_lo,
+              pengirim:
+                lo.nomor_mobil +
+                " / " +
+                lo.nama_driver +
+                "(" +
+                lo.nomor_driver +
+                ")",
+              muatan: lo.jumlah_penyaluran_januari,
+              status: lo.status_dokumen_muat,
+              link:
+                "http://localhost:8080/kantorcabang/lo/" +
+                $("#alokasi").val() +
+                "/detail/" +
+                lo.nomor_lo,
+            });
+          });
+          $("#tablelo").DataTable({
+            paging: true,
+            info: false,
+            language: {
+              paginate: {
+                next: ">",
+                previous: "<",
+              },
+            },
+            data: datanya,
+            columns: [
+              { data: "tanggal_muat" },
+              { data: "gudang" },
+              { data: "nomor_lo" },
+              { data: "pengirim" },
+              { data: "muatan" },
+              { data: "status" },
+              {
+                data: "link",
+                render: function (data, type, row, meta) {
+                  return (
+                    "<a href=" +
+                    data +
+                    " type='button' class='text-primary' style='border-radius: 5px;'>" +
+                    "<i class='fas fa-search-plus'></i></a>"
+                  );
+                },
+                className: "text-center",
+              },
+            ],
           });
         },
         error: function (error) {
@@ -231,42 +254,65 @@ $("#filterLO").on("click", function () {
         dataType: "json",
         success: function (data) {
           console.log("Data Kabupaten Ada", data);
-          datalo.empty();
-          $.each(data, function (index, spm) {
-            var listspm =
-              "<tr>" +
-              "<td>" +
-              spm.tanggal_muat +
-              "</td>" +
-              "<td>" +
-              spm.nama_gudang +
-              "</td>" +
-              "<td>" +
-              spm.nomor_lo +
-              "</td>" +
-              "<td>" +
-              spm.nomor_mobil +
-              " / " +
-              spm.nama_driver +
-              " (" +
-              spm.nomor_driver +
-              ")" +
-              "</td>" +
-              "<td>" +
-              spm.jumlah_penyaluran_januari +
-              "</td>" +
-              "<td>" +
-              spm.status_dokumen_muat +
-              "</td>" +
-              "<td class='text-center'>" +
-              "<a href='http://localhost:8080/gudang/spmbast/detail/" +
-              spm.nomor_spm +
-              "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-              "<i class='fas fa-search-plus'></i>" +
-              "</a>" +
-              "</td>" +
-              "</tr >";
-            datalo.append(listspm);
+          $("#filterSearch").removeClass("d-none");
+          $("#tabelhilangdulu").removeClass("d-none");
+          $("#tombolDownload").removeClass("d-none");
+          if ($.fn.DataTable.isDataTable("#tablelo")) {
+            $("#tablelo").DataTable().destroy();
+          }
+
+          var datanya = [];
+          $.each(data, function (index, lo) {
+            datanya.push({
+              tanggal_muat: lo.tanggal_muat,
+              gudang: lo.nama_gudang,
+              nomor_lo: lo.nomor_lo,
+              pengirim:
+                lo.nomor_mobil +
+                " / " +
+                lo.nama_driver +
+                "(" +
+                lo.nomor_driver +
+                ")",
+              muatan: lo.jumlah_penyaluran_januari,
+              status: lo.status_dokumen_muat,
+              link:
+                "http://localhost:8080/kantorcabang/lo/" +
+                $("#alokasi").val() +
+                "/detail/" +
+                lo.nomor_lo,
+            });
+          });
+          $("#tablelo").DataTable({
+            paging: true,
+            info: false,
+            language: {
+              paginate: {
+                next: ">",
+                previous: "<",
+              },
+            },
+            data: datanya,
+            columns: [
+              { data: "tanggal_muat" },
+              { data: "gudang" },
+              { data: "nomor_lo" },
+              { data: "pengirim" },
+              { data: "muatan" },
+              { data: "status" },
+              {
+                data: "link",
+                render: function (data, type, row, meta) {
+                  return (
+                    "<a href=" +
+                    data +
+                    " type='button' class='text-primary' style='border-radius: 5px;'>" +
+                    "<i class='fas fa-search-plus'></i></a>"
+                  );
+                },
+                className: "text-center",
+              },
+            ],
           });
         },
         error: function (error) {
@@ -305,42 +351,65 @@ $("#filterLO").on("click", function () {
         dataType: "json",
         success: function (data) {
           console.log("Data Gudang Kabupaten Ada", data);
-          datalo.empty();
-          $.each(data, function (index, spm) {
-            var listspm =
-              "<tr>" +
-              "<td>" +
-              spm.tanggal_muat +
-              "</td>" +
-              "<td>" +
-              spm.nama_gudang +
-              "</td>" +
-              "<td>" +
-              spm.nomor_lo +
-              "</td>" +
-              "<td>" +
-              spm.nomor_mobil +
-              " / " +
-              spm.nama_driver +
-              " (" +
-              spm.nomor_driver +
-              ")" +
-              "</td>" +
-              "<td>" +
-              spm.jumlah_penyaluran_januari +
-              "</td>" +
-              "<td>" +
-              spm.status_dokumen_muat +
-              "</td>" +
-              "<td class='text-center'>" +
-              "<a href='http://localhost:8080/gudang/spmbast/detail/" +
-              spm.nomor_spm +
-              "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-              "<i class='fas fa-search-plus'></i>" +
-              "</a>" +
-              "</td>" +
-              "</tr >";
-            datalo.append(listspm);
+          $("#filterSearch").removeClass("d-none");
+          $("#tabelhilangdulu").removeClass("d-none");
+          $("#tombolDownload").removeClass("d-none");
+          if ($.fn.DataTable.isDataTable("#tablelo")) {
+            $("#tablelo").DataTable().destroy();
+          }
+
+          var datanya = [];
+          $.each(data, function (index, lo) {
+            datanya.push({
+              tanggal_muat: lo.tanggal_muat,
+              gudang: lo.nama_gudang,
+              nomor_lo: lo.nomor_lo,
+              pengirim:
+                lo.nomor_mobil +
+                " / " +
+                lo.nama_driver +
+                "(" +
+                lo.nomor_driver +
+                ")",
+              muatan: lo.jumlah_penyaluran_januari,
+              status: lo.status_dokumen_muat,
+              link:
+                "http://localhost:8080/kantorcabang/lo/" +
+                $("#alokasi").val() +
+                "/detail/" +
+                lo.nomor_lo,
+            });
+          });
+          $("#tablelo").DataTable({
+            paging: true,
+            info: false,
+            language: {
+              paginate: {
+                next: ">",
+                previous: "<",
+              },
+            },
+            data: datanya,
+            columns: [
+              { data: "tanggal_muat" },
+              { data: "gudang" },
+              { data: "nomor_lo" },
+              { data: "pengirim" },
+              { data: "muatan" },
+              { data: "status" },
+              {
+                data: "link",
+                render: function (data, type, row, meta) {
+                  return (
+                    "<a href=" +
+                    data +
+                    " type='button' class='text-primary' style='border-radius: 5px;'>" +
+                    "<i class='fas fa-search-plus'></i></a>"
+                  );
+                },
+                className: "text-center",
+              },
+            ],
           });
         },
         error: function (error) {
@@ -379,42 +448,65 @@ $("#filterLO").on("click", function () {
         dataType: "json",
         success: function (data) {
           console.log("Data Kabupaten Kecamatan Ada", data);
-          datalo.empty();
-          $.each(data, function (index, spm) {
-            var listspm =
-              "<tr>" +
-              "<td>" +
-              spm.tanggal_muat +
-              "</td>" +
-              "<td>" +
-              spm.nama_gudang +
-              "</td>" +
-              "<td>" +
-              spm.nomor_lo +
-              "</td>" +
-              "<td>" +
-              spm.nomor_mobil +
-              " / " +
-              spm.nama_driver +
-              " (" +
-              spm.nomor_driver +
-              ")" +
-              "</td>" +
-              "<td>" +
-              spm.jumlah_penyaluran_januari +
-              "</td>" +
-              "<td>" +
-              spm.status_dokumen_muat +
-              "</td>" +
-              "<td class='text-center'>" +
-              "<a href='http://localhost:8080/gudang/spmbast/detail/" +
-              spm.nomor_spm +
-              "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-              "<i class='fas fa-search-plus'></i>" +
-              "</a>" +
-              "</td>" +
-              "</tr >";
-            datalo.append(listspm);
+          $("#filterSearch").removeClass("d-none");
+          $("#tabelhilangdulu").removeClass("d-none");
+          $("#tombolDownload").removeClass("d-none");
+          if ($.fn.DataTable.isDataTable("#tablelo")) {
+            $("#tablelo").DataTable().destroy();
+          }
+
+          var datanya = [];
+          $.each(data, function (index, lo) {
+            datanya.push({
+              tanggal_muat: lo.tanggal_muat,
+              gudang: lo.nama_gudang,
+              nomor_lo: lo.nomor_lo,
+              pengirim:
+                lo.nomor_mobil +
+                " / " +
+                lo.nama_driver +
+                "(" +
+                lo.nomor_driver +
+                ")",
+              muatan: lo.jumlah_penyaluran_januari,
+              status: lo.status_dokumen_muat,
+              link:
+                "http://localhost:8080/kantorcabang/lo/" +
+                $("#alokasi").val() +
+                "/detail/" +
+                lo.nomor_lo,
+            });
+          });
+          $("#tablelo").DataTable({
+            paging: true,
+            info: false,
+            language: {
+              paginate: {
+                next: ">",
+                previous: "<",
+              },
+            },
+            data: datanya,
+            columns: [
+              { data: "tanggal_muat" },
+              { data: "gudang" },
+              { data: "nomor_lo" },
+              { data: "pengirim" },
+              { data: "muatan" },
+              { data: "status" },
+              {
+                data: "link",
+                render: function (data, type, row, meta) {
+                  return (
+                    "<a href=" +
+                    data +
+                    " type='button' class='text-primary' style='border-radius: 5px;'>" +
+                    "<i class='fas fa-search-plus'></i></a>"
+                  );
+                },
+                className: "text-center",
+              },
+            ],
           });
         },
         error: function (error) {
@@ -455,42 +547,65 @@ $("#filterLO").on("click", function () {
         dataType: "json",
         success: function (data) {
           console.log("Data Gudang Kabupaten Kecamatan Ada", data);
-          datalo.empty();
-          $.each(data, function (index, spm) {
-            var listspm =
-              "<tr>" +
-              "<td>" +
-              spm.tanggal_muat +
-              "</td>" +
-              "<td>" +
-              spm.nama_gudang +
-              "</td>" +
-              "<td>" +
-              spm.nomor_lo +
-              "</td>" +
-              "<td>" +
-              spm.nomor_mobil +
-              " / " +
-              spm.nama_driver +
-              " (" +
-              spm.nomor_driver +
-              ")" +
-              "</td>" +
-              "<td>" +
-              spm.jumlah_penyaluran_januari +
-              "</td>" +
-              "<td>" +
-              spm.status_dokumen_muat +
-              "</td>" +
-              "<td class='text-center'>" +
-              "<a href='http://localhost:8080/gudang/spmbast/detail/" +
-              spm.nomor_spm +
-              "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-              "<i class='fas fa-search-plus'></i>" +
-              "</a>" +
-              "</td>" +
-              "</tr >";
-            datalo.append(listspm);
+          $("#filterSearch").removeClass("d-none");
+          $("#tabelhilangdulu").removeClass("d-none");
+          $("#tombolDownload").removeClass("d-none");
+          if ($.fn.DataTable.isDataTable("#tablelo")) {
+            $("#tablelo").DataTable().destroy();
+          }
+
+          var datanya = [];
+          $.each(data, function (index, lo) {
+            datanya.push({
+              tanggal_muat: lo.tanggal_muat,
+              gudang: lo.nama_gudang,
+              nomor_lo: lo.nomor_lo,
+              pengirim:
+                lo.nomor_mobil +
+                " / " +
+                lo.nama_driver +
+                "(" +
+                lo.nomor_driver +
+                ")",
+              muatan: lo.jumlah_penyaluran_januari,
+              status: lo.status_dokumen_muat,
+              link:
+                "http://localhost:8080/kantorcabang/lo/" +
+                $("#alokasi").val() +
+                "/detail/" +
+                lo.nomor_lo,
+            });
+          });
+          $("#tablelo").DataTable({
+            paging: true,
+            info: false,
+            language: {
+              paginate: {
+                next: ">",
+                previous: "<",
+              },
+            },
+            data: datanya,
+            columns: [
+              { data: "tanggal_muat" },
+              { data: "gudang" },
+              { data: "nomor_lo" },
+              { data: "pengirim" },
+              { data: "muatan" },
+              { data: "status" },
+              {
+                data: "link",
+                render: function (data, type, row, meta) {
+                  return (
+                    "<a href=" +
+                    data +
+                    " type='button' class='text-primary' style='border-radius: 5px;'>" +
+                    "<i class='fas fa-search-plus'></i></a>"
+                  );
+                },
+                className: "text-center",
+              },
+            ],
           });
         },
         error: function (error) {
