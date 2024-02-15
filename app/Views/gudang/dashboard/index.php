@@ -59,5 +59,5 @@
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets/js/gudang/dashboard/v1.js') ?>"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/gudang/dashboard/dashboard.js"></script>
 <?php $this->endSection() ?>

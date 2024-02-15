@@ -57,5 +57,5 @@
     </div>
 </div>
 
-<script src="<?= base_url('assets/js/kantorcabang/laporan/getlaporandoc.js') ?>"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/laporan/getlaporandoc.js"></script>
 <?php $this->endSection() ?>

@@ -5,12 +5,6 @@
     <div class="col-md-12 col-lg-12">
         <div class="card-body">
             <h4 class="card-title mb-3">Loading Order (LO)</h4>
-            <h6 class="card-subtitle mb-3">
-                Klik <a style="font-weight: bolder;" href="<?= base_url('kantorcabang/spmbast') ?>">disini</a> untuk mengelola Loading Order (LO)
-            </h6>
-
-
-            
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="tanggalpembuatan" class="h6">Tanggal Pembuatan</label>
@@ -46,5 +40,5 @@
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets/js/kantorcabang/lo/getdetaillo.js') ?>"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/lo/getdetaillo.js"></script>
 <?php $this->endSection() ?>

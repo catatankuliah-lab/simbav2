@@ -7,11 +7,11 @@ $.ajax({
     $("#tanggalpembuatan").val(data[0].tanggal_muat);
     $("#nopoldriver").val(
       data[0].nomor_mobil +
-        " / " +
-        data[0].nama_driver +
-        " (" +
-        data[0].nomor_driver +
-        ")"
+      " / " +
+      data[0].nama_driver +
+      " (" +
+      data[0].nomor_driver +
+      ")"
     );
     $("#kabupaten").val(data[0].nama_kabupaten_kota);
     $("#kecamatan").val(data[0].nama_kecamatan);

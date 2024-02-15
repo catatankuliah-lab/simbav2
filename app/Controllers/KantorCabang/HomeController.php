@@ -224,7 +224,7 @@ class HomeController extends Controller
             // lopiing surat jalan by nomor lo
             foreach ($data as $row) {
                 $pdf->AddPage('P', 'A4');
-                $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_upload_bast_bulog  . $row->file_uplaod_lo;
+                $leftImagePath = FCPATH . DIRECTORY_SEPARATOR . $row->path_surat_jalan  . $row->file_surat_jalan;
                 $pdf->Image($leftImagePath, 10, 10, $pdf->GetPageWidth(), $pdf->getPageHeight());
             }
         }

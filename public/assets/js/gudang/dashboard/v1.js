@@ -1,5 +1,5 @@
 $.ajax({
-  url: "http://localhost:8080/api/alokasi",
+  url: "https://delapandelapanlogistics.com/api/alokasi",
   method: "GET",
   dataType: "json",
   success: function (data) {
@@ -34,7 +34,7 @@ function prosestampilkandashboard(idalokasi) {
     },
   });
   $.ajax({
-    url: "http://localhost:8080/api/lo/" + idalokasi + "/dashboard",
+    url: "https://delapandelapanlogistics.com/api/lo/" + idalokasi + "/dashboard",
     method: "GET",
     dataType: "json",
     success: function (data) {
