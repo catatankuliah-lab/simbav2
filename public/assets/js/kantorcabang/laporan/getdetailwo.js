@@ -62,6 +62,6 @@ $.ajax({
 
 $("#downloadwo").on("click", function () {
   window.location.href =
-    "http://localhost:8080/kantorcabang/lo/1/generatelaporanwo/" +
+    "http://localhost:8080/itkantorcabang/lo/1/generatelaporanwo/" +
     $("#kodewo").val();
 });

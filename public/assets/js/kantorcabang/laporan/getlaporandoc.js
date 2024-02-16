@@ -98,7 +98,7 @@ $("#filterWO").on("click", function () {
               muatan: lo.total,
               status: lo.status_dokumen_muat,
               link:
-                "http://localhost:8080/kantorcabang/lo/laporan/1/detail/" +
+                "http://localhost:8080/itkantorcabang/lo/laporan/1/detail/" +
                 lo.kode_wo,
             });
           });

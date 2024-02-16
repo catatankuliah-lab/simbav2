@@ -1,5 +1,5 @@
 $.ajax({
-  url: "http://localhost:8080/api/lo/1/detail/" + $("#nomorlo").val(),
+  url: "https://localhostt:8080/api/lo/1/detail/" + $("#nomorlo").val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
@@ -37,7 +37,7 @@ $.ajax({
         spm.total +
         "</td>" +
         "<td class='text-center'>" +
-        "<a href='http://localhost:8080/kantorcabang/lo/1/detail/suratjalan/" +
+        "<a href='https://localhost:8080/itkantorcabang/lo/1/detail/suratjalan/" +
         spm.id_sj +
         "' type='button' class='text-primary' style='border-radius: 5px;'>" +
         "<i class='fas fa-search-plus'></i>" +
