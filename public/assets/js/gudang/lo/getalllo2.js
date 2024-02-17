@@ -2,7 +2,7 @@ const datalo = $("#datalo");
 
 function loadingswal() {
   Swal.fire({
-    text: "Memuat Data...",
+    text: 'Memuat Data...',
     allowOutsideClick: false,
     allowEscapeKey: false,
     showConfirmButton: false,
@@ -17,21 +17,23 @@ $(function () {
     {
       opens: "left",
     },
-    function (start, end, label) {}
+    function (start, end, label) {
+    }
   );
 });
 
 // GET DETAIL DATA GUDANG
 $.ajax({
-  url: "http://localhost:8080/api/gudang/" + $("#gudang").val(),
+  url: "http://localhost:8080/api/gudang/" + $('#gudang').val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
-    $("#containergudang").removeClass("d-none");
+    $('#containergudang').removeClass('d-none');
     $("#gudang").val(data.nama_gudang);
     getWilayahKerja(data.id_kantor_cabang);
   },
-  error: function (error) {},
+  error: function (error) {
+  },
 });
 
 // GET WILAYAH KERJA
@@ -53,7 +55,8 @@ function getWilayahKerja(idkantor) {
         kabupatenkota.append(listoptionkabupatenkota);
       });
     },
-    error: function (error) {},
+    error: function (error) {
+    },
   });
 }
 
@@ -64,20 +67,18 @@ function showKecamatan() {
   const kecamatan = $("#pilihkecamatan");
   if (kabupatenkotadipilih == 0) {
     kecamatan.empty();
-    var listoptionkecamatan = "<option value='0'>Pilih Kecamatan</option>";
+    var listoptionkecamatan =
+      "<option value='0'>Pilih Kecamatan</option>";
     kecamatan.append(listoptionkecamatan);
   }
   $.ajax({
-    url:
-      "http://localhost:8080/api/pbp/" +
-      $("#alokasi").val() +
-      "/kecamatanbykabupaten/" +
-      kabupatenkotadipilih,
+    url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/kecamatanbykabupaten/" + kabupatenkotadipilih,
     type: "GET",
     dataType: "json",
     success: function (data) {
       kecamatan.empty();
-      var listoptionkecamatan = "<option value='0'>Pilih Kecamatan</option>";
+      var listoptionkecamatan =
+        "<option value='0'>Pilih Kecamatan</option>";
       kecamatan.append(listoptionkecamatan);
       $.each(data.datakecamatan, function (index, listkecamatan) {
         listoptionkecamatan =
@@ -89,13 +90,14 @@ function showKecamatan() {
         kecamatan.append(listoptionkecamatan);
       });
     },
-    error: function (error) {},
+    error: function (error) {
+    },
   });
 }
 
 // SET FORMAT DATA
 $("#tamilkanlo").click(function () {
-  if ($("#alokasi").val() == null) {
+  if ($('#alokasi').val() == null) {
     Swal.fire({
       icon: "error",
       title: "Loading Order (LO)",
@@ -104,7 +106,7 @@ $("#tamilkanlo").click(function () {
       timer: 3000,
     });
   } else {
-    var bahantanggal = $("#datatanggal").val();
+    var bahantanggal = $('#datatanggal').val();
     var tanggal = bahantanggal.substring(3, 5);
     var bulan = bahantanggal.substring(0, 2);
     var tahun = bahantanggal.substring(6, 10);
@@ -114,19 +116,13 @@ $("#tamilkanlo").click(function () {
     tahun = bahantanggal.substring(19, 23);
     var akhir = tahun + "-" + bulan + "-" + tanggal;
     $.ajax({
-      url:
-        "http://localhost:8080/api/lo/" +
-        $("#alokasi").val() +
-        "/filter/" +
-        mulai +
-        "/" +
-        akhir,
+      url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/filter/" + mulai + "/" + akhir,
       type: "GET",
       dataType: "json",
       success: function (data) {
         if (data.status == "200") {
-          $("#filterdatatable").removeClass("d-none");
-          $("#tablelo").removeClass("d-none");
+          $('#filterdatatable').removeClass('d-none');
+          $('#tablelo').removeClass('d-none');
           var datanya = [];
           var nomorwo = "";
           $.each(data.data, function (index, lo) {
@@ -167,7 +163,6 @@ $("#tamilkanlo").click(function () {
             columns: [
               { data: "tanggal_muat" },
               { data: "nomor_wo" },
-              { data: "nomor_lo" },
               { data: "pengirim" },
               {
                 data: "muatan",
@@ -193,9 +188,9 @@ $("#tamilkanlo").click(function () {
             ],
           });
         } else {
-          $("#filterdatatable").addClass("d-none");
-          $("#tablelo").addClass("d-none");
-          $("#tablelo_paginate").addClass("d-none");
+          $('#filterdatatable').addClass('d-none');
+          $('#tablelo').addClass('d-none');
+          $('#tablelo_paginate').addClass('d-none');
           Swal.fire({
             icon: "error",
             title: "Loading Order (LO)",

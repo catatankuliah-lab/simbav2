@@ -2,13 +2,13 @@
 
 namespace App\Controllers\API\LO;
 
-use App\Models\JanuariSJModel;
-use App\Models\LOJanuariModel;
-use App\Models\PBPJanuariModel;
+use App\Models\FebruariSJModel;
+use App\Models\LOFebruariModel;
+use App\Models\PBPFebruariModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class LOJanuariController extends ResourceController
+class LOFebruariController extends ResourceController
 {
 
     use ResponseTrait;
@@ -18,9 +18,9 @@ class LOJanuariController extends ResourceController
 
     public function __construct()
     {
-        $this->model = new LOJanuariModel();
-        $this->modelSJ = new JanuariSJModel();
-        $this->modelPBP = new PBPJanuariModel();
+        $this->model = new LOFebruariModel();
+        $this->modelSJ = new FebruariSJModel();
+        $this->modelPBP = new PBPFebruariModel();
     }
 
     public function getSession()
@@ -308,8 +308,8 @@ class LOJanuariController extends ResourceController
     {
         $datalo = $this->model->getkebutuhanupload($idlo);
         $namagudang = substr($datalo->nama_gudang, 5);
-        $alamatnya = FCPATH  . 'UPLOAD/1/LO/' . $namagudang . '/' . $datalo->tanggal_muat . '/';
-        $path = 'UPLOAD/1/LO/' . $namagudang . '/' . $datalo->tanggal_muat . '/';
+        $alamatnya = FCPATH  . 'UPLOAD/2/LO/' . $namagudang . '/' . $datalo->tanggal_muat . '/';
+        $path = 'UPLOAD/2/LO/' . $namagudang . '/' . $datalo->tanggal_muat . '/';
         $file1 = $this->request->getFile('filewo');
         $file2 = $this->request->getFile('filelo');
         $file3 = $this->request->getFile('filedo');

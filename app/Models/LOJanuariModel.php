@@ -381,6 +381,7 @@ class LOJanuariModel extends Model
             ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
             ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
             ->where('januari_lo.id_kantor', $idkantor)
+          	->where('januari_lo.status_dokumen_muat', 'LENGKAP')
             ->where('januari_lo.tanggal_muat >=', $awal)
             ->where('januari_lo.tanggal_muat <=', $akhir)
             ->groupBy('januari_sj.nomor_lo')

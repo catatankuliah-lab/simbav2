@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\Database\Query;
 
 class GudangModel extends Model
 {
@@ -11,7 +12,7 @@ class GudangModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     protected $protectFields    = true;
-    protected $allowedFields = ['id_kantor_cabang', 'nama_gudang', 'alamat_gudang'];
+    protected $allowedFields = ['id_kantor', 'id_kantor_cabang', 'nama_gudang', 'alamat_gudang'];
 
     // Validation
     protected $validationRules = [
@@ -34,7 +35,7 @@ class GudangModel extends Model
         ],
     ];
 
-    public function showbykantor($idKantor)
+    public function getGudangByKantor($idKantor)
     {
         $query = $this->db->table('gudang')
             ->select('gudang.*, kantor_cabang.*')

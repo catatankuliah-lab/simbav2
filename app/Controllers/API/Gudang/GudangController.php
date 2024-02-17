@@ -30,7 +30,7 @@ class GudangController extends ResourceController
 
     public function showbykantor($id = null)
     {
-        $data = $this->model->showbykantor($id);
+        $data = $this->model->getGudangByKantor($id);
         if ($data) {
             return $this->respond($data);
         } else {
