@@ -32,7 +32,7 @@ $("#prosesLogin").click(function () {
           timer: 3000,
           showConfirmButton: false,
         }).then(() => {
-          window.location.href = "http://localhost:8080/kantorcabang";
+          window.location.href = "http://localhost:8080/itkantorcabang";
         });
       } else if (data.id_hak_akses == 4) {
         Swal.fire({

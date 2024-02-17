@@ -61,5 +61,5 @@
     </div>
 </div>
 
-<script src="<?= base_url('assets/js/kantorcabang/laporan/getdetailwo.js') ?>"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/laporan/getdetailwo2.js"></script>
 <?php $this->endSection() ?>

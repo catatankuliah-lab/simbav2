@@ -177,11 +177,11 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
 
     // CEK LO SESUAI ALOKASI NANA
     $routes->post('lo/1/create', 'LO\LOJanuariController::create');
-    $routes->get('lo/2/create', 'LO\LOFebruariController::create');
-    $routes->get('lo/3/create', 'LO\LOMaretController::create');
-    $routes->get('lo/4/create', 'LO\LOAprilController::create');
-    $routes->get('lo/5/create', 'LO\LOMeiController::create');
-    $routes->get('lo/6/create', 'LO\LOJuniController::create');
+    $routes->post('lo/2/create', 'LO\LOFebruariController::create');
+    $routes->post('lo/3/create', 'LO\LOMaretController::create');
+    $routes->post('lo/4/create', 'LO\LOAprilController::create');
+    $routes->post('lo/5/create', 'LO\LOMeiController::create');
+    $routes->post('lo/6/create', 'LO\LOJuniController::create');
 
     // PBP SELECT KECAMATAN BY KABUPATEN KOTA NANA
     $routes->get('pbp/1/kecamatanbykabupaten/(:segment)', 'PBP\PBPJanuariController::kecamatanbykabupaten/$1');

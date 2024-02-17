@@ -5,11 +5,8 @@
     <div class="col-md-12 col-lg-12">
         <div class="card-body">
             <h4 class="card-title mb-3">Loading Order (LO)</h4>
-            <h6 class="card-subtitle mb-3">
-                Klik <a style="font-weight: bolder;" href="<?= base_url('' . $nomorlo) ?>">disini</a> untuk mengelola Loading Order (LO)
-            </h6>
             <div class="row">
-                <input type="text" value="<?= $id_sj ?>" id="idsj" name="idsj" hidden>
+                <input type="text" value="<?= $idspmbast ?>" id="idspmbast" hidden>
                 <div class="col-md-4 mb-3">
                     <label for="tanggalpembuatan" class="h6">Tanggal Pembuatan</label>
                     <input readonly value="" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan Nama Driver Disini" id="tanggalpembuatan" name="tanggalpembuatan">
@@ -43,5 +40,5 @@
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets/js/kantorcabang/lo/getdetailsuratjalan.js') ?>"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/lo/getdetailsuratjalan.js"></script>
 <?php $this->endSection() ?>

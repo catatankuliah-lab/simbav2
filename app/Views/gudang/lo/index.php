@@ -52,19 +52,18 @@
                         <tr>
                             <th scope="col">Tanggal</th>
                             <th scope="col">No WO</th>
-                            <th scope="col">No Loading Order (LO)</th>
                             <th scope="col">Nopol Mobil/Driver</th>
                             <th scope="col">Total Muatan (Kg)</th>
                             <th scope="col">Status</th>
                             <th scope="col" class="text-center">Detail</th>
                         </tr>
                     </thead>
-                    <tbody id="datalo">
+                    <tbody id="datalo1">
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<script src="<?= base_url('assets/js/gudang/lo/getalllo.js') ?>"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/gudang/lo/getalllo2.js"></script>
 <?php $this->endSection() ?>

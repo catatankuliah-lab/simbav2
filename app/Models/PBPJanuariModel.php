@@ -49,6 +49,7 @@ class PBPJanuariModel extends Model
         $query = $this->db->table('januari_pbp')
             ->select('januari_pbp.*')
             ->where('januari_pbp.nama_kecamatan', $namakecamatan)
+          	->where('januari_pbp.nama_kabupaten_kota', $namakecamatan)
             ->groupBy('januari_pbp.nama_desa_kelurahan')
             ->get();
         return $query->getResult();
