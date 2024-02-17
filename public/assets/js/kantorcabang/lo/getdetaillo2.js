@@ -1,5 +1,5 @@
 $.ajax({
-  url: "https://delapandelapanlogistics.com/api/lo/1/detail/" + $("#nomorlo").val(),
+  url: "http://localhost:8080/api/lo/1/detail/" + $("#nomorlo").val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
@@ -7,11 +7,11 @@ $.ajax({
     $("#tanggalpembuatan").val(data[0].tanggal_muat);
     $("#nopoldriver").val(
       data[0].nomor_mobil +
-        " / " +
-        data[0].nama_driver +
-        " (" +
-        data[0].nomor_driver +
-        ")"
+      " / " +
+      data[0].nama_driver +
+      " (" +
+      data[0].nomor_driver +
+      ")"
     );
     const datalo = $("#datalo");
 

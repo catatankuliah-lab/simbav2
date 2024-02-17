@@ -3,7 +3,7 @@ const datalo = $("#datalo");
 // console.log(idkantor);
 
 $.ajax({
-  url: "https://delapandelapanlogistics.com/api/alokasi",
+  url: "http://localhost:8080/api/alokasi",
   method: "GET",
   dataType: "json",
   success: function (data) {
@@ -21,7 +21,7 @@ $.ajax({
 });
 
 $.ajax({
-  url: "https://delapandelapanlogistics.com/api/gudang/kantor/" + idkantor,
+  url: "http://localhost:8080/api/gudang/kantor/" + idkantor,
   method: "GET",
   dataType: "json",
   success: function (data) {
@@ -44,7 +44,7 @@ $.ajax({
 });
 
 $.ajax({
-  url: "https://delapandelapanlogistics.com/api/wilayahkerja/" + idkantor,
+  url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
   type: "GET",
   dataType: "json",
   success: function (data) {
@@ -67,7 +67,7 @@ $.ajax({
 });
 
 $.ajax({
-  url: "https://delapandelapanlogistics.com/api/wilayahkerja/" + idkantor,
+  url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
   method: "GET",
   dataType: "json",
   success: function (data) {
@@ -102,7 +102,7 @@ function showKecamatan() {
   }
   $.ajax({
     url:
-      "https://delapandelapanlogistics.com/api/kecamatan/kabupatenkota/" +
+      "http://localhost:8080/api/kecamatan/kabupatenkota/" +
       kabupatenkotadipilih,
     type: "GET",
     dataType: "json",
@@ -139,7 +139,7 @@ $("#filterLO").on("click", function () {
   } else {
     // DOWNLOAD EXCEL
     document.getElementById("formDownload").action =
-      "https://delapandelapanlogistics.com/itkantorcabang/lo/"+$('#alokasi').val()+"/downloadexcel/" +
+      "http://localhost:8080/itkantorcabang/lo/" + $('#alokasi').val() + "/downloadexcel/" +
       $("#alokasi").val();
     var gudang = $("#pilihgudang").val();
     var kabupaten = $("#pilihkabupatenkota").val();
@@ -149,7 +149,7 @@ $("#filterLO").on("click", function () {
     if ((alokasi != 0, gudang != 0 && kabupaten == 0 && kecamatan == 0)) {
       $.ajax({
         url:
-          "https://delapandelapanlogistics.com/api/lo/" +
+          "http://localhost:8080/api/lo/" +
           alokasi +
           "/gudangbykantor/" +
           gudang,
@@ -180,7 +180,7 @@ $("#filterLO").on("click", function () {
               muatan: lo.jumlah_penyaluran_januari,
               status: lo.status_dokumen_muat,
               link:
-                "https://delapandelapanlogistics.com/itkantorcabang/lo/" +
+                "http://localhost:8080/itkantorcabang/lo/" +
                 $("#alokasi").val() +
                 "/detail/" +
                 lo.nomor_lo,
@@ -243,7 +243,7 @@ $("#filterLO").on("click", function () {
     ) {
       $.ajax({
         url:
-          "https://delapandelapanlogistics.com/api/lo/" +
+          "http://localhost:8080/api/lo/" +
           alokasi +
           "/kabupatenbykantor/" +
           kabupaten,
@@ -273,7 +273,7 @@ $("#filterLO").on("click", function () {
               muatan: lo.jumlah_penyaluran_januari,
               status: lo.status_dokumen_muat,
               link:
-                "https://delapandelapanlogistics.com/itkantorcabang/lo/" +
+                "http://localhost:8080/itkantorcabang/lo/" +
                 $("#alokasi").val() +
                 "/detail/" +
                 lo.nomor_lo,
@@ -336,7 +336,7 @@ $("#filterLO").on("click", function () {
     ) {
       $.ajax({
         url:
-          "https://delapandelapanlogistics.com/api/lo/" +
+          "http://localhost:8080/api/lo/" +
           alokasi +
           "/gudangdankabupaten/" +
           gudang +
@@ -368,7 +368,7 @@ $("#filterLO").on("click", function () {
               muatan: lo.jumlah_penyaluran_januari,
               status: lo.status_dokumen_muat,
               link:
-                "https://delapandelapanlogistics.com/itkantorcabang/lo/" +
+                "http://localhost:8080/itkantorcabang/lo/" +
                 $("#alokasi").val() +
                 "/detail/" +
                 lo.nomor_lo,
@@ -431,7 +431,7 @@ $("#filterLO").on("click", function () {
     ) {
       $.ajax({
         url:
-          "https://delapandelapanlogistics.com/api/lo/" +
+          "http://localhost:8080/api/lo/" +
           alokasi +
           "/kecamatanbykabupaten/" +
           kabupaten +
@@ -463,7 +463,7 @@ $("#filterLO").on("click", function () {
               muatan: lo.jumlah_penyaluran_januari,
               status: lo.status_dokumen_muat,
               link:
-                "https://delapandelapanlogistics.com/itkantorcabang/lo/" +
+                "http://localhost:8080/itkantorcabang/lo/" +
                 $("#alokasi").val() +
                 "/detail/" +
                 lo.nomor_lo,
@@ -526,7 +526,7 @@ $("#filterLO").on("click", function () {
     ) {
       $.ajax({
         url:
-          "https://delapandelapanlogistics.com/api/lo/" +
+          "http://localhost:8080/api/lo/" +
           alokasi +
           "/gudangkabupatenkecamatan/" +
           gudang +
@@ -560,7 +560,7 @@ $("#filterLO").on("click", function () {
               muatan: lo.jumlah_penyaluran_januari,
               status: lo.status_dokumen_muat,
               link:
-                "https://delapandelapanlogistics.com/itkantorcabang/lo/" +
+                "http://localhost:8080/itkantorcabang/lo/" +
                 $("#alokasi").val() +
                 "/detail/" +
                 lo.nomor_lo,
@@ -622,7 +622,7 @@ $("#filterLO").on("click", function () {
       // DATA LOADING ORDER BY ID_KANTOR
       $.ajax({
         url:
-          " https://delapandelapanlogistics.com/api/lo/" +
+          " http://localhost:8080/api/lo/" +
           $("#alokasi").val() +
           "/getbyidkantor/" +
           idkantor,
@@ -654,7 +654,7 @@ $("#filterLO").on("click", function () {
               muatan: lo.jumlah_penyaluran_januari,
               status: lo.status_dokumen_muat,
               link:
-                "https://delapandelapanlogistics.com/itkantorcabang/lo/" +
+                "http://localhost:8080/itkantorcabang/lo/" +
                 $("#alokasi").val() +
                 "/detail/" +
                 lo.nomor_lo,

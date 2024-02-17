@@ -8,7 +8,7 @@ $("#prosesLogin").click(function () {
   };
 
   $.ajax({
-    url: "https://delapandelapanlogistics.com/api/auth/proseslogin",
+    url: "http://localhost:8080/api/auth/proseslogin",
     type: "POST",
     dataType: "json",
     contentType: "application/json",
@@ -22,7 +22,7 @@ $("#prosesLogin").click(function () {
           timer: 3000,
           showConfirmButton: false,
         }).then(() => {
-          window.location.href = "https://delapandelapanlogistics.com/kantorpusat";
+          window.location.href = "http://localhost:8080/kantorpusat";
         });
       } else if (data.id_hak_akses == 3) {
         Swal.fire({
@@ -32,7 +32,7 @@ $("#prosesLogin").click(function () {
           timer: 3000,
           showConfirmButton: false,
         }).then(() => {
-          window.location.href = "https://delapandelapanlogistics.com/itkantorcabang";
+          window.location.href = "http://localhost:8080/itkantorcabang";
         });
       } else if (data.id_hak_akses == 4) {
         Swal.fire({
@@ -42,7 +42,7 @@ $("#prosesLogin").click(function () {
           timer: 3000,
           showConfirmButton: false,
         }).then(() => {
-          window.location.href = "https://delapandelapanlogistics.com/gudang";
+          window.location.href = "http://localhost:8080/gudang";
         });
       }
     },

@@ -1,5 +1,5 @@
 $.ajax({
-  url: "https://delapandelapanlogistics.com/api/lo/suratjalan/" + $("#nomor_lo").val(),
+  url: "http://localhost:8080/api/lo/suratjalan/" + $("#nomor_lo").val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
@@ -7,11 +7,11 @@ $.ajax({
     $("#tanggalpembuatan").val(data[0].tanggal_muat);
     $("#nopoldriver").val(
       data[0].nomor_mobil +
-        " / " +
-        data[0].nama_driver +
-        " (" +
-        data[0].nomor_driver +
-        ")"
+      " / " +
+      data[0].nama_driver +
+      " (" +
+      data[0].nomor_driver +
+      ")"
     );
     $("#kabupaten").val(data[0].nama_kabupaten_kota);
     $("#kecamatan").val(data[0].nama_kecamatan);
@@ -31,7 +31,7 @@ $.ajax({
 
 $("#filebuktisj").on("change", function () {
   $.ajax({
-    url: "https://delapandelapanlogistics.com/api/v1/lo/suratjalan/" + $("#idspmbast").val(),
+    url: "http://localhost:8080/api/v1/lo/suratjalan/" + $("#idspmbast").val(),
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -46,7 +46,7 @@ $("#filebuktisj").on("change", function () {
       };
       formData.append("additionalData", JSON.stringify(additionalData));
       $.ajax({
-        url: "https://delapandelapanlogistics.com/api/v1/lo/uploadsj",
+        url: "http://localhost:8080/api/v1/lo/uploadsj",
         type: "POST",
         data: formData,
         processData: false,
@@ -91,7 +91,7 @@ $("#filebuktisj").on("change", function () {
 
 $("#filebuktidriver").on("change", function () {
   $.ajax({
-    url: "https://delapandelapanlogistics.com/api/v1/lo/suratjalan/" + $("#idspmbast").val(),
+    url: "http://localhost:8080/api/v1/lo/suratjalan/" + $("#idspmbast").val(),
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -106,7 +106,7 @@ $("#filebuktidriver").on("change", function () {
       };
       formData.append("additionalData", JSON.stringify(additionalData));
       $.ajax({
-        url: "https://delapandelapanlogistics.com/api/v1/lo/uploadsjdriver",
+        url: "http://localhost:8080/api/v1/lo/uploadsjdriver",
         type: "POST",
         data: formData,
         processData: false,

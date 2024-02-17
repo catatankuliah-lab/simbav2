@@ -1,7 +1,7 @@
 var idkantor = $('#idk').val();
 
 $.ajax({
-    url: "https://delapandelapanlogistics.com/api/wilayahkerja/" + idkantor,
+    url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
     method: "GET",
     dataType: "json",
     success: function (data) {
@@ -13,7 +13,7 @@ $.ajax({
 
 $("#alokasi").change(function () {
     $.ajax({
-        url: "https://delapandelapanlogistics.com/api/wilayahkerja/" + idkantor,
+        url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -22,7 +22,7 @@ $("#alokasi").change(function () {
             $.each(data, function (index, datapbpperkabupatenkota) {
                 $.ajax({
                     type: 'get',
-                    url: "https://delapandelapanlogistics.com/api/pbp/" + $('#alokasi').val() + "/" + datapbpperkabupatenkota.nama_kabupaten_kota,
+                    url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/" + datapbpperkabupatenkota.nama_kabupaten_kota,
                     async: false,
                 }).done(function (response) {
                     $('#idgrafik').removeClass('d-none');

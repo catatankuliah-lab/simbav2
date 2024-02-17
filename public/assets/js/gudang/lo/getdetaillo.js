@@ -14,7 +14,7 @@ var nomor_so = "";
 
 // get data lo by nomor lo
 $.ajax({
-  url: "https://delapandelapanlogistics.com/api/lo/detail/" + alokasi + "/" + nomor_Lo,
+  url: "http://localhost:8080/api/lo/detail/" + alokasi + "/" + nomor_Lo,
   type: "GET",
   dataType: "json",
   success: function (data) {
@@ -24,12 +24,12 @@ $.ajax({
     var output4 = $("#outdo");
     var output5 = $("#outsjbulog");
     var output6 = $("#outbast");
-    output1.attr("src", "https://delapandelapanlogistics.com/" + data.data.path_upload_wo + data.data.file_upload_wo);
-    output2.attr("src", "https://delapandelapanlogistics.com/" + data.data.path_upload_wo + data.data.file_uplaod_lo);
-    output3.attr("src", "https://delapandelapanlogistics.com/" + data.data.path_upload_wo + data.data.file_upload_salur_bulog);
-    output4.attr("src", "https://delapandelapanlogistics.com/" + data.data.path_upload_wo + data.data.file_upload_do);
-    output5.attr("src", "https://delapandelapanlogistics.com/" + data.data.path_upload_wo + data.data.file_upload_sj_bulog);
-    output6.attr("src", "https://delapandelapanlogistics.com/" + data.data.path_upload_wo + data.data.file_upload_bast_bulog);
+    output1.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_wo);
+    output2.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_uplaod_lo);
+    output3.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_salur_bulog);
+    output4.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_do);
+    output5.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_sj_bulog);
+    output6.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_bast_bulog);
     $('#tanggal_pembuatan').val(data.data.tanggal_muat);
     $('#alokasi').val(alokasi);
     $('#idlo').val(data.data.id_lo);
@@ -52,7 +52,7 @@ var kode_so = "";
 // AMBIL DATA SJ DARI NOMOR LO
 function getallsj(nomorlo) {
   $.ajax({
-    url: "https://delapandelapanlogistics.com/api/suratjalan/" + $('#alokasi').val() + "/datasj/" + $('#nomor_lo').val(),
+    url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/datasj/" + $('#nomor_lo').val(),
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -70,7 +70,7 @@ function getallsj(nomorlo) {
             "<input readonly value='" + sj.jumlah_penyaluran_januari + " Kg'type='text' style='border:none; background-color:transparent !important; width:75px'>" +
             "</td>" +
             "<td class='text-center'>" +
-            "<a href='https://delapandelapanlogistics.com/gudang/sj/detailsuratjalan/" + $('#alokasi').val() + "/" + sj.id_sj + "' type='button' class='text-primary' style='border-radius: 5px;'>" +
+            "<a href='http://localhost:8080/gudang/sj/detailsuratjalan/" + $('#alokasi').val() + "/" + sj.id_sj + "' type='button' class='text-primary' style='border-radius: 5px;'>" +
             "<i class='fas fa-search-plus'></i>" +
             "</a>" +
             "</td>" +
@@ -157,7 +157,7 @@ $('#prosesupdate').click(function (e) {
     console.log(additionalData);
     formData.append('additionalData', JSON.stringify(additionalData));
     $.ajax({
-      url: "https://delapandelapanlogistics.com/api/lo/" + $('#alokasi').val() + "/uploadfile/" + $('#idlo').val(),
+      url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/uploadfile/" + $('#idlo').val(),
       type: "POST",
       data: formData,
       processData: false,

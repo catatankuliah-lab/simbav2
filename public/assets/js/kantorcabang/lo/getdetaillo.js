@@ -1,5 +1,5 @@
 $.ajax({
-  url: " https://delapandelapanlogistics.com/api/lo/1/detaillo/" + $("#nomorlo").val(),
+  url: " http://localhost:8080/api/lo/1/detaillo/" + $("#nomorlo").val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
@@ -7,11 +7,11 @@ $.ajax({
     $("#tanggalpembuatan").val(data.tanggal_muat);
     $("#nopoldriver").val(
       data.nomor_mobil +
-        " / " +
-        data.nama_driver +
-        " (" +
-        data.nomor_driver +
-        ")"
+      " / " +
+      data.nama_driver +
+      " (" +
+      data.nomor_driver +
+      ")"
     );
     const datalo = $("#datalo");
 
@@ -37,7 +37,7 @@ $.ajax({
         spm.total +
         "</td>" +
         "<td class='text-center'>" +
-        "<a href='https://delapandelapanlogistics.com/kantorcabang/lo/suratjalan/" +
+        "<a href='http://localhost:8080/kantorcabang/lo/suratjalan/" +
         spm.id_lo +
         "' type='button' class='text-primary' style='border-radius: 5px;'>" +
         "<i class='fas fa-search-plus'></i>" +

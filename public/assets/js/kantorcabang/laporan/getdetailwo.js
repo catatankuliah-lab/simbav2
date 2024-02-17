@@ -3,7 +3,7 @@ console.log($("#alokasi").val());
 
 $.ajax({
   url:
-    "https://delapandelapanlogistics.com/api/lo/" +
+    "http://localhost:8080/api/lo/" +
     $("#alokasi").val() +
     "/laporan/detail/" +
     $("#kodewo").val(),
@@ -61,6 +61,6 @@ $.ajax({
 
 $("#downloadwo").on("click", function () {
   window.location.href =
-    "https://delapandelapanlogistics.com/kantorcabang/lo/1/generatelaporanwo/" +
+    "http://localhost:8080/kantorcabang/lo/1/generatelaporanwo/" +
     $("#kodewo").val();
 });

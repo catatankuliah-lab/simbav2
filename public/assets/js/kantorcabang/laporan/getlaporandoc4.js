@@ -1,7 +1,7 @@
 const datawo = $("#datawo");
 
 $.ajax({
-  url: "https://delapandelapanlogistics.com/api/alokasi",
+  url: "http://localhost:8080/api/alokasi",
   method: "GET",
   dataType: "json",
   success: function (data) {
@@ -26,9 +26,9 @@ $(function () {
     function (start, end, label) {
       console.log(
         "A new date selection was made: " +
-          start.format("YYYY-MM-DD") +
-          " to " +
-          end.format("YYYY-MM-DD")
+        start.format("YYYY-MM-DD") +
+        " to " +
+        end.format("YYYY-MM-DD")
       );
     }
   );
@@ -62,7 +62,7 @@ $("#filterWO").on("click", function () {
 
     $.ajax({
       url:
-        "https://delapandelapanlogistics.com/api/lo/alokasi/" +
+        "http://localhost:8080/api/lo/alokasi/" +
         $("#alokasi").val() +
         "/awal/" +
         tanggalMulai +
@@ -98,7 +98,7 @@ $("#filterWO").on("click", function () {
               muatan: lo.total,
               status: lo.status_dokumen_muat,
               link:
-                "https://delapandelapanlogistics.com/itkantorcabang/lo/laporan/1/detail/" +
+                "http://localhost:8080/itkantorcabang/lo/laporan/1/detail/" +
                 lo.kode_wo,
             });
           });

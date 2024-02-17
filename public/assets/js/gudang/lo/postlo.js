@@ -24,7 +24,7 @@ function loadingswal() {
 
 // GET DETAIL DATA GUDANG
 $.ajax({
-    url: "https://delapandelapanlogistics.com/api/gudang/" + $('#gudang').val(),
+    url: "http://localhost:8080/api/gudang/" + $('#gudang').val(),
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -40,7 +40,7 @@ $.ajax({
 function getWilayahKerja(idkantor) {
     datalo.empty();
     $.ajax({
-        url: "https://delapandelapanlogistics.com/api/wilayahkerja/" + idkantor,
+        url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -68,7 +68,7 @@ $("#alokasi").on("change", function () {
 // MENGECEK NOMOR LO YANG SEDANG AKTIF
 function cekNomorLO(idalokasi) {
     $.ajax({
-        url: "https://delapandelapanlogistics.com/api/lo/" + idalokasi + "/ceknomorlo",
+        url: "http://localhost:8080/api/lo/" + idalokasi + "/ceknomorlo",
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -116,7 +116,7 @@ function generateNomorLo(idalokasi, id_gudang, id_kantor_cabang) {
     });
 
     $.ajax({
-        url: "https://delapandelapanlogistics.com/api/lo/" + idalokasi + "/bahannomorlo",
+        url: "http://localhost:8080/api/lo/" + idalokasi + "/bahannomorlo",
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -143,7 +143,7 @@ function showKecamatan() {
         kecamatan.append(listoptionkecamatan);
     }
     $.ajax({
-        url: "https://delapandelapanlogistics.com/api/pbp/" + $('#alokasi').val() + "/kecamatanbykabupaten/" + kabupatenkotadipilih,
+        url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/kecamatanbykabupaten/" + kabupatenkotadipilih,
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -171,7 +171,7 @@ function showDesaKelurahan() {
     loadingswal();
     const kecamatandipilih = $("#pilihkecamatan").find(":selected").val();
     $.ajax({
-        url: "https://delapandelapanlogistics.com/api/pbp/" + $('#alokasi').val() + "/desabykecamatan/" + kecamatandipilih,
+        url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/desabykecamatan/" + kecamatandipilih,
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -236,7 +236,7 @@ function proses(idpbp, index) {
             var nomor_surat_jalan = $('#nomor_lo').val();
             nomor_surat_jalan = "SJ" + nomor_surat_jalan.slice(2) + "-" + idpbp;
             $.ajax({
-                url: "https://delapandelapanlogistics.com/api/suratjalan/" + $('#alokasi').val() + "/ceknomorsj/" + nomor_surat_jalan,
+                url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/ceknomorsj/" + nomor_surat_jalan,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -262,7 +262,7 @@ function proses(idpbp, index) {
                             });
                         } else {
                             $.ajax({
-                                url: "https://delapandelapanlogistics.com/api/lo/" + $('#alokasi').val() + "/ceknomorlo/" + $('#nomor_lo').val(),
+                                url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/ceknomorlo/" + $('#nomor_lo').val(),
                                 type: "GET",
                                 dataType: "json",
                                 success: function (data) {
@@ -285,7 +285,7 @@ function proses(idpbp, index) {
                                             'nomor_surat_jalan': nomor_surat_jalan,
                                         };
                                         $.ajax({
-                                            url: "https://delapandelapanlogistics.com/api/suratjalan/" + $('#alokasi').val() + "/create",
+                                            url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/create",
                                             type: "POST",
                                             dataType: "json",
                                             contentType: "application/json",
@@ -325,7 +325,7 @@ function proses(idpbp, index) {
                                             'nomor_surat_jalan': nomor_surat_jalan,
                                         };
                                         $.ajax({
-                                            url: "https://delapandelapanlogistics.com/api/lo/" + $('#alokasi').val() + "/create",
+                                            url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/create",
                                             type: "POST",
                                             dataType: "json",
                                             contentType: "application/json",
@@ -369,7 +369,7 @@ function tampilkanDataMuat() {
     loadingswal();
     $("#simpanspm").removeClass("d-none");
     $.ajax({
-        url: "https://delapandelapanlogistics.com/api/suratjalan/" + $('#alokasi').val() + "/datasj/" + $('#nomor_lo').val(),
+        url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/datasj/" + $('#nomor_lo').val(),
         type: "GET",
         dataType: "json",
         success: function (data) {
@@ -432,21 +432,21 @@ function hapusLo(idsj, index) {
                 'id_sj': idsj
             };
             $.ajax({
-                url: "https://delapandelapanlogistics.com/api/suratjalan/" + $('#alokasi').val() + "/delete",
+                url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/delete",
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json",
                 data: JSON.stringify(datahapus),
                 success: function (data) {
                     $.ajax({
-                        url: "https://delapandelapanlogistics.com/api/suratjalan/" + $('#alokasi').val() + "/ceknomorlo/" + $('#nomor_lo').val(),
+                        url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/ceknomorlo/" + $('#nomor_lo').val(),
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
                             Swal.close();
                             if (data.status == "404") {
                                 $.ajax({
-                                    url: "https://delapandelapanlogistics.com/api/lo/" + $('#alokasi').val() + "/deletelo/" + ('#nomor_lo').val(),
+                                    url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/deletelo/" + ('#nomor_lo').val(),
                                     type: "DELETE",
                                     dataType: "json",
                                     success: function (data) {
@@ -458,7 +458,7 @@ function hapusLo(idsj, index) {
                         },
                         error: function (error) {
                             $.ajax({
-                                url: "https://delapandelapanlogistics.com/api/lo/" + $('#alokasi').val() + "/deletelo/" + $('#nomor_lo').val(),
+                                url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/deletelo/" + $('#nomor_lo').val(),
                                 type: "DELETE",
                                 dataType: "json",
                                 success: function (data) {
@@ -501,7 +501,7 @@ $("#simpanspm").on("click", function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "https://delapandelapanlogistics.com/api/lo/" + $('#alokasi').val() + "/ceknomorlosubmit",
+                url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/ceknomorlosubmit",
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
