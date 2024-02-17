@@ -56,6 +56,5 @@
         </div>
     </div>
 </div>
-
-<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/laporan/getlaporandoc.js"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/laporan/getlaporandoc4.js"></script>
 <?php $this->endSection() ?>

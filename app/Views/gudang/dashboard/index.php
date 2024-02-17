@@ -7,7 +7,7 @@
     <div class="col-md-4 px-4 mt-3">
         <label for="alokasi" class="h6">Pilih Alokasi</label>
         <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi">
-            <option value="0" selected disabled>Pilih Alokasi</option>
+          <option value="0" disabled selected>Pilih Alokasi</option>
         </select>
     </div>
     <div class="col-md-12 mt-4">
@@ -59,5 +59,5 @@
         </div>
     </div>
 </div>
-<script src="https://catatankuliah-lab.github.io/jssimbav2/gudang/dashboard/dashboard.js"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/gudang/dashboard/dashboard2.js"></script>
 <?php $this->endSection() ?>

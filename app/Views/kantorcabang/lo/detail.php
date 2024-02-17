@@ -29,7 +29,6 @@
                                 <th scope="col">Kecamatan</th>
                                 <th scope="col">Desa/Kelurahan</th>
                                 <th scope="col">Total Muatan (Kg)</th>
-                                <th scope="col" class="text-center">Detail</th>
                             </tr>
                         </thead>
                         <tbody id="datalo">
@@ -40,5 +39,5 @@
         </div>
     </div>
 </div>
-<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/lo/getdetaillo.js"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/lo/getdetaillo2.js"></script>
 <?php $this->endSection() ?>

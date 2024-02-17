@@ -1,16 +1,16 @@
 $.ajax({
-  url: " https://delapandelapanlogistics.com/api/lo/1/detaillo/" + $("#nomorlo").val(),
+  url: "https://delapandelapanlogistics.com/api/lo/1/detail/" + $("#nomorlo").val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
-    console.log(data);
-    $("#tanggalpembuatan").val(data.tanggal_muat);
+    console.log("Detail LO Ditemukan", data);
+    $("#tanggalpembuatan").val(data[0].tanggal_muat);
     $("#nopoldriver").val(
-      data.nomor_mobil +
+      data[0].nomor_mobil +
         " / " +
-        data.nama_driver +
+        data[0].nama_driver +
         " (" +
-        data.nomor_driver +
+        data[0].nomor_driver +
         ")"
     );
     const datalo = $("#datalo");
@@ -35,13 +35,6 @@ $.ajax({
         "</td>" +
         "<td>" +
         spm.total +
-        "</td>" +
-        "<td class='text-center'>" +
-        "<a href='https://delapandelapanlogistics.com/kantorcabang/lo/suratjalan/" +
-        spm.id_lo +
-        "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-        "<i class='fas fa-search-plus'></i>" +
-        "</a>" +
         "</td>" +
         "</tr >";
       datalo.append(listspm);

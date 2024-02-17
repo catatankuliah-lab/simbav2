@@ -12,33 +12,29 @@
                     <input type="text" name="kantor" id="kantor" value="<?= session()->get('id_kantor_cabang') ?>">
                 </div>
 
-                <div class="col-md-6 my-3">
+                <div class="col-md-4 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="alokasi" name="alokasi" style="height: 50px !important; font-size: 14px;" placeholder="Alokasi">
                         <option value="0" selected disabled>Pilih Alokasi</option>
                     </select>
                 </div>
-                <div class="col-md-6 my-3">
-                    <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterLO" name="filterLO">Tampilkan</button>
-                </div>
-            </div>
-
-            <div class="row" id="">
                 <div class="col-md-4 my-3">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihgudang" name="pilihgudang" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Gudang">
                         <option data-nama_gudang="0" value="0">Pilih Gudang</option>
                     </select>
                 </div>
-                <div class="col-md-4 my-3">
+                <div class="col-md-4 my-3 d-none">
                     <select class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkabupatenkota" name="pilihkabupatenkota" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kabupaten Kota" onchange="showKecamatan()">
                         <option data-nama_kabupaten='0' value="0">Pilih Nama Kabupaten/Kota</option>
                     </select>
                 </div>
-                <div class="col-md-4 my-3">
+                <!-- <div class="col-md-3 my-3 d-none">
                     <select class="form-control cuzstom-shadow custom-radius border-0 bg-white text-secondary px-4" id="pilihkecamatan" name="pilihkecamatan" style="height: 50px !important; font-size: 14px;" placeholder="Pilih Kecamatan">
                         <option value="0">Pilih Kecamatan</option>
                     </select>
+                </div> -->
+                <div class="col-md-4 my-3">
+                    <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="filterLO" name="filterLO">Tampilkan</button>
                 </div>
-
             </div>
             <div class="row d-none" id="filterSearch">
                 <div class="col-md-4 col-sm-12 my-3">
@@ -70,7 +66,6 @@
                                 <tr>
                                     <th scope="col">Tanggal</th>
                                     <th scope="col">Gudang</th>
-                                    <th scope="col">No Loading Order (LO)</th>
                                     <th scope="col">Nopol Mobil/Driver</th>
                                     <th scope="col">Total Muatan (Kg)</th>
                                     <th scope="col">Status</th>
@@ -87,6 +82,5 @@
         </div>
     </div>
 </div>
-
-<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/lo/getalllokantor.js"></script>
+<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/lo/getalllokantor7.js"></script>
 <?php $this->endSection() ?>

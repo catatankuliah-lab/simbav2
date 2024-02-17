@@ -6,7 +6,7 @@
         <div class="card-body">
             <h4 class="card-title mb-3">Loading Order (LO)</h4>
             <div class="row">
-                <input type="text" value="<?= $id_sj ?>" id="idsj" name="idsj" hidden>
+                <input type="text" value="<?= $idspmbast ?>" id="idspmbast" hidden>
                 <div class="col-md-4 mb-3">
                     <label for="tanggalpembuatan" class="h6">Tanggal Pembuatan</label>
                     <input readonly value="" class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan Nama Driver Disini" id="tanggalpembuatan" name="tanggalpembuatan">

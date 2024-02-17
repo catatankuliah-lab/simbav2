@@ -25,7 +25,7 @@
                         <option value="6">Juni 2024</option>
                     </select>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-3 d-none">
                     <label for="nomor_lo" class="h6">No Loading Order (LO)</label>
                     <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Nomor LO" id="nomor_lo" name="nomor_lo" readonly>
                 </div>
@@ -45,7 +45,7 @@
                     <label for="gudang" class="h6">Gudang Pengiriman</label>
                     <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Gudang Pengirirman" id="gudang" name="gudang">
                 </div>
-                <div class="col-md-12 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="totalpengiriman" class="h6">Total Pengiriman</label>
                     <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Kg" id="totalpengiriman" name="totalpengiriman" readonly>
                 </div>

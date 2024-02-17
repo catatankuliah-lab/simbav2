@@ -24,7 +24,7 @@ $(function () {
 
 // GET DETAIL DATA GUDANG
 $.ajax({
-  url: "http://localhost:8080/api/gudang/" + $('#gudang').val(),
+  url: "https://delapandelapanlogistics.com/api/gudang/" + $('#gudang').val(),
   type: "GET",
   dataType: "json",
   success: function (data) {
@@ -40,7 +40,7 @@ $.ajax({
 function getWilayahKerja(idkantor) {
   datalo.empty();
   $.ajax({
-    url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
+    url: "https://delapandelapanlogistics.com/api/wilayahkerja/" + idkantor,
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -72,7 +72,7 @@ function showKecamatan() {
     kecamatan.append(listoptionkecamatan);
   }
   $.ajax({
-    url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/kecamatanbykabupaten/" + kabupatenkotadipilih,
+    url: "https://delapandelapanlogistics.com/api/pbp/" + $('#alokasi').val() + "/kecamatanbykabupaten/" + kabupatenkotadipilih,
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -116,7 +116,7 @@ $("#tamilkanlo").click(function () {
     tahun = bahantanggal.substring(19, 23);
     var akhir = tahun + "-" + bulan + "-" + tanggal;
     $.ajax({
-      url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/filter/" + mulai + "/" + akhir,
+      url: "https://delapandelapanlogistics.com/api/lo/" + $('#alokasi').val() + "/filter/" + mulai + "/" + akhir,
       type: "GET",
       dataType: "json",
       success: function (data) {
@@ -145,7 +145,7 @@ $("#tamilkanlo").click(function () {
               muatan: lo.total,
               status: lo.status_dokumen_muat,
               link: {
-                link1: "http://localhost:8080/gudang/lo/detail/" + lo.nomor_lo,
+                link1: "https://delapandelapanlogistics.com/gudang/lo/detail/" + lo.nomor_lo,
                 link2: "lo/downloadPDFLO/" + $('#alokasi').val() + "/" + lo.nomor_lo,
               }
             });
@@ -163,7 +163,6 @@ $("#tamilkanlo").click(function () {
             columns: [
               { data: "tanggal_muat" },
               { data: "nomor_wo" },
-              { data: "nomor_lo" },
               { data: "pengirim" },
               {
                 data: "muatan",
