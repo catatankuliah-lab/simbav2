@@ -27,5 +27,5 @@
         </div>
     </div>
 </div>
-<script src="https://catatankuliah-lab.github.io/jssimbav2/kantorcabang/dashboard/v2.js"></script>
+<script src="<?= base_url('assets/js/kantorcabang/dashboard/v2.js') ?>"></script>
 <?php $this->endSection() ?>

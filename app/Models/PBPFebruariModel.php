@@ -44,23 +44,34 @@ class PBPFebruariModel extends Model
     }
 
     // NANA AMBIL NAMA DESA
-    public function desabykecamatan($namakecamatan)
+    public function desabykecamatan($namakecamatan, $namakabupaten)
     {
         $query = $this->db->table('februari_pbp')
             ->select('februari_pbp.*')
             ->where('februari_pbp.nama_kecamatan', $namakecamatan)
+            ->where('februari_pbp.nama_kabupaten_kota', $namakabupaten)
             ->groupBy('februari_pbp.nama_desa_kelurahan')
             ->get();
         return $query->getResult();
     }
 
-    // NANA AMBIL NAMA DESA
-    public function bahandashboardkc($namakabupatenkota)
+    // NANA DASHBOAR KANTOR CABANG
+    public function getsumpbp($namakabupatenkota)
     {
         $query = $this->db->table('februari_pbp')
             ->select('februari_pbp.nama_kabupaten_kota')
             ->selectSum('februari_pbp.jumlah_pbp', 'jpbp')
             ->selectSum('februari_pbp.jumlah_alokasi', 'jalokasi')
+            ->where('februari_pbp.nama_kabupaten_kota', $namakabupatenkota)
+            ->get();
+        return $query->getRow();
+    }
+
+    public function bahandashboardkc($namakabupatenkota)
+    {
+        $query = $this->db->table('februari_pbp')
+            ->selectSum('februari_sj.jumlah_penyaluran_januari', 'jpenyaluran')
+            ->join('februari_sj', 'februari_sj.id_pbp = februari_pbp.id_pbp')
             ->where('februari_pbp.nama_kabupaten_kota', $namakabupatenkota)
             ->get();
         return $query->getRow();

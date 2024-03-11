@@ -43,48 +43,14 @@
                     <input readonly class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan No DO Disini" id="desakelurahan" name="desakelurahan">
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="nopolmobil" class="h6">Nopol Mobil</label>
-                    <input readonly class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan Nopol Mobil Disini" id="nopolmobil" name="nopolmobil">
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="namadriver" class="h6">Nama Driver</label>
-                    <input readonly class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan Nama Driver Disini" id="namadriver" name="namadriver">
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="nomordriver" class="h6">Nomor Telpon Driver</label>
-                    <input readonly class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Masukan No Telpon Driver Disini" id="nomordriver" name="nomordriver">
-                </div>
-                <div class="col-md-4 mb-3">
                     <label for="totalpengiriman" class="h6">Total Pengiriman</label>
                     <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="text" style="height: 50px !important; font-size: 14px;" placeholder="Kg" id="totalpengiriman" name="totalpengiriman" readonly>
                 </div>
+                <div class="col-md-4 mb-3">
+                    <label for="jamditerima" class="h6">Jam Diterima</label>
+                    <input class="form-control custom-shadow custom-radius border-0 bg-white text-secondary px-4" type="time" style="height: 50px !important; font-size: 14px;" placeholder="Jam Pengiriman" id="jamditerima" name="jamditerima">
+                </div>
             </div>
-            <form id="uploadForm" class="row" enctype="multipart/form-data">
-                <div class="col-md-6 mb-3 mt-2" id="formupload">
-                    <label for="filesj" class="h6">Upload Surat Jalan</label>
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input custom-shadow border-0 bg-white text-secondary px-4" style="height: 50px !important; font-size: 14px;" id="filesj" name="filesj">
-                            <label class="custom-file-label custom-shadow border-0 bg-white text-secondary px-4" style="height: 50px !important; font-size: 14px; border-radius: 25px; padding-top: 15px;" for="filesj">Upload Surat Jalan Disini</label>
-                        </div>
-                    </div>
-                    <a href="" type="button" class="h6 ml-4 mt-2" data-bs-toggle="modal" data-bs-target="#modalsj">
-                        Preview Surat Jalan
-                    </a>
-                </div>
-                <div class="col-md-6 mb-3 mt-2" id="formupload">
-                    <label for="filebukti" class="h6">Upload Bukti Penyerahan (Driver)</label>
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input custom-shadow border-0 bg-white text-secondary px-4" style="height: 50px !important; font-size: 14px;" id="filebukti" name="filebukti">
-                            <label class="custom-file-label custom-shadow border-0 bg-white text-secondary px-4" style="height: 50px !important; font-size: 14px; border-radius: 25px; padding-top: 15px;" for="filebukti">Upload Bukti Penyerahan Disini</label>
-                        </div>
-                    </div>
-                    <a href="" type="button" class="h6 ml-4 mt-2" data-bs-toggle="modal" data-bs-target="#modalbukti">
-                        Preview LO
-                    </a>
-                </div>
-            </form>
             <div class="row">
                 <div class="col-md-12 my-3">
                     <button type="button" style="height: 50px !important; font-size: 14px;" class="btn waves-effect custom-shadow waves-light btn-rounded btn-primary w-100" id="prosesupdate" name="prosesupdate">Upload Data</button>
@@ -93,30 +59,5 @@
         </div>
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="modalsj" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title fs-5" id="exampleModalLabel">Privew Dokumen Surat Jalan</h6>
-            </div>
-            <div class="modal-body">
-                <img id="outsj" src="" width="100%" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modalbukti" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title fs-5" id="exampleModalLabel">Privew Dokumen Bukti Penyerahan (Driver)</h6>
-            </div>
-            <div class="modal-body">
-                <img id="outbukti" src="" width="100%" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-<script src="https://catatankuliah-lab.github.io/jssimbav2/gudang/lo/getdetailsuratjalan.js"></script>
+<script src="<?= base_url('assets/js/gudang/lo/getdetailsuratjalan.js') ?>"></script>
 <?php $this->endSection() ?>

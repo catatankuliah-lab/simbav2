@@ -131,8 +131,13 @@ $("#tamilkanlo").click(function () {
             } else {
               nomorwo = lo.nomor_wo;
             }
+            var tanggalObj = new Date(lo.tanggal_muat);
+            var tanggal = tanggalObj.getDate();
+            var bulan = tanggalObj.getMonth() + 1;
+            var tahun = tanggalObj.getFullYear();
+            var tanggalbaru = tanggal + "-" + bulan + "-" + tahun;
             datanya.push({
-              tanggal_muat: lo.tanggal_muat,
+              tanggal_muat: tanggalbaru,
               nomor_wo: nomorwo,
               nomor_lo: lo.nomor_lo,
               pengirim:

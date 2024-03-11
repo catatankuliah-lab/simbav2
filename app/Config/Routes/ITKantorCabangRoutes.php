@@ -16,4 +16,12 @@ $routes->group('/itkantorcabang', ['namespace' => 'App\Controllers\KantorCabang'
     // Menu Laporan Doc
     $routes->get('lo/1/generatelaporanwo/(:segment)', 'HomeController::generateLaporanwo/$1');
     $routes->get('lo/laporan/(:segment)/detail/(:segment)', 'HomeController::getwobykodewo/$1/$2');
+
+    // cek bikin laporan
+    $routes->get('wo/1/downloadwo/(:segment)', 'HomeController::downloadwo1/$1');
+    $routes->get('wo/2/downloadwo/(:segment)', 'HomeController::downloadwo2/$1');
+    $routes->get('wo/3/downloadwo/(:segment)', 'HomeController::downloadwo3/$1');
+    $routes->get('wo/4/downloadwo/(:segment)', 'HomeController::downloadwo4/$1');
+    $routes->get('wo/5/downloadwo/(:segment)', 'HomeController::downloadwo5/$1');
+    $routes->get('wo/6/downloadwo/(:segment)', 'HomeController::downloadwo6/$1');
 });

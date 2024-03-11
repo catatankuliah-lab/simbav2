@@ -39,7 +39,8 @@ class LOJanuariModel extends Model
         "path_upload_sj_bulog",
         "file_upload_bast_bulog",
         "path_upload_bast_bulog",
-        "status_dokumen_muat"
+        "status_dokumen_muat",
+        "jam_pemberangkatan"
     ];
 
 
@@ -105,14 +106,14 @@ class LOJanuariModel extends Model
     public function gudangdankabupaten($gudang, $kabupaten)
     {
         $query = $this->db->table('januari_lo')
-        ->select('januari_lo.*, gudang.*, januari_sj.*, januari_pbp.*, kabupaten_kota.*')
-        ->selectSum('januari_sj.jumlah_penyaluran_januari', 'total')
-        ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
-        ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
-        ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
-        ->join('kabupaten_kota', 'kabupaten_kota.nama_kabupaten_kota = januari_pbp.nama_kabupaten_kota')
-        ->where('gudang.id_gudang', $gudang)
-        ->where('kabupaten_kota.kode_kabupaten_kota', $kabupaten)
+            ->select('januari_lo.*, gudang.*, januari_sj.*, januari_pbp.*, kabupaten_kota.*')
+            ->selectSum('januari_sj.jumlah_penyaluran_januari', 'total')
+            ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->join('kabupaten_kota', 'kabupaten_kota.nama_kabupaten_kota = januari_pbp.nama_kabupaten_kota')
+            ->where('gudang.id_gudang', $gudang)
+            ->where('kabupaten_kota.kode_kabupaten_kota', $kabupaten)
             ->groupBy('januari_sj.nomor_lo')
             ->orderBy('januari_lo.tanggal_muat', 'DESC')
             ->orderBy('januari_lo.id_lo', 'DESC')
@@ -141,12 +142,12 @@ class LOJanuariModel extends Model
     public function gudangkabupatenkecamatan($gudang, $kabupaten, $kecamatan)
     {
         $query = $this->db->table('januari_lo')
-        ->select('januari_lo.*, gudang.*, januari_sj.*, januari_pbp.*, kabupaten_kota.*')
-        ->selectSum('januari_sj.jumlah_penyaluran_januari', 'total')
-        ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
-        ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
-        ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
-        ->join('kabupaten_kota', 'kabupaten_kota.nama_kabupaten_kota = januari_pbp.nama_kabupaten_kota')
+            ->select('januari_lo.*, gudang.*, januari_sj.*, januari_pbp.*, kabupaten_kota.*')
+            ->selectSum('januari_sj.jumlah_penyaluran_januari', 'total')
+            ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
+            ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
+            ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
+            ->join('kabupaten_kota', 'kabupaten_kota.nama_kabupaten_kota = januari_pbp.nama_kabupaten_kota')
             ->where('gudang.id_gudang', $gudang)
             ->where('kabupaten_kota.kode_kabupaten_kota', $kabupaten)
             ->where('januari_pbp.nama_kecamatan', $kecamatan)
@@ -381,7 +382,7 @@ class LOJanuariModel extends Model
             ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
             ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
             ->where('januari_lo.id_kantor', $idkantor)
-          	->where('januari_lo.status_dokumen_muat', 'LENGKAP')
+            ->where('januari_lo.status_dokumen_muat', 'LENGKAP')
             ->where('januari_lo.tanggal_muat >=', $awal)
             ->where('januari_lo.tanggal_muat <=', $akhir)
             ->groupBy('januari_sj.nomor_lo')
@@ -400,6 +401,49 @@ class LOJanuariModel extends Model
             ->join('januari_sj', 'januari_sj.nomor_lo = januari_lo.nomor_lo')
             ->join('januari_pbp', 'januari_pbp.id_pbp = januari_sj.id_pbp')
             ->where('januari_lo.kode_wo', $kodewo)
+            ->get();
+        return $query->getResult();
+    }
+
+    public function gettanggalwo($idkantor)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.tanggal_muat')
+            ->where('januari_lo.id_kantor', $idkantor)
+            ->groupBy('januari_lo.tanggal_muat')
+            ->get();
+        return $query->getResult();
+    }
+
+    public function getallwo($idkantor, $tanggal)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*, gudang.nama_gudang')
+            ->join('gudang', 'gudang.id_gudang = januari_lo.id_gudang')
+            ->where('januari_lo.id_kantor', $idkantor)
+            ->where('januari_lo.tanggal_muat', $tanggal)
+            ->where('januari_lo.status_dokumen_muat', "LENGKAP")
+            ->groupBy('januari_lo.nomor_wo')
+            ->get();
+        return $query->getResult();
+    }
+
+    public function findbykodewo($kodewo)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*')
+            ->where('januari_lo.kode_wo', $kodewo)
+            ->get();
+        return $query->getResult();
+    }
+
+    public function bahandokumenwotanggal($tanggal, $idkantor)
+    {
+        $query = $this->db->table('januari_lo')
+            ->select('januari_lo.*')
+            ->where('januari_lo.tanggal_muat', $tanggal)
+            ->where('januari_lo.id_kantor', $idkantor)
+            ->groupBy('januari_lo.kode_wo')
             ->get();
         return $query->getResult();
     }

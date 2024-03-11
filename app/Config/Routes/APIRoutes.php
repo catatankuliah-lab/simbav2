@@ -128,12 +128,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('pbp/6/getkecamatanbykabupaten/(:any)', 'PBP\PBPJuniController::showByKabupatenKota/$1');
 
     // (PBP) DESA BY KECAMATAN
-    $routes->get('pbp/1/getdesabykecamatan/(:any)', 'PBP\PBPJanuariController::showByDesa/$1');
-    $routes->get('pbp/2/getdesabykecamatan/(:any)', 'PBP\PBPFebruariController::showByDesa/$1');
-    $routes->get('pbp/3/getdesabykecamatan/(:any)', 'PBP\PBPMaretController::showByDesa/$1');
-    $routes->get('pbp/4/getdesabykecamatan/(:any)', 'PBP\PBPAprilController::showByDesa/$1');
-    $routes->get('pbp/5/getdesabykecamatan/(:any)', 'PBP\PBPMeiController::showByDesa/$1');
-    $routes->get('pbp/6/getdesabykecamatan/(:any)', 'PBP\PBPJuniController::showByDesa/$1');
+    $routes->get('pbp/1/getdesabykecamatan/(:segment)', 'PBP\PBPJanuariController::showByDesa/$1');
+    $routes->get('pbp/2/getdesabykecamatan/(:segment)', 'PBP\PBPFebruariController::showByDesa/$1');
+    $routes->get('pbp/3/getdesabykecamatan/(:segment)', 'PBP\PBPMaretController::showByDesa/$1');
+    $routes->get('pbp/4/getdesabykecamatan/(:segment)', 'PBP\PBPAprilController::showByDesa/$1');
+    $routes->get('pbp/5/getdesabykecamatan/(:segment)', 'PBP\PBPMeiController::showByDesa/$1');
+    $routes->get('pbp/6/getdesabykecamatan/(:segment)', 'PBP\PBPJuniController::showByDesa/$1');
 
     // MENU DOWNLOAD DOC WORKING ORDER
     $routes->get('lo/1/downloadwo/(:segment)', 'LO\LOJanuariController::downloadWO/$1');
@@ -192,12 +192,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('pbp/6/kecamatanbykabupaten/(:segment)', 'PBP\PBPJuniController::kecamatanbykabupaten/$1');
 
     // PBP SELECT DESA BY KECAMATAN KOTA NANA
-    $routes->get('pbp/1/desabykecamatan/(:segment)', 'PBP\PBPJanuariController::desabykecamatan/$1');
-    $routes->get('pbp/2/desabykecamatan/(:segment)', 'PBP\PBPFebruariController::desabykecamatan/$1');
-    $routes->get('pbp/3/desabykecamatan/(:segment)', 'PBP\PBPMaretController::desabykecamatan/$1');
-    $routes->get('pbp/4/desabykecamatan/(:segment)', 'PBP\PBPAprilController::desabykecamatan/$1');
-    $routes->get('pbp/5/desabykecamatan/(:segment)', 'PBP\PBPMeiController::desabykecamatan/$1');
-    $routes->get('pbp/6/desabykecamatan/(:segment)', 'PBP\PBPJuniController::desabykecamatan/$1');
+    $routes->get('pbp/1/desabykecamatan/(:segment)/(:segment)', 'PBP\PBPJanuariController::desabykecamatan/$1/$2');
+    $routes->get('pbp/2/desabykecamatan/(:segment)/(:segment)', 'PBP\PBPFebruariController::desabykecamatan/$1/$2');
+    $routes->get('pbp/3/desabykecamatan/(:segment)/(:segment)', 'PBP\PBPMaretController::desabykecamatan/$1/$2');
+    $routes->get('pbp/4/desabykecamatan/(:segment)/(:segment)', 'PBP\PBPAprilController::desabykecamatan/$1/$2');
+    $routes->get('pbp/5/desabykecamatan/(:segment)/(:segment)', 'PBP\PBPMeiController::desabykecamatan/$1/$2');
+    $routes->get('pbp/6/desabykecamatan/(:segment)/(:segment)', 'PBP\PBPJuniController::desabykecamatan/$1/$2');
 
     // SURAT JALAN CEK NOMOR SJ
     $routes->get('suratjalan/1/ceknomorsj/(:segment)', 'SJ\SJJanuariController::ceknomorsj/$1');
@@ -279,13 +279,29 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('lo/detail/5/(:segment)', 'LO\LOMeiController::detaillo/$1');
     $routes->get('lo/detail/6/(:segment)', 'LO\LOJuniController::detaillo/$1');
 
-    // UPLOAD FILE
-    $routes->post('lo/1/uploadfile/(:segment)', 'LO\LOJanuariController::uploadfile/$1');
-    $routes->post('lo/2/uploadfile/(:segment)', 'LO\LOFebruariController::uploadfile/$1');
-    $routes->post('lo/3/uploadfile/(:segment)', 'LO\LOMaretController::uploadfile/$1');
-    $routes->post('lo/4/uploadfile/(:segment)', 'LO\LOAprilController::uploadfile/$1');
-    $routes->post('lo/5/uploadfile/(:segment)', 'LO\LOMeiController::uploadfile/$1');
-    $routes->post('lo/6/uploadfile/(:segment)', 'LO\LOJuniController::uploadfile/$1');
+    // UPLOAD FILE WO
+    $routes->post('lo/1/uploadfile/1/(:segment)', 'LO\LOJanuariController::uploadfile1/$1');
+    $routes->post('lo/2/uploadfile/1/(:segment)', 'LO\LOFebruariController::uploadfile1/$1');
+    $routes->post('lo/3/uploadfile/1/(:segment)', 'LO\LOMaretController::uploadfile1/$1');
+    $routes->post('lo/4/uploadfile/1/(:segment)', 'LO\LOAprilController::uploadfile1/$1');
+    $routes->post('lo/5/uploadfile/1/(:segment)', 'LO\LOMeiController::uploadfile1/$1');
+    $routes->post('lo/6/uploadfile/1/(:segment)', 'LO\LOJuniController::uploadfile1/$1');
+
+    // UPLOAD FILE LO
+    $routes->post('lo/1/uploadfile/2/(:segment)', 'LO\LOJanuariController::uploadfile2/$1');
+    $routes->post('lo/2/uploadfile/2/(:segment)', 'LO\LOFebruariController::uploadfile2/$1');
+    $routes->post('lo/3/uploadfile/2/(:segment)', 'LO\LOMaretController::uploadfile2/$1');
+    $routes->post('lo/4/uploadfile/2/(:segment)', 'LO\LOAprilController::uploadfile2/$1');
+    $routes->post('lo/5/uploadfile/2/(:segment)', 'LO\LOMeiController::uploadfile2/$1');
+    $routes->post('lo/6/uploadfile/2/(:segment)', 'LO\LOJuniController::uploadfile2/$1');
+
+    // UPLOAD FILE DO
+    $routes->post('lo/1/uploadfile/3/(:segment)', 'LO\LOJanuariController::uploadfile3/$1');
+    $routes->post('lo/2/uploadfile/3/(:segment)', 'LO\LOFebruariController::uploadfile3/$1');
+    $routes->post('lo/3/uploadfile/3/(:segment)', 'LO\LOMaretController::uploadfile3/$1');
+    $routes->post('lo/4/uploadfile/3/(:segment)', 'LO\LOAprilController::uploadfile3/$1');
+    $routes->post('lo/5/uploadfile/3/(:segment)', 'LO\LOMeiController::uploadfile3/$1');
+    $routes->post('lo/6/uploadfile/3/(:segment)', 'LO\LOJuniController::uploadfile3/$1');
 
     // SURAT JALAN DETAIL SJ NANA
     $routes->get('sj/detailitemsj/1/(:segment)', 'SJ\SJJanuariController::detailitemsj/$1');
@@ -295,19 +311,42 @@ $routes->group('api', ['namespace' => 'App\Controllers\API'], function ($routes)
     $routes->get('sj/detailitemsj/5/(:segment)', 'SJ\SJMeiController::detailitemsj/$1');
     $routes->get('sj/detailitemsj/6/(:segment)', 'SJ\SJJuniController::detailitemsj/$1');
 
-    // SURAT JALAN UPLOAD FILE SJ NANA
-    $routes->post('sj/1/uploadfile/(:segment)', 'SJ\SJJanuariController::uploadfile/$1');
-    $routes->post('sj/2/uploadfile/(:segment)', 'SJ\SJFebruariController::uploadfile/$1');
-    $routes->post('sj/3/uploadfile/(:segment)', 'SJ\SJMaretController::uploadfile/$1');
-    $routes->post('sj/4/uploadfile/(:segment)', 'SJ\SJAprilController::uploadfile/$1');
-    $routes->post('sj/5/uploadfile/(:segment)', 'SJ\SJMeiController::uploadfile/$1');
-    $routes->post('sj/6/uploadfile/(:segment)', 'SJ\SJJuniController::uploadfile/$1');
-
     // DASHBOARD KANTOR CABANG
-    $routes->get('pbp/1/(:segment)', 'PBP\PBPJanuariController::bahandashboardkc/$1');
-    $routes->get('pbp/2/(:segment)', 'PBP\PBPFebruariController::bahandashboardkc/$1');
-    $routes->get('pbp/3/(:segment)', 'PBP\PBPMaretController::bahandashboardkc/$1');
-    $routes->get('pbp/4/(:segment)', 'PBP\PBPAprilController::bahandashboardkc/$1');
-    $routes->get('pbp/5/(:segment)', 'PBP\PBPMeiController::bahandashboardkc/$1');
-    $routes->get('pbp/6/(:segment)', 'PBP\PBPJuniController::bahandashboardkc/$1');
+    $routes->get('pbp/1/dashboard/(:segment)', 'PBP\PBPJanuariController::bahandashboardkc/$1');
+    $routes->get('pbp/2/dashboard/(:segment)', 'PBP\PBPFebruariController::bahandashboardkc/$1');
+    $routes->get('pbp/3/dashboard/(:segment)', 'PBP\PBPMaretController::bahandashboardkc/$1');
+    $routes->get('pbp/4/dashboard/(:segment)', 'PBP\PBPAprilController::bahandashboardkc/$1');
+    $routes->get('pbp/5/dashboard/(:segment)', 'PBP\PBPMeiController::bahandashboardkc/$1');
+    $routes->get('pbp/6/dashboard/(:segment)', 'PBP\PBPJuniController::bahandashboardkc/$1');
+
+    // EDIT INFORMASI LO
+    $routes->post('lo/1/editdatalo/(:segment)', 'LO\LOJanuariController::editdatalo/$1');
+    $routes->post('lo/2/editdatalo/(:segment)', 'LO\LOFebruariController::editdatalo/$1');
+    $routes->post('lo/3/editdatalo/(:segment)', 'LO\LOMaretController::editdatalo/$1');
+    $routes->post('lo/4/editdatalo/(:segment)', 'LO\LOAprilController::editdatalo/$1');
+    $routes->post('lo/5/editdatalo/(:segment)', 'LO\LOMeiController::editdatalo/$1');
+    $routes->post('lo/6/editdatalo/(:segment)', 'LO\LOJuniController::editdatalo/$1');
+
+    // EDIT DATA JAM PENERIMAAN
+    $routes->post('sj/1/jampenerimaan/editdatajs/(:segment)', 'SJ\SJJanuariController::jampenerimaan/$1');
+    $routes->post('sj/2/jampenerimaan/editdatajs/(:segment)', 'SJ\SJFebruariController::jampenerimaan/$1');
+    $routes->post('sj/3/jampenerimaan/editdatajs/(:segment)', 'SJ\SJMaretController::jampenerimaan/$1');
+    $routes->post('sj/4/jampenerimaan/editdatajs/(:segment)', 'SJ\SJAprilController::jampenerimaan/$1');
+    $routes->post('sj/5/jampenerimaan/editdatajs/(:segment)', 'SJ\SJMeiController::jampenerimaan/$1');
+    $routes->post('sj/6/jampenerimaan/editdatajs/(:segment)', 'SJ\SJJuniController::jampenerimaan/$1');
+
+    // DOWNLOAD DOKUMEN
+    $routes->get('wo/1/tanggal', 'LO\LOJanuariController::gettanggalwo');
+    $routes->get('wo/2/tanggal', 'LO\LOFebruariController::gettanggalwo');
+    $routes->get('wo/3/tanggal', 'LO\LOMaretController::gettanggalwo');
+    $routes->get('wo/4/tanggal', 'LO\LOAprilController::gettanggalwo');
+    $routes->get('wo/5/tanggal', 'LO\LOMeiController::gettanggalwo');
+    $routes->get('wo/6/tanggal', 'LO\LOJuniController::gettanggalwo');
+
+    $routes->get('wo/1/getallwo/(:segment)', 'LO\LOJanuariController::gettanggalwo/$1');
+    $routes->get('wo/2/getallwo/(:segment)', 'LO\LOFebruariController::gettanggalwo/$1');
+    $routes->get('wo/3/getallwo/(:segment)', 'LO\LOMaretController::gettanggalwo/$1');
+    $routes->get('wo/4/getallwo/(:segment)', 'LO\LOAprilController::gettanggalwo/$1');
+    $routes->get('wo/5/getallwo/(:segment)', 'LO\LOMeiController::gettanggalwo/$1');
+    $routes->get('wo/6/getallwo/(:segment)', 'LO\LOJuniController::gettanggalwo/$1');
 });

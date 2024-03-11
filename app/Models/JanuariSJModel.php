@@ -19,7 +19,8 @@ class JanuariSJModel extends Model
         "file_surat_jalan",
         "path_surat_jalan",
         "file_bukti_surat_jalan",
-        "path_bukti_surat_jalan"
+        "path_bukti_surat_jalan",
+        "jam_penerimaan"
     ];
 
     public function ceknomorsj($nomorsj)

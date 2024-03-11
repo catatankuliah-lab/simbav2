@@ -57,9 +57,9 @@ class PBPFebruariController extends ResourceController
     }
 
     // NANA SHOW DESA BY KECAMATAN
-    public function desabykecamatan($namakecamatan)
+    public function desabykecamatan($namakecamatan, $namakabupaten)
     {
-        $data = $this->modelPBP->desabykecamatan($namakecamatan);
+        $data = $this->modelPBP->desabykecamatan($namakecamatan, $namakabupaten);
         $datadesakelurhan = [
             "status" => "200",
             "datadesakelurahan" => $data,
@@ -67,13 +67,16 @@ class PBPFebruariController extends ResourceController
         return $this->respond($datadesakelurhan);
     }
 
-    // NANA SHOW DESA BY KECAMATAN
+    // NANA BAHAN DASHBOARD KANCAB
     public function bahandashboardkc($namakabupaten)
     {
-        $data = $this->modelPBP->bahandashboardkc($namakabupaten);
+        $data1 = $this->modelPBP->getsumpbp($namakabupaten);
+        $data2 = $this->modelPBP->bahandashboardkc($namakabupaten);
         $dataperkabupaten = [
             "status" => "200",
-            "data" => $data,
+            "datakabupaten" => $data1->nama_kabupaten_kota,
+            "datasj" => $data2->jpenyaluran,
+            "dataalokasi" => $data1->jpbp,
         ];
         return $this->respond($dataperkabupaten);
     }

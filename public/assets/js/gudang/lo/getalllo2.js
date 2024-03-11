@@ -131,8 +131,16 @@ $("#tamilkanlo").click(function () {
             } else {
               nomorwo = lo.nomor_wo;
             }
+            var tanggalObj = new Date(lo.tanggal_muat);
+            var tanggal = tanggalObj.getDate();
+            var bulan = tanggalObj.getMonth() + 1;
+            if (bulan < 10) {
+              bulan = "0" + bulan;
+            }
+            var tahun = tanggalObj.getFullYear();
+            var tanggalbaru = tanggal + "-" + bulan + "-" + tahun;
             datanya.push({
-              tanggal_muat: lo.tanggal_muat,
+              tanggal_muat: tanggalbaru,
               nomor_wo: nomorwo,
               nomor_lo: lo.nomor_lo,
               pengirim:
@@ -147,9 +155,11 @@ $("#tamilkanlo").click(function () {
               link: {
                 link1: "http://localhost:8080/gudang/lo/detail/" + lo.nomor_lo,
                 link2: "lo/downloadPDFLO/" + $('#alokasi').val() + "/" + lo.nomor_lo,
+                link3: "https://wa.me/62895342065080?text=Mohon%20dibantu%20LO%20dengan%20nomor%20dokumen%20*" + lo.nomor_lo + "*%0APerihal%20%3A%0A"
               }
             });
           });
+          $('#tablelo').DataTable().clear().destroy();
           $("#tablelo").DataTable({
             paging: true,
             info: false,
@@ -180,7 +190,11 @@ $("#tamilkanlo").click(function () {
                     "<a href=" +
                     data.link2 +
                     " type='button' class='text-danger ml-3' style='border-radius: 5px;'>" +
-                    "<i class='fas fa-download'></i></a>"
+                    "<i class='fas fa-download'></i></a>" +
+                    "<a target='_blank' href=" +
+                    data.link3 +
+                    " type='button' class='text-success ml-3' style='border-radius: 5px;'>" +
+                    "<i class='fas fa-comment-dots'></i></a>"
                   );
                 },
                 className: "text-center",

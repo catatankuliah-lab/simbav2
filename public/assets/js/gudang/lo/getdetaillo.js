@@ -12,24 +12,31 @@ var nomor_wo = "";
 var nomor_do = "";
 var nomor_so = "";
 
+function loadingswal() {
+  Swal.fire({
+    text: 'Uploading data...',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading();
+    },
+  });
+}
+
 // get data lo by nomor lo
 $.ajax({
   url: "http://localhost:8080/api/lo/detail/" + alokasi + "/" + nomor_Lo,
   type: "GET",
   dataType: "json",
   success: function (data) {
-    var output1 = $("#outwo");
-    var output2 = $("#outlo");
-    var output3 = $("#outpenyerahan");
-    var output4 = $("#outdo");
-    var output5 = $("#outsjbulog");
-    var output6 = $("#outbast");
+    console.log(data);
+    var output1 = $("#out1");
+    var output2 = $("#out2");
+    var output3 = $("#out3");
     output1.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_wo);
-    output2.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_uplaod_lo);
-    output3.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_salur_bulog);
-    output4.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_do);
-    output5.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_sj_bulog);
-    output6.attr("src", "http://localhost:8080/" + data.data.path_upload_wo + data.data.file_upload_bast_bulog);
+    output2.attr("src", "http://localhost:8080/" + data.data.path_lo + data.data.file_uplaod_lo);
+    output3.attr("src", "http://localhost:8080/" + data.data.path_uplaod_do + data.data.file_upload_do);
     $('#tanggal_pembuatan').val(data.data.tanggal_muat);
     $('#alokasi').val(alokasi);
     $('#idlo').val(data.data.id_lo);
@@ -38,16 +45,16 @@ $.ajax({
     $('#nomor_wo').val(data.data.nomor_wo);
     $('#nomor_do').val(data.data.nomor_do);
     $('#totalpengiriman').val(data.data.total + " Kg");
+    $('#nopolmobil').val(data.data.nomor_mobil);
+    $('#namadriver').val(data.data.nama_driver);
+    $('#nomordriver').val(data.data.nomor_driver);
+    $('#jampengiriman').val(data.data.jam_pemberangkatan);
     getallsj(data.data.nomor_lo);
   },
   error: function (error) {
     console.log("ERROR DATA LO : ", error);
   },
 });
-
-var kode_wo = "";
-var kode_do = "";
-var kode_so = "";
 
 // AMBIL DATA SJ DARI NOMOR LO
 function getallsj(nomorlo) {
@@ -70,9 +77,7 @@ function getallsj(nomorlo) {
             "<input readonly value='" + sj.jumlah_penyaluran_januari + " Kg'type='text' style='border:none; background-color:transparent !important; width:75px'>" +
             "</td>" +
             "<td class='text-center'>" +
-            "<a href='http://localhost:8080/gudang/sj/detailsuratjalan/" + $('#alokasi').val() + "/" + sj.id_sj + "' type='button' class='text-primary' style='border-radius: 5px;'>" +
-            "<i class='fas fa-search-plus'></i>" +
-            "</a>" +
+            "<input  id='penerimaan" + index + "' value='" + sj.jam_penerimaan + "' onchange='editpenerimaan(" + sj.id_sj + "," + index + ")' class='border-0' style='background-color: transparent !important;' type='time' placeholder='00:00' id='jamditerima' name='jamditerima'>" +
             "</td>" +
             "</tr >";
           datasj.append(listdo);
@@ -84,98 +89,189 @@ function getallsj(nomorlo) {
   });
 }
 
-$('#filewo').change(function (e) {
-  ceknomor();
-  var output = document.getElementById('outwo');
-  output.src = URL.createObjectURL(event.target.files[0]);
-});
-$('#filelo').change(function (e) {
-  ceknomor();
-  var output = document.getElementById('outlo');
-  output.src = URL.createObjectURL(event.target.files[0]);
-});
-$('#filepenyerahan').change(function (e) {
-  ceknomor();
-  var output = document.getElementById('outpenyerahan');
-  output.src = URL.createObjectURL(event.target.files[0]);
-});
-$('#filedo').change(function (e) {
-  ceknomor();
-  var output = document.getElementById('outdo');
-  output.src = URL.createObjectURL(event.target.files[0]);
-});
-$('#filesjbulog').change(function (e) {
-  ceknomor();
-  var output = document.getElementById('outsjbulog');
-  output.src = URL.createObjectURL(event.target.files[0]);
-});
-$('#filebast').change(function (e) {
-  ceknomor();
-  var output = document.getElementById('outbast');
-  output.src = URL.createObjectURL(event.target.files[0]);
+function editpenerimaan(idsj, index) {
+  var additionalData = {
+    'jam_penerimaan': $("#penerimaan" + index).val(),
+  };
+  $.ajax({
+    url: "http://localhost:8080/api/sj/" + $('#alokasi').val() + "/jampenerimaan/editdatajs/" + idsj,
+    type: "POST",
+    dataType: "json",
+    contentType: "application/json",
+    data: JSON.stringify(additionalData),
+    success: function (data) {
+      console.log("BERHASIL GANTI JAM PENERIMAAN : ", data);
+    },
+    error: function (error) {
+      console.log("GAGAL GANTI JAM PENERIMAAN : ", error);
+    },
+  });
+}
+
+$('#file1').change(function (e) {
+  // UPLOAD
+  nomor_wo = $("#nomor_wo").val();
+  kode_wo = nomor_wo.replace(/[\/.]/g, '');
+  var formData = new FormData($('#uploadForm')[0]);
+  var additionalData = {
+    'kode_wo': kode_wo,
+    'idlo': $('#idlo').val()
+  };
+  console.log(additionalData);
+  formData.append('additionalData', JSON.stringify(additionalData));
+  loadingswal();
+  $.ajax({
+    url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/uploadfile/1/" + $('#idlo').val(),
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      Swal.close();
+      Swal.fire({
+        icon: "success",
+        title: "WO",
+        text: "Berkas WO berhasil diupload.",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    },
+    error: function (error) {
+      Swal.close();
+      Swal.fire({
+        icon: "error",
+        title: "WO",
+        text: "Berkas WO gagal diupload.",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  });
 });
 
-// PERSIAPAN UPLOAD DAN UPDATE
-function ceknomor() {
+$('#file2').change(function (e) {
+  // UPLOAD
+  nomor_lo = $("#nomor_lo").val();
+  var formData = new FormData($('#uploadForm')[0]);
+  var additionalData = {
+    'nomor_lo': nomor_lo,
+    'idlo': $('#idlo').val()
+  };
+  console.log(additionalData);
+  formData.append('additionalData', JSON.stringify(additionalData));
+  loadingswal();
+  $.ajax({
+    url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/uploadfile/2/" + $('#idlo').val(),
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      Swal.close();
+      Swal.fire({
+        icon: "success",
+        title: "Loasing Order (LO) dan Surat Jalan",
+        text: "Berkas Loasing Order (LO) dan Surat Jalan berhasil diupload.",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    },
+    error: function (error) {
+      Swal.close();
+      Swal.fire({
+        icon: "error",
+        title: "Loasing Order (LO) dan Surat Jalan",
+        text: "Berkas Loasing Order (LO) dan Surat Jalan gagal diupload.",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  });
+});
+
+$('#file3').change(function (e) {
+  nomor_do = $("#nomor_do").val();
+  kode_do = nomor_do.replace(/[\/.]/g, '');
+  var formData = new FormData($('#uploadForm')[0]);
+  var additionalData = {
+    'kode_do': kode_do,
+    'idlo': $('#idlo').val()
+  };
+  console.log(additionalData);
+  formData.append('additionalData', JSON.stringify(additionalData));
+  loadingswal();
+  $.ajax({
+    url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/uploadfile/3/" + $('#idlo').val(),
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      Swal.close();
+      Swal.fire({
+        icon: "success",
+        title: "DO",
+        text: "Berkas DO berhasil diupload.",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    },
+    error: function (error) {
+      Swal.close();
+      Swal.fire({
+        icon: "error",
+        title: "DO",
+        text: "Berkas DO gagal diupload.",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  });
+});
+
+// UPDATE DOKUMEN
+$('#prosesedit').click(function (e) {
   nomor_wo = $("#nomor_wo").val();
   nomor_do = $("#nomor_do").val();
   nomor_so = $("#nomor_so").val();
+  jam_pemberangkatan = $("#jampengiriman").val();
   kode_wo = nomor_wo.replace(/[\/.]/g, '');
   kode_do = nomor_do.replace(/[\/.]/g, '');
   kode_so = nomor_so.replace(/[\/.]/g, '');
-  var lengkap = false;
-  if (nomor_wo == "" || nomor_do == "" || nomor_so == "") {
-    lengkap = false;
-  } else {
-    lengkap = true;
-  }
-  return lengkap;
-}
-
-// PROSES UPLOAD DAN UPDATE
-$('#prosesupdate').click(function (e) {
-  ceknomor();
-  if (ceknomor() == false) {
-    Swal.fire({
-      icon: "error",
-      title: "Loading Order (LO)",
-      text: "Mohon Lengkapi Data Loading Order (LO) Terlebih Dahulu.",
-      timer: 3000,
-      showConfirmButton: false,
-    });
-  } else {
-    var formData = new FormData($('#uploadForm')[0]);
-    var additionalData = {
-      'kode_wo': kode_wo,
-      'kode_do': kode_do,
-      'kode_so': kode_so,
-      'nomor_wo': nomor_wo,
-      'nomor_do': nomor_do,
-      'nomor_so': nomor_so,
-      'idlo': $('#idlo').val()
-    };
-    console.log(additionalData);
-    formData.append('additionalData', JSON.stringify(additionalData));
-    $.ajax({
-      url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/uploadfile/" + $('#idlo').val(),
-      type: "POST",
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function (response) {
-        Swal.fire({
-          icon: "success",
-          title: "Loading Order (LO)",
-          text: "Berkas Loading Order (LO) berhasil diupload.",
-          showConfirmButton: false,
-          timer: 3000,
-        }).then(() => {
-          window.location.reload();
-        });
-      },
-      error: function (error) {
-        console.log(error);
-      }
-    });
-  }
+  var additionalData = {
+    'jam_pemberangkatan': jam_pemberangkatan,
+    'kode_wo': kode_wo,
+    'kode_do': kode_do,
+    'kode_so': kode_so,
+    'nomor_wo': nomor_wo,
+    'nomor_do': nomor_do,
+    'nomor_so': nomor_so,
+    'tanggal_muat': $('#tanggal_pembuatan').val(),
+    'nomor_mobil': $('#nopolmobil').val(),
+    'nama_driver': $('#namadriver').val(),
+    'nomor_driver': $('#nomordriver').val(),
+    'idlo': $('#idlo').val()
+  };
+  $.ajax({
+    url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/editdatalo/" + $('#idlo').val(),
+    type: "POST",
+    dataType: "json",
+    contentType: "application/json",
+    data: JSON.stringify(additionalData),
+    success: function (data) {
+      console.log(data);
+      // Swal.fire({
+      //   icon: "success",
+      //   title: "Loading Order (LO)",
+      //   text: "Berkas Loading Order (LO) berhasil diupload.",
+      //   showConfirmButton: false,
+      //   timer: 3000,
+      // }).then(() => {
+      //   window.history.back();
+      // });
+    },
+    error: function (error) {
+      console.log("ERROR EDIT DATA : ", error);
+    },
+  });
 });

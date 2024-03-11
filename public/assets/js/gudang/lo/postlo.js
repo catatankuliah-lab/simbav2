@@ -114,7 +114,6 @@ function generateNomorLo(idalokasi, id_gudang, id_kantor_cabang) {
         'idgudangjadi': idgudangjadi,
         'idkantorjadi': idkantorjadi
     });
-
     $.ajax({
         url: "http://localhost:8080/api/lo/" + idalokasi + "/bahannomorlo",
         type: "GET",
@@ -169,12 +168,12 @@ function showKecamatan() {
 // GET SEMUA DESA KELURAHAN SESUAI DENGAN NAMA KECAMATAN
 function showDesaKelurahan() {
     loadingswal();
-    const kecamatandipilih = $("#pilihkecamatan").find(":selected").val();
     $.ajax({
-        url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/desabykecamatan/" + kecamatandipilih,
+        url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/desabykecamatan/" + $("#pilihkecamatan").find(":selected").val() + "/" + $("#pilihkabupatenkota").find(":selected").val(),
         type: "GET",
         dataType: "json",
         success: function (data) {
+            console.log(data);
             datalo.empty();
             $.each(data.datadesakelurahan, function (index, lo) {
                 var dnone = "";
@@ -240,121 +239,109 @@ function proses(idpbp, index) {
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
-                    console.log("SURAT JALAN CEK NOMOR SJ : ", data);
-                    if ($("#namadriver").val() == "" || $("#nomordriver").val() == "" || $("#nopolmobil").val() == "") {
+                    if (data.status == "200") {
                         Swal.close();
                         Swal.fire({
                             icon: "error",
                             title: "Loading Order (LO)",
-                            text: "Data Loading Order (LO) gagal ditambahkan, mohon pastikan semua data sudah diiput dengan benar.",
+                            text: "Data Loading Order (LO) gagal ditambahkan, untuk mengupdate muatan, mohon hapus terlebih dahulu pada data muat.",
                             showConfirmButton: false,
                             timer: 3000,
                         });
                     } else {
-                        if (data.status == "200") {
-                            Swal.close();
-                            Swal.fire({
-                                icon: "error",
-                                title: "Loading Order (LO)",
-                                text: "Data Loading Order (LO) gagal ditambahkan, untuk mengupdate muatan, mohon hapus terlebih dahulu pada data muat.",
-                                showConfirmButton: false,
-                                timer: 3000,
-                            });
-                        } else {
-                            $.ajax({
-                                url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/ceknomorlo/" + $('#nomor_lo').val(),
-                                type: "GET",
-                                dataType: "json",
-                                success: function (data) {
-                                    if (data.status == "200") {
-                                        var datapostlo = {
-                                            'id_gudang': data.id_gudang,
-                                            'id_kantor': data.id_kantor_cabang,
-                                            'id_akun': data.id_akun,
-                                            'nomor_lo': $('#nomor_lo').val(),
-                                            'tanggal_muat': $("#tanggal_pembuatan").val(),
-                                            'nama_driver': $("#namadriver").val(),
-                                            'nomor_driver': $("#nomordriver").val(),
-                                            'nomor_mobil': $("#nopolmobil").val(),
-                                            'id_pbp': idpbp,
-                                            'jumlah_penyaluran_januari': $('#input' + index).val(),
-                                            'alokasifix': $('#alokasifix' + index).val(),
-                                            'nomor_do': $('#nomor_do').val(),
-                                            'nomor_so': $('#nomor_so').val(),
-                                            'nomor_wo': $('#nomor_wo').val(),
-                                            'nomor_surat_jalan': nomor_surat_jalan,
-                                        };
-                                        $.ajax({
-                                            url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/create",
-                                            type: "POST",
-                                            dataType: "json",
-                                            contentType: "application/json",
-                                            data: JSON.stringify(datapostlo),
-                                            success: function (data) {
-                                                Swal.fire({
-                                                    icon: "success",
-                                                    title: "Loading Order (LO)",
-                                                    text: "Data Loading Order (LO) berhasil ditambahkan.",
-                                                    showConfirmButton: false,
-                                                    timer: 3000,
-                                                }).then(() => {
-                                                    tampilkanDataMuat();
-                                                });
-                                            },
-                                            error: function (error) {
-                                                console.log("ERROR BUAT LO : ", error);
-                                                Swal.close();
-                                            },
-                                        });
-                                    } else {
-                                        var datapostlo = {
-                                            'id_gudang': data.id_gudang,
-                                            'id_kantor': data.id_kantor_cabang,
-                                            'id_akun': data.id_akun,
-                                            'nomor_lo': $('#nomor_lo').val(),
-                                            'tanggal_muat': $("#tanggal_pembuatan").val(),
-                                            'nama_driver': $("#namadriver").val(),
-                                            'nomor_driver': $("#nomordriver").val(),
-                                            'nomor_mobil': $("#nopolmobil").val(),
-                                            'id_pbp': idpbp,
-                                            'jumlah_penyaluran_januari': $('#input' + index).val(),
-                                            'alokasifix': $('#alokasifix' + index).val(),
-                                            'nomor_do': $('#nomor_do').val(),
-                                            'nomor_so': $('#nomor_so').val(),
-                                            'nomor_wo': $('#nomor_wo').val(),
-                                            'nomor_surat_jalan': nomor_surat_jalan,
-                                        };
-                                        $.ajax({
-                                            url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/create",
-                                            type: "POST",
-                                            dataType: "json",
-                                            contentType: "application/json",
-                                            data: JSON.stringify(datapostlo),
-                                            success: function (data) {
-                                                Swal.close();
-                                                Swal.fire({
-                                                    icon: "success",
-                                                    title: "Loading Order (LO)",
-                                                    text: "Data Loading Order (LO) berhasil ditambahkan.",
-                                                    showConfirmButton: false,
-                                                    timer: 3000,
-                                                }).then(() => {
-                                                    tampilkanDataMuat();
-                                                });
-                                            },
-                                            error: function (error) {
-                                                console.log("ERROR BUAT LO : ", error);
-                                                Swal.close();
-                                            },
-                                        });
-                                    }
-                                },
-                                error: function (error) {
-                                    console.log("ERROR BUAT LO : ", error);
-                                    Swal.close();
-                                },
-                            });
-                        }
+                        $.ajax({
+                            url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/ceknomorlo/" + $('#nomor_lo').val(),
+                            type: "GET",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.status == "200") {
+                                    var datapostlo = {
+                                        'id_gudang': data.id_gudang,
+                                        'id_kantor': data.id_kantor_cabang,
+                                        'id_akun': data.id_akun,
+                                        'nomor_lo': $('#nomor_lo').val(),
+                                        'tanggal_muat': $("#tanggal_pembuatan").val(),
+                                        'nama_driver': $("#namadriver").val(),
+                                        'nomor_driver': $("#nomordriver").val(),
+                                        'nomor_mobil': $("#nopolmobil").val(),
+                                        'id_pbp': idpbp,
+                                        'jumlah_penyaluran_januari': $('#input' + index).val(),
+                                        'alokasifix': $('#alokasifix' + index).val(),
+                                        'nomor_do': $('#nomor_do').val(),
+                                        'nomor_so': $('#nomor_so').val(),
+                                        'nomor_wo': $('#nomor_wo').val(),
+                                        'nomor_surat_jalan': nomor_surat_jalan,
+                                    };
+                                    $.ajax({
+                                        url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/create",
+                                        type: "POST",
+                                        dataType: "json",
+                                        contentType: "application/json",
+                                        data: JSON.stringify(datapostlo),
+                                        success: function (data) {
+                                            Swal.fire({
+                                                icon: "success",
+                                                title: "Loading Order (LO)",
+                                                text: "Data Loading Order (LO) berhasil ditambahkan.",
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                            }).then(() => {
+                                                tampilkanDataMuat();
+                                            });
+                                        },
+                                        error: function (error) {
+                                            console.log("ERROR BUAT LO : ", error);
+                                            Swal.close();
+                                        },
+                                    });
+                                } else {
+                                    var datapostlo = {
+                                        'id_gudang': data.id_gudang,
+                                        'id_kantor': data.id_kantor_cabang,
+                                        'id_akun': data.id_akun,
+                                        'nomor_lo': $('#nomor_lo').val(),
+                                        'tanggal_muat': $("#tanggal_pembuatan").val(),
+                                        'nama_driver': $("#namadriver").val(),
+                                        'nomor_driver': $("#nomordriver").val(),
+                                        'nomor_mobil': $("#nopolmobil").val(),
+                                        'id_pbp': idpbp,
+                                        'jumlah_penyaluran_januari': $('#input' + index).val(),
+                                        'alokasifix': $('#alokasifix' + index).val(),
+                                        'nomor_do': $('#nomor_do').val(),
+                                        'nomor_so': $('#nomor_so').val(),
+                                        'nomor_wo': $('#nomor_wo').val(),
+                                        'nomor_surat_jalan': nomor_surat_jalan,
+                                    };
+                                    $.ajax({
+                                        url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/create",
+                                        type: "POST",
+                                        dataType: "json",
+                                        contentType: "application/json",
+                                        data: JSON.stringify(datapostlo),
+                                        success: function (data) {
+                                            Swal.close();
+                                            Swal.fire({
+                                                icon: "success",
+                                                title: "Loading Order (LO)",
+                                                text: "Data Loading Order (LO) berhasil ditambahkan.",
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                            }).then(() => {
+                                                tampilkanDataMuat();
+                                            });
+                                        },
+                                        error: function (error) {
+                                            console.log("ERROR BUAT LO : ", error);
+                                            Swal.close();
+                                        },
+                                    });
+                                }
+                            },
+                            error: function (error) {
+                                console.log("ERROR BUAT LO : ", error);
+                                Swal.close();
+                            },
+                        });
                     }
                 },
                 error: function (error) {
@@ -368,6 +355,7 @@ function proses(idpbp, index) {
 function tampilkanDataMuat() {
     loadingswal();
     $("#simpanspm").removeClass("d-none");
+    console.log($('#nomor_lo').val());
     $.ajax({
         url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/datasj/" + $('#nomor_lo').val(),
         type: "GET",
@@ -438,39 +426,6 @@ function hapusLo(idsj, index) {
                 contentType: "application/json",
                 data: JSON.stringify(datahapus),
                 success: function (data) {
-                    $.ajax({
-                        url: "http://localhost:8080/api/suratjalan/" + $('#alokasi').val() + "/ceknomorlo/" + $('#nomor_lo').val(),
-                        type: "GET",
-                        dataType: "json",
-                        success: function (data) {
-                            Swal.close();
-                            if (data.status == "404") {
-                                $.ajax({
-                                    url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/deletelo/" + ('#nomor_lo').val(),
-                                    type: "DELETE",
-                                    dataType: "json",
-                                    success: function (data) {
-                                    },
-                                    error: function (error) {
-                                    },
-                                });
-                            }
-                        },
-                        error: function (error) {
-                            $.ajax({
-                                url: "http://localhost:8080/api/lo/" + $('#alokasi').val() + "/deletelo/" + $('#nomor_lo').val(),
-                                type: "DELETE",
-                                dataType: "json",
-                                success: function (data) {
-                                    console.log("CEK HAPUS LO : ", data);
-                                },
-                                error: function (error) {
-                                    console.log("ERROR HAPUS LO : ", error);
-                                },
-                            });
-                            console.log("ERROR CEK NOMOR LO DI SJ : ", error);
-                        },
-                    });
                     Swal.fire({
                         icon: "success",
                         title: "Loading Order (LO)",
@@ -478,10 +433,15 @@ function hapusLo(idsj, index) {
                         showConfirmButton: false,
                         timer: 3000,
                     }).then(() => {
+                        datamuat.empty();
+                        Swal.close();
                         tampilkanDataMuat();
                     });
                 },
                 error: function (error) {
+                    datamuat.empty();
+                    Swal.close();
+                    tampilkanDataMuat();
                 },
             });
         }

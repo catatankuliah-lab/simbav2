@@ -124,73 +124,14 @@ class SJJanuariController extends ResourceController
         return $this->respond($datasuratjalan);
     }
 
-    public function uploadfile($idsj)
+    public function jampenerimaan($idsj)
     {
-        $datasj = $this->model->detailsj($idsj);
-        $namagudang = substr($datasj->nama_gudang, 5);
-        $alamatnya = FCPATH  . 'UPLOAD/1/SJ/' . $namagudang . '/' . $datasj->tanggal_muat . '/';
-        $path = 'UPLOAD/1/SJ/' . $namagudang . '/' . $datasj->tanggal_muat . '/';
-        $file1 = $this->request->getFile('filesj');
-        $file2 = $this->request->getFile('filebukti');
-        $bahandata = $this->request->getPost('additionalData');
-        if ($bahandata == null) {
-            $bahandata = "";
-        }
-        $additionalData = json_decode($bahandata, true);
-        if ($file1->isValid() && !$file1->hasMoved() && $file2->isValid() && !$file2->hasMoved()) {
-            if ($file1->getExtension() == 'jpg' || $file1->getExtension() == 'png' || $file1->getExtension() == 'jpeg' || $file2->getExtension() == 'jpg' || $file2->getExtension() == 'png' || $file2->getExtension() == 'jpeg') {
-                $namasj = $datasj->nomor_surat_jalan . ".png";
-                $namabukti = "BUKTI-" . $datasj->nomor_surat_jalan . ".png";
-                $file1->move($alamatnya, $namasj);
-                $file2->move($alamatnya, $namabukti);
-                $datadokumen = [
-                    'file_surat_jalan' => $namasj,
-                    'file_bukti_surat_jalan' => $namabukti,
-                    'path_surat_jalan' => $path,
-                    'path_bukti_surat_jalan' => $path
-                ];
-                $this->model->update($idsj, $datadokumen);
-                $datacekstatus = $this->modelLO->cekstatusdokumen($datasj->id_lo);
-                $lengkap = false;
-                $ulangi = true;
-                foreach ($datacekstatus as $cek) {
-                    if ($ulangi == true) {
-                        if ($cek->file_uplaod_lo == NULL || $cek->file_upload_bast_bulog == NULL || $cek->file_upload_do == NULL || $cek->file_upload_salur_bulog == NULL || $cek->file_upload_sj_bulog == NULL || $cek->file_upload_wo == NULL || $cek->file_bukti_surat_jalan == NULL || $cek->file_surat_jalan == NULL) {
-                            $lengkap = false;
-                            $ulangi = false;
-                        } else {
-                            $lengkap = true;
-                        }
-                    }
-                }
-                if ($lengkap == false) {
-                    $datalo = [
-                        "status_dokumen_muat" => "BELUM LENGKAP"
-                    ];
-                } else {
-                    $datalo = [
-                        "status_dokumen_muat" => "LENGKAP"
-                    ];
-                }
-                $this->modelLO->update($datacekstatus[0]->id_lo, $datalo);
-                $response = [
-                    'status' => '200',
-                    'message' => 'Berkas Surat Jalan berhasil diupload',
-                ];
-                return $this->respond($response, 200);
-            } else {
-                $response = [
-                    'status' => '400',
-                    'message' => 'GAGAL'
-                ];
-                return $this->respond($response, 200);
-            }
-        } else {
-            $response = [
-                'status' => 'error',
-                'message' => 'GAGAL'
-            ];
-            return $this->respond($response, 400);
-        }
+        $data = $this->request->getJSON();
+        $this->model->update($idsj, $data);
+        $response = [
+            'status' => '200',
+            'message' => 'Berhasil',
+        ];
+        return $this->respond($response);
     }
 }

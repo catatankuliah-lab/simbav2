@@ -1,7 +1,7 @@
 var idkantor = $('#idk').val();
 
 $.ajax({
-    url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
+    url: "https://delapandelapanlogistics.com/api/wilayahkerja/" + idkantor,
     method: "GET",
     dataType: "json",
     success: function (data) {
@@ -13,7 +13,7 @@ $.ajax({
 
 $("#alokasi").change(function () {
     $.ajax({
-        url: "http://localhost:8080/api/wilayahkerja/" + idkantor,
+        url: "https://delapandelapanlogistics.com/api/wilayahkerja/" + idkantor,
         method: "GET",
         dataType: "json",
         success: function (data) {
@@ -22,23 +22,28 @@ $("#alokasi").change(function () {
             $.each(data, function (index, datapbpperkabupatenkota) {
                 $.ajax({
                     type: 'get',
-                    url: "http://localhost:8080/api/pbp/" + $('#alokasi').val() + "/" + datapbpperkabupatenkota.nama_kabupaten_kota,
+                    url: "https://delapandelapanlogistics.com/api/pbp/" + $('#alokasi').val() + "/dashboard/" + datapbpperkabupatenkota.nama_kabupaten_kota,
                     async: false,
                 }).done(function (response) {
+                    console.log(response);
                     $('#idgrafik').removeClass('d-none');
                     $('#idgrafik').empty();
+                    if (response.datasj == null) {
+                        var datasj = 0;
+                    } else {
+                        var datasj = response.datasj;
+                    }
                     datagrafik.push({
-                        'namakabupaten': response.data.nama_kabupaten_kota,
-                        'fix': response.data.jpbp * 10,
-                        'alokasi': response.data.jpbp * 10,
-                        'tersalurkan': (response.data.jpbp * 10) - (response.data.jalokasi),
-                        'sisa': response.data.jalokasi,
+                        'namakabupaten': response.datakabupaten,
+                        'alokasi': response.dataalokasi * 10,
+                        'tersalurkan': datasj,
+                        'sisa': (response.dataalokasi * 10) - datasj,
                     });
                 }).fail(function (error) {
+                    console.log(error);
                     $('#idgrafik').addClass('d-none');
                 });
             });
-
             $.each(datagrafik, function (index, bahan) {
                 var containergrafik = "";
                 containergrafik = containergrafik + "<div class='col-md-6 col-sm-12 my-4'>" +
@@ -54,10 +59,10 @@ $("#alokasi").change(function () {
                     },
                     labels: ['Sisa', 'Disalurkan'],
                     responsive: [{
-                        breakpoint: 480,
+                        breakpoint: 400,
                         options: {
                             chart: {
-                                width: 320
+                                width: 300
                             },
                             legend: {
                                 position: 'bottom'
@@ -68,7 +73,7 @@ $("#alokasi").change(function () {
                 var chart = new ApexCharts(document.querySelector("#chart" + index), options);
                 chart.render();
                 $('#namakabupaten' + index).text(bahan.namakabupaten);
-                $('#totalalokasi' + index).text(bahan.fix + " Kg");
+                $('#totalalokasi' + index).text(bahan.alokasi + " Kg");
             });
         },
         error: function (error) {

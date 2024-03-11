@@ -14,7 +14,7 @@ $("#prosesLogin").click(function () {
     contentType: "application/json",
     data: JSON.stringify(dataLogin),
     success: function (data) {
-      if (data.id_hak_akses == 2) {
+      if (data.id_hak_akses == 1) {
         Swal.fire({
           icon: "success",
           title: "Kantor Pusat",

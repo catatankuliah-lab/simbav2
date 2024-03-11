@@ -65,5 +65,5 @@
         </div>
     </div>
 </div>
-<script src="https://catatankuliah-lab.github.io/jssimbav2/gudang/lo/getalllo2.js"></script>
+<script src="<?= base_url('assets/js/gudang/lo/getalllo2.js') ?>"></script>
 <?php $this->endSection() ?>
